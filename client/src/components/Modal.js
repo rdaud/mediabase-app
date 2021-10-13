@@ -77,6 +77,7 @@ const columns = [
     },
 ];
 
+
 const conditionalRowStyles = [
     {
       when: row => row.NomeDoFormato,

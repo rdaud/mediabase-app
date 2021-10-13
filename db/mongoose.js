@@ -1,6 +1,5 @@
-const mongoose = require('mongoose')
-const key = require('../keys.js') 
+const mongoose = require('mongoose');
 
-mongoose.connect(key.MONGO_URI)
+mongoose.connect(process.env.MONGODB_URL)
 .then(() => console.log("Database connected!"))
 .catch(err => console.log(err));
