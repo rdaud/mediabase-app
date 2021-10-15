@@ -1,19 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import { BrowserRouter as Router, Switch, Route, Redirect, BrowserRouter } from "react-router-dom";
-import { createBrowserHistory } from 'history';
+import { BrowserRouter as Router, Route, Switch, Redirect, BrowserRouter } from "react-router-dom";
 
+import HomePage from "./pages/HomePage";
+import SignUpPage from "./pages/SignUpPage";
+import SignInPage from "./pages/SignInPage";
+import AddFormatPage from "./pages/AddFormatPage";
+import AddCampaignPage from "./pages/AddCampaignPage";
 
-
-import HomePage from "./components/routes/HomePage";
-import SignUpPage from "./components/routes/SignUpPage";
-import SignInPage from "./components/routes/SignInPage";
-import Modal from "./components/Modal";
-
-import { PrivateRoute } from "./components/routes/PrivateRoute";
-import { PublicRoute } from "./components/routes/PublicRoute";
+import PrivateRoute from "./routes/PrivateRoute";
+import PublicRoute from "./routes/PublicRoute";
 
 
 
@@ -21,20 +19,16 @@ export default function App() {
 
   return (
    
-      <BrowserRouter >
+      <BrowserRouter>
         <Switch>
-
-          <PublicRoute exact path="/entrar" component={SignInPage}/>
-          <PublicRoute exact path="/cadastrar" component={SignUpPage}/>
-          <PublicRoute exact path="/modal" component={Modal}/>
-          <PrivateRoute path="/home" component={HomePage} />
-          <PublicRoute exact path="/" render={() => {
-                      return (            
-                        <Redirect to="/entrar" component={SignInPage}/> 
-                      )
-                    }
-                  }
-          /> 
+          <PublicRoute  exact path="/entrar" component={SignInPage}/>
+          <PublicRoute  exact path="/cadastrar" component={SignUpPage}/>
+          <PrivateRoute exact path="/adicionar-formato" component={AddFormatPage}/>
+          <PrivateRoute exact path="/nova-campanha" component={AddCampaignPage}/>
+          <PrivateRoute exact path="/home" component={HomePage} />
+          <PublicRoute exact path="/" component={SignInPage}>
+            <Redirect to="/entrar" />
+          </PublicRoute>
         </Switch>
       </BrowserRouter>
 
@@ -44,5 +38,7 @@ export default function App() {
   
 }
 
-
+// render={() => (            
+//   <Redirect to="/entrar" component={SignInPage}/> 
+// )
 

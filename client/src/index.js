@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider, configureStore, useDispatch } from "react-redux";
-
+import { Provider } from "react-redux";
+import { CookiesProvider } from 'react-cookie'
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -9,12 +9,12 @@ import makeStore from "./redux/store";
 
 const store = makeStore();
 
-console.log(store.getState())
-
 ReactDOM.render(
-  <Provider store={store}>
-    <App />
-    </Provider>,
+  <CookiesProvider>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </CookiesProvider>,
   document.getElementById('root')
 );
 

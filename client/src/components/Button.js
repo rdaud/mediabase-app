@@ -1,4 +1,4 @@
-import React, { useState, Component } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 
@@ -26,26 +26,27 @@ const StyledButton = styled.button`
         display: inline;
         height: 24px;
         transform: rotate(45deg);
-        background-color: #161616;
+        background-color: ${ props => props.corDaOrelha || "#161616" };
     }
 `
 
-const StyledCloseButton = styled.div`
+const StyledCloseButton = styled.button`
     width: 56px;
     height: 56px;
     background: white;
+    cursor: pointer;
 `
 
 
 export function ThemeButton(props) {
     return (
-        <StyledButton type="submit">{props.children}</StyledButton>
+        <StyledButton type="submit" {...props}>{props.children}</StyledButton>
     )
 }
 
 export function SystemButton(props) {
     return (
-        <StyledCloseButton>{props.children}</StyledCloseButton>
+        <StyledCloseButton type="button" {...props}> {props.children} </StyledCloseButton>
     )
 }
 

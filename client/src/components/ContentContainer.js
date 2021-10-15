@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { ThemeButton } from "./Button";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from 'react-router-dom';
-import { signOut, getCampaigns } from '../redux/action-creators'
+import { signOut } from '../redux/actions/usersActions';
 
 
 
@@ -27,27 +27,22 @@ function ContentContainer(props) {
 
     const dispatch = useDispatch()
     const history = useHistory()
-    const state = useSelector(state => state.campanhas)
+
+    const handleClick = () => {
+        history.push('/nova-campanha')
+    }
 
     return (
         <Hero>
             <Header>
                 <h1>Campanhas</h1>
-                <ThemeButton>+ Adicionar campanha</ThemeButton>
+                <ThemeButton onClick={handleClick}>+ Adicionar campanha</ThemeButton>
             </Header>
             <button onClick={() => {
                 dispatch(signOut(history))
             }}>
                 Logout
             </button>
-
-            <button onClick={() => {
-                const data = dispatch(getCampaigns())
-                console.log(state)
-            }}>
-                Get table data
-            </button>
-
             {props.children}
         </Hero>
     )

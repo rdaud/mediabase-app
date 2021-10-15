@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 import DataTable from 'react-data-table-component';
+import { useSelector } from "react-redux";
+
 
 
 
@@ -47,54 +49,15 @@ const data = [
             fim: '01/09/2021'
         }
     },
-    {
-        id: 2,
-        Nome: 'Next Joy',
-        Cliente: 'Bradesco',
-        Produto: 'Next',
-        Status: 'Em planejamento',
-        Veiculacao: {
-            inicio: '01/08/2021',
-            fim: '01/09/2021'
-        }
-    },
-    {
-        id: 3,
-        Nome: 'Next Joy',
-        Cliente: 'Bradesco',
-        Produto: 'Next',
-        Status: 'Em planejamento',
-        Veiculacao: {
-            inicio: '01/08/2021',
-            fim: '01/09/2021'
-        }
-    },
-    {
-        id: 4,
-        Nome: 'Next Joy',
-        Cliente: 'Bradesco',
-        Produto: 'Next',
-        Status: 'Em planejamento',
-        Veiculacao: {
-            inicio: '01/08/2021',
-            fim: '01/09/2021'
-        }
-    },
   
 ]
 
-const mapStateToProps = (state) => {
-    return {
-        campaigns: state.campaigns
-    }
-}
-
-function Table(props) {
 
 
-    const [data,setData] = useState([])
+function CampaignsTable(props) {
 
 
+const { campaigns } = useSelector( state => state )
 
     return (
         <Hero>
@@ -109,5 +72,5 @@ function Table(props) {
     )
 }
 
-export default connect(mapStateToProps)(Table)
 
+export default CampaignsTable

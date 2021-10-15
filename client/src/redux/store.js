@@ -2,7 +2,7 @@ import { applyMiddleware, createStore, compose } from "redux";
 import thunk from "redux-thunk";
 import { combineReducers } from "redux";
 import authentication from "./reducers/authReducer";
-import campanhas from "./reducers/campanhasReducer";
+import campaigns from "./reducers/campaignsReducer";
 
 
 
@@ -16,7 +16,7 @@ let initState = {
     loading: false,
     isAuthenticated: false
   },
-  campanhas: []
+  campaigns: []
 }
 
 
@@ -26,7 +26,7 @@ export default function makeStore(initialState = initState) {
   const store = createStore(
     combineReducers({
       authentication,
-      campanhas
+      campaigns
     }),
     initialState,
     composeEnhancers(applyMiddleware(thunk))

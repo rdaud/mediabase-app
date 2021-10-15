@@ -30,7 +30,7 @@ router.post('/campaigns', auth, async (req,res) => {
 router.patch('/campaigns/:id',auth, async(req,res) => {
 
     const updates = Object.keys(req.body)
-    const allowedUpdates = ['nome','cliente','campanha','status','dataVeiculacao']
+    const allowedUpdates = ['nome','cliente','campanha','status','dataDeVeiculacao']
     const isValidOperation = updates.every( update => allowedUpdates.includes(update) )
 
     if (!isValidOperation) {
@@ -62,32 +62,32 @@ router.patch('/campaigns/:id',auth, async(req,res) => {
 router.get('/campaigns', auth, async (req,res) => {
 
     const match = {}
-    const sort = {}
+    // const sort = {}
 
     if (req.query.status) {
         match.status = req.query.status
     }
 
-    if (req.query.sortBy) {
-        const parts = req.query.sortBy.split(':')
-        sort[parts[0]] = parts[1] === 'desc' ? -1 : 1
-    }
+    // if (req.query.sortBy) {
+    //     const parts = req.query.sortBy.split(':')
+    //     sort[parts[0]] = parts[1] === 'desc' ? -1 : 1
+    // }
 
     try {
 
         await req.user.populate({
             path: 'campaigns',
-            match,
-            options: {
-                limit: parseInt(req.query.limit),
-                skip: parseInt(req.query.skip),
-                sort
-            }
+            // match,
+            // options: {
+            //     limit: parseInt(req.query.limit),
+            //     skip: parseInt(req.query.skip),
+            //     sort
+            // }
         })
         res.send(req.user.campaigns)
 
     } catch (e) {
-        res.status(500).send(2)
+        res.status(500).send(e)
     }
 
 })

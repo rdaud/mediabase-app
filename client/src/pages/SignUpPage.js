@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { NavLink, useHistory } from "react-router-dom";
-import { signUp } from "../../redux/action-creators";
-import { ThemeButton } from "../Button";
-import logo from "../../utils/logo.svg"
+import { signUp } from "../redux/actions/usersActions";
+import { ThemeButton } from "../components/Button";
+import logo from "../utils/logo.svg"
 import styled from 'styled-components'
 import { useDispatch, useSelector } from "react-redux";
+import { useCookies } from 'react-cookie';
+
 
 const Logo = styled.div`
     position: relative;
@@ -15,14 +17,14 @@ const Logo = styled.div`
 `
 
 
-
 export default function SignUpPage() {
 
-    const { error } = useSelector((state) => state.authentication);
+    const { user } = useSelector((state) => state.authentication);
 
     const [ name, setName ] = useState('');
     const [ email, setEmail ] = useState('');
     const [ password, setPassword ] = useState('');
+
 
     const dispatch = useDispatch()
     const history = useHistory()

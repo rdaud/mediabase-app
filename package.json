@@ -17,8 +17,10 @@
     "mongoose": "^6.0.7",
     "nodemon": "^2.0.12",
     "react": "^17.0.2",
+    "react-cookie": "^4.1.1",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
+    "redux-persist": "^6.0.0",
     "sass": "^1.41.0",
     "validator": "^13.6.0",
     "web-vitals": "^1.1.2"
@@ -26,7 +28,7 @@
   "scripts": {
     "start": "react-scripts start",
     "client": "cd client && yarn start",
-    "server": "env-cmd -f ./config/dev.env nodemon server.js",
+    "server": "env-cmd -f ./config/dev.env nodemon index.js",
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
     "build": "react-scripts build",
     "test": "jest --watch",
@@ -53,6 +55,5 @@
   "devDependencies": {
     "env-cmd": "^10.1.0",
     "jest": "^26.6.0"
-
   }
 }

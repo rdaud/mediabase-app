@@ -1,13 +1,13 @@
 import '../App.scss';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components'
 import icon from '../utils/close-icon.svg'
-import axios from "axios";
+import { useHistory } from 'react-router-dom'
 
 
-import DataTable from 'react-data-table-component';
-import { useDispatch, useSelector } from "react-redux";
-import { getFormatos } from '../redux/action-creators';
+
+
+
 
 
 
@@ -24,18 +24,18 @@ const Hero = styled.div`
 
 const Header = styled.div`
     position: relative;
-    padding: 1.2rem;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 `
 
 const ModalContainer = styled.div`
-    width: 1024px;
+    width:  ${ props => props.modalWidth || "1024px" };;
     height: 608px;
     background-color: #323232;
     position: relative;
     margin: 0 auto;
+    padding: 2rem;
     overflow-y: hidden;
 `
 
@@ -47,106 +47,32 @@ const CloseButton = styled.div`
     align-items: center;
 `
 
-const TableWrapper = styled.div`
-width: 100%;
-height: 100%;
-position: relative;
-`
-
-
-const columns = [
-    {
-        name: 'Formato',
-        selector: row => row.NomeDoFormato,
-    },
-    {
-        name: 'Veículo',
-        selector: row => row.Veículo,
-    },
-    {
-        name: 'Mídia',
-        selector: row => row.Meio,
-    },
-    {
-        name: 'Formato do Arquivo',
-        selector: row => row.FormatoDoArquivo,
-    },
-    {
-        name: 'Tamanho',
-        selector: row => row.Tamanho,
-    },
-];
-
-
-const conditionalRowStyles = [
-    {
-      when: row => row.NomeDoFormato,
-      classNames: ['add-label'],
-    }
-
-  ];
-
-
-  const dataTeste = [
-      {
-          id: 1,
-          NomeDoFormato: 
-           `Teste <br> teste`,
-          Veículo: 'Teste',
-      }
-  ]
 
 
 
 
-function Modal() {
-
-
-    const [ data, setData ] = useState([])
-
-    useEffect(() => {
-      
-      axios.get('/formats',{
-        'Content-Type': 'application/json',
-      }).then(response => {
-
-            let arr = []
-            response.data.forEach((element,index) => {
-            const rowData = element.fields
-            arr.push({id:index,...rowData})
-            });
-
-            console.log(arr)
-            setData(arr)
-
-      }).catch( e => console.log(e))
 
 
 
-    },[])
+function Modal(props) {
 
+    const history = useHistory()
 
-
+    const handleClickOnCloseButton = e => {
+        e.stopPropagation();
+        history.goBack();
+    };
+    
 
     return (
         <Hero>
-            <ModalContainer>
+            <ModalContainer {...props}>
                 <Header>
-                    <h2>Adicionar Formatos</h2>
-                    <CloseButton> <img src={icon} alt="Mediabase" />
+                    <h2>{props.headerTitle}</h2>
+                    <CloseButton onClick={handleClickOnCloseButton}> <img src={icon} alt="Fechar" />
                     </CloseButton>
                 </Header>
-                <TableWrapper>
-                <DataTable
-                conditionalRowStyles={conditionalRowStyles}
-                columns={columns}
-                data={data}
-                theme="dark"
-                highlightOnHover="true"
-                selectableRows
-                fixedHeader
-                />
-                </TableWrapper>
+                {props.children}
             </ModalContainer>
         </Hero>
     )

@@ -23,13 +23,15 @@ const campaignSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    inicioDaVeiculacao: {
-        type: Date,
-        required: true
-    },
-    fimDaVeiculacao: {
-        type: Date,
-        required: true
+    dataDeVeiculacao: {
+        inicio: {
+            type: Date,
+            required: true
+        },
+        fim: {
+            type: Date,
+            required: true
+        }  
     },
     formatos: {
         type: Array

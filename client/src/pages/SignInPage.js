@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { NavLink, useHistory } from "react-router-dom";
-import { SignInAction } from "../../redux/action-creators";
-import { ThemeButton } from "../Button";
-import logo from "../../utils/logo.svg"
+import { signIn } from "../redux/actions/usersActions";
+import { ThemeButton } from "../components/Button";
+import logo from "../utils/logo.svg"
 import styled from 'styled-components'
 import { useDispatch, useSelector } from "react-redux";
-// import { history } from "../../App"
+import { useCookies } from 'react-cookie';
+
 
 
 
@@ -19,23 +20,21 @@ const Logo = styled.div`
 
 
 
-
 export default function SignInPage() {
 
     const dispatch = useDispatch();
  
     const [ password, setPassword ] = useState('');
-
     const [ email, setEmail ] = useState('');
-
     const history = useHistory();
+    const { user } = useSelector( state => state.authentication )
+
 
     const handleSignInClick = (event) => {
         event.preventDefault();
-        dispatch(SignInAction({email, password}, history));
+        dispatch(signIn({email, password}, history));
       };
 
-      const user = useSelector( state => state.authentication )
 
 
         return (
