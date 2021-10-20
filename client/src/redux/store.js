@@ -1,8 +1,9 @@
 import { applyMiddleware, createStore, compose } from "redux";
+import { configureStore } from '@reduxjs/toolkit'
 import thunk from "redux-thunk";
 import { combineReducers } from "redux";
-import authentication from "./reducers/authReducer";
-import campaigns from "./reducers/campaignsReducer";
+import authenticationReducer from "./reducers/authReducer";
+import campaignsReducer from "./reducers/campaignsReducer";
 
 
 
@@ -16,21 +17,43 @@ let initState = {
     loading: false,
     isAuthenticated: false
   },
-  campaigns: []
+  campaigns: {
+    status: "idle",
+    loading: false,
+    error: "",
+    addCampaignModal: true,
+    campaigns: []
+  }
 }
 
 
 
-export default function makeStore(initialState = initState) {
-
-  const store = createStore(
-    combineReducers({
-      authentication,
-      campaigns
+export default configureStore({
+    reducer: {
+      authentication: authenticationReducer,
+      campaigns: campaignsReducer
+    },
+    middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
     }),
-    initialState,
-    composeEnhancers(applyMiddleware(thunk))
-  );
+    devTools: process.env.NODE_ENV !== 'production',
+    initState
 
-  return store;
-}
+});
+
+
+
+// export default function makeStore(initialState = initState) {
+
+//   const store = createStore(
+//     combineReducers({
+//       authenticationReducer,
+//       campaignsReducer
+//     }),
+//     initialState,
+//     composeEnhancers(applyMiddleware(thunk))
+//   );
+
+//   return store;
+// }

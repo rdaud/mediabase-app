@@ -2,14 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { NavLink, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { ThemeButton } from "../components/Button";
-import { getCampaigns } from "../redux/actions/campaignsActions";
-
+import { createCampaign } from "../redux/actions/campaignsActions";
+import { closeAddCampaignModalRequest } from '../redux/actions/campaignsActions';
 
 
 import styled from 'styled-components';
 import Modal from '../components/Modal'
-
-
 
 
 
@@ -29,7 +27,7 @@ const FormContainer = styled.div`
 
 
 
-function AddCampaignPage() {
+function AddCampaignPage(props) {
 
     const dispatch = useDispatch()
     const history = useHistory()
@@ -39,24 +37,32 @@ function AddCampaignPage() {
     const [ cliente , setCliente ] = useState('')
     const [ produto , setProduto ] = useState('')
     const [ status , setStatus ] = useState('')
-    const [ dataDeVeiculacao , setDataDeVeiculacao ] = useState({
-        inicio: '',
-        fim: ''
-    })
+    const [ dataDeVeiculacaoInicio , setDataDeVeiculacaoInicio ] = useState('')
+    const [ dataDeVeiculacaoFim , setDataDeVeiculacaoFim ] = useState('')
+  
 
-
-    const handleSignInClick = (event) => {
+    const handleSubmitFormClick = (event) => {
         event.preventDefault();
-        dispatch(getCampaigns({ nome,cliente,produto,status, ...dataDeVeiculacao }, history));
+        dispatch(createCampaign({ nome,cliente,produto,status, dataDeVeiculacaoInicio, dataDeVeiculacaoFim }, history));
+        setNome('')
+        setCliente('')
+        setStatus('')
+        setDataDeVeiculacaoInicio('')
+        setDataDeVeiculacaoFim('')
+    };
+
+    const handleClickOnCloseButton = () => {
+        dispatch(closeAddCampaignModalRequest())
     };
 
 
-
     return (
-        <Modal headerTitle="Nova Campanha" modalWidth="600px">
-            <FormWrapper>
+        <Modal headerTitle="Nova Campanha" modalWidth="600px" handleClickOnCloseButton={handleClickOnCloseButton}>
+           { props.loading ? <div>Is loading </div> : 
+           
+           <FormWrapper>
                 <FormContainer>
-                    <form onSubmit={handleSignInClick}>
+                    <form onSubmit={handleSubmitFormClick}>
                         <div className="form-group">
                             <label>Nome da campanha</label>
                             <input type="text" onChange={e => setNome(e.target.value)} value={nome} className="form-control" placeholder="Nome da campanha" />
@@ -86,10 +92,9 @@ function AddCampaignPage() {
                             <div style={{
                                 "display": "flex",
                                 "gap": "1rem"
-
                             }}>
-                            <input type="date" onChange={e => setDataDeVeiculacao({inicio: e.target.value})} value={dataDeVeiculacao.inicio} className="form-control"/>
-                            <input type="date" onChange={e => setDataDeVeiculacao({fim: e.target.value})} value={dataDeVeiculacao.fim} className="form-control"/>
+                            <input type="date" onChange={e => setDataDeVeiculacaoInicio(e.target.value)} value={dataDeVeiculacaoInicio} className="form-control"/>
+                            <input type="date" onChange={e => setDataDeVeiculacaoFim(e.target.value)} value={dataDeVeiculacaoFim} className="form-control"/>
                             </div>
                      </div>
                         <ThemeButton corDaOrelha="#323232">
@@ -98,6 +103,8 @@ function AddCampaignPage() {
                     </form>
                  </FormContainer>
             </FormWrapper>
+           
+           } 
         </Modal>
     )
 }

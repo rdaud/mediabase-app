@@ -4,6 +4,8 @@ import { ThemeButton } from "./Button";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from 'react-router-dom';
 import { signOut } from '../redux/actions/usersActions';
+import { openAddCampaignModalRequest } from '../redux/actions/campaignsActions';
+
 
 
 
@@ -27,20 +29,24 @@ function ContentContainer(props) {
 
     const dispatch = useDispatch()
     const history = useHistory()
+    const { token } = useSelector( state => state.authentication )
 
-    const handleClick = () => {
-        history.push('/nova-campanha')
+    const handleCreateCampaignClick = () => {
+        dispatch(openAddCampaignModalRequest())        // history.push('/nova-campanha')
     }
 
+    const handleSignOutClick = () => {
+        dispatch(signOut(history,token))
+    }
+
+    
     return (
         <Hero>
             <Header>
                 <h1>Campanhas</h1>
-                <ThemeButton onClick={handleClick}>+ Adicionar campanha</ThemeButton>
+                <ThemeButton onClick={handleCreateCampaignClick}>+ Adicionar campanha</ThemeButton>
             </Header>
-            <button onClick={() => {
-                dispatch(signOut(history))
-            }}>
+            <button onClick={handleSignOutClick}>
                 Logout
             </button>
             {props.children}

@@ -12,7 +12,7 @@ const PrivateRoute = ({
 }) => (
   
   <Route {...rest} component={ (props) => (
-        isAuthenticated ? (
+        localStorage.getItem('USER-ID') ? (
           <Component {...props} />
         ) : (
           <Redirect to="/entrar" />

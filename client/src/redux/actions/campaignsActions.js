@@ -1,20 +1,38 @@
 import axios from "axios";
 
+
+
+
+export const openAddCampaignModalRequest = () => {
+  return {
+    type: 'OPEN_ADD_CAMPAIGN_MODAL_REQUEST'
+  }
+}
+
+export const closeAddCampaignModalRequest = () => {
+  return {
+    type: 'CLOSE_ADD_CAMPAIGN_MODAL_REQUEST'
+  }
+}
+
 /**
  * 
  *  Create campaigns actions
  */
 
-
 const createCampaignRequest = () => {
     return {
-      type: 'CREATE_CAMPAIGN_REQUEST'
+      type: 'CREATE_CAMPAIGN_REQUEST',
+      loading: true
     }
   }
+
+
   
   const createCampaignSuccess = (payload) => {
     return {
       type: 'CREATE_CAMPAIGN_SUCCESS',
+      loading: false,
       payload
     }
   }
@@ -26,21 +44,45 @@ const createCampaignRequest = () => {
     }
   }
   
-  const createCampaign = (payload,token) => {
+  export const createCampaign = ({ nome, cliente, produto, status, dataDeVeiculacaoInicio, dataDeVeiculacaoFim },history) => {
   
-    const headers = {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
-    }
-  
-    return function (dispatch) {
+    return function (dispatch,getState) {
+
       dispatch(createCampaignRequest());
-      axios.post('/campaigns',payload,headers)
-      .then((response) => {
-        const { data } = response.data;
-          dispatch(createCampaignSuccess(data));
-          alert('Campanha criada com sucesso');
+      
+      const { token } = getState().authentication
+
+      const campaignTest = {
+        nome,
+        cliente,
+        produto,
+        status,
+        dataDeVeiculacaoInicio,
+        dataDeVeiculacaoFim
+      }
+
+      console.log(campaignTest)
+
+      axios.post('/campaigns',{
+        nome,
+        cliente,
+        produto,
+        status,
+        dataDeVeiculacaoInicio,
+        dataDeVeiculacaoFim
+      },{
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        }
       })
+      .then((response) => {
+        const data = response.data;
+        console.log(data)
+          dispatch(createCampaignSuccess(data));
+          dispatch(closeAddCampaignModalRequest())
+          alert('Campanha criada com sucesso');
+        })
       .catch((error) => {
         dispatch(createCampaignFailure(error));
         alert(error)
@@ -62,17 +104,17 @@ const createCampaignRequest = () => {
     };
   };
   
-  const getCampaignsSuccess = (payload) => {
+  const getCampaignsSuccess = (data) => {
     return {
       type: 'GET_CAMPAIGNS_SUCCESS',
-      payload
+      payload: data
     };
   };
   
-  const getCampaignsFailure = (payload) => {
+  const getCampaignsFailure = (data) => {
     return {
       type: 'GET_CAMPAIGNS_FAILURE',
-      payload
+      payload: data
     };
   };
   
@@ -86,7 +128,7 @@ const createCampaignRequest = () => {
 
       axios.get('/campaigns',{
         headers: {
-          'Authorization': `Bearer ${token}` 
+          'Authorization': `Bearer ${token}`,
         }
       })
       .then((response) => {

@@ -33,18 +33,21 @@ const signUpFailure = (error) => {
 
 export const signUp = (user, history) => {
 
-  const headers = {
-    'Access-Control-Allow-Origin': '*',
-    'Content-Type': 'application/json',
-  }
+ 
 
   return function (dispatch) {
     dispatch(signUpRequest());
-    axios.post('/users',user,headers)
+    axios.post('/users',user,{
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json'
+      }
+    })
     .then((response) => {
-      const { data } = response.data;
+        const data = response.data;
         dispatch(signUpSuccess(data));
-        localStorage.setItem("USER-INFO",data)
+        localStorage.setItem("USER-TOKEN", data.token);
+        localStorage.setItem("USER-ID", data.user._id);
         alert('Cadastrado com sucesso');
         history.push("/home");
     })
@@ -63,10 +66,10 @@ const signInRequest = () => {
   };
 };
 
-export const signInSuccess = (payload) => {
+export const signInSuccess = (data) => {
   return {
     type: 'SIGN_IN_SUCCESS',
-    payload
+    payload: data
   };
 };
 
@@ -93,10 +96,10 @@ export const signIn = (userLoginData = {}, history) => {
     axios.post('/users/login',userLogin,headers)
     .then((response) => {
       const data = response.data;
-      // localStorage.setItem("USER-TOKEN", data.token);
-      // localStorage.setItem("USER-ID", data.user._id);
+      localStorage.setItem("USER-TOKEN", data.token);
+      localStorage.setItem("USER-ID", data.user._id);
       alert('Logado com sucesso');
-      dispatch({ type: "SIGN_IN_SUCCESS", payload: data })
+      dispatch(signInSuccess(data))
       history.push("/home");
     }).catch( error => {
       dispatch(signInFailure(error))
@@ -126,19 +129,29 @@ export const signOutFailure = function () {
   };
 };
 
-export const signOut = function (history) {
+export const signOut = function (history,token) {
 
 
-  return function (dispatch) {
+  return function (dispatch,getState) {
 
     dispatch(signOutRequest());
-    history.push("/entrar");
 
-    if (localStorage.getItem("USER_TOKEN")) {
-      dispatch(signOutFailure());
-    } else {
+    const { token } = getState().authentication;
+    
+    axios.post('/users/logoutAll',token,{
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Access-Control-Allow-Origin': '*',
+      }
+    }).then(result => {
       dispatch(signOutSuccess());
-    }
+      localStorage.clear();
+      history.push("/entrar");
+    }).catch( error => {
+      dispatch(signOutFailure());
+      console.log(error)
+    })
+
   };
 };
 

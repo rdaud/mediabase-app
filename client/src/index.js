@@ -1,22 +1,28 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render }  from 'react-dom';
 import { Provider } from "react-redux";
 import { CookiesProvider } from 'react-cookie'
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import makeStore from "./redux/store";
+import store from "./redux/store";
 
-const store = makeStore();
 
-ReactDOM.render(
-  <CookiesProvider>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </CookiesProvider>,
-  document.getElementById('root')
+const renderApp = () => (
+  render (
+      <Provider store={store}>
+        <App />
+      </Provider>,
+    document.getElementById('root')
+  )
 );
+
+
+if (process.env.NODE_ENV !== 'production' && module.hot) {
+  module.hot.accept('./index', renderApp)
+}
+
+renderApp();
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

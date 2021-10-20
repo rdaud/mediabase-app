@@ -33,8 +33,9 @@ const StyledButton = styled.button`
 const StyledCloseButton = styled.button`
     width: 56px;
     height: 56px;
-    background: white;
-    cursor: pointer;
+    background: transparent;
+    outline: none;
+    border-style: none;
 `
 
 

@@ -3,6 +3,8 @@ import React from 'react';
 import styled from 'styled-components'
 import icon from '../utils/close-icon.svg'
 import { useHistory } from 'react-router-dom'
+import { SystemButton } from "../components/Button";
+
 
 
 
@@ -16,7 +18,7 @@ const Hero = styled.div`
     height: 100%;
     position: absolute;
     z-index: 9999;
-    background-color: black;
+    background-color: rgba(0,0,0,.5);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -39,17 +41,6 @@ const ModalContainer = styled.div`
     overflow-y: hidden;
 `
 
-const CloseButton = styled.div`
-    width: 56px;
-    height: 56px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-`
-
-
-
-
 
 
 
@@ -58,10 +49,10 @@ function Modal(props) {
 
     const history = useHistory()
 
-    const handleClickOnCloseButton = e => {
-        e.stopPropagation();
-        history.goBack();
-    };
+    // const handleClickOnCloseButton = e => {
+    //     e.stopPropagation();
+    //     history.goBack();
+    // };
     
 
     return (
@@ -69,8 +60,8 @@ function Modal(props) {
             <ModalContainer {...props}>
                 <Header>
                     <h2>{props.headerTitle}</h2>
-                    <CloseButton onClick={handleClickOnCloseButton}> <img src={icon} alt="Fechar" />
-                    </CloseButton>
+                    <SystemButton onClick={props.handleClickOnCloseButton}> <img src={icon} alt="Fechar" />
+                    </SystemButton>
                 </Header>
                 {props.children}
             </ModalContainer>

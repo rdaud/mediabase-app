@@ -30,7 +30,7 @@ router.post('/campaigns', auth, async (req,res) => {
 router.patch('/campaigns/:id',auth, async(req,res) => {
 
     const updates = Object.keys(req.body)
-    const allowedUpdates = ['nome','cliente','campanha','status','dataDeVeiculacao']
+    const allowedUpdates = ['nome','cliente','campanha','status','dataDeVeiculacaoInicio', 'dataDeVeiculacaoFim']
     const isValidOperation = updates.every( update => allowedUpdates.includes(update) )
 
     if (!isValidOperation) {

@@ -16,9 +16,7 @@ import PublicRoute from "./routes/PublicRoute";
 
 
 export default function App() {
-
   return (
-   
       <BrowserRouter>
         <Switch>
           <PublicRoute  exact path="/entrar" component={SignInPage}/>
@@ -31,14 +29,6 @@ export default function App() {
           </PublicRoute>
         </Switch>
       </BrowserRouter>
-
-      
-   
   );
-  
 }
-
-// render={() => (            
-//   <Redirect to="/entrar" component={SignInPage}/> 
-// )
 

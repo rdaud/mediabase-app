@@ -13,7 +13,7 @@ const PublicRoute = ({
   
   return (
     <Route {...rest} component={ (props) => (
-          isAuthenticated ? (
+      localStorage.getItem('USER-ID') ? (
             <Redirect to="/home" />
           ) : (
             <Component {...props} />

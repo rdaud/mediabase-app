@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 import DataTable from 'react-data-table-component';
@@ -17,53 +17,38 @@ const Hero = styled.div`
 const columns = [
     {
         name: 'Nome',
-        selector: row => row.Nome,
+        selector: row => row.nome,
     },
     {
         name: 'Cliente',
-        selector: row => row.Cliente,
+        selector: row => row.cliente,
     },
     {
         name: 'Produto',
-        selector: row => row.Produto,
+        selector: row => row.produto,
     },
     {
         name: 'Status',
-        selector: row => row.Status,
+        selector: row => row.status,
     },
     {
         name: 'Data de veiculação',
-        selector: row => `${row.Veiculacao.inicio} - ${row.Veiculacao.fim}`,
+        selector: row => `${row.dataDeVeiculacaoInicio} - ${row.dataDeVeiculacaoFim}`,
     },
 ];
 
-const data = [
-    {
-        id: 1,
-        Nome: 'Next Joy',
-        Cliente: 'Bradesco',
-        Produto: 'Next',
-        Status: 'Em planejamento',
-        Veiculacao: {
-            inicio: '01/08/2021',
-            fim: '01/09/2021'
-        }
-    },
-  
-]
+
 
 
 
 function CampaignsTable(props) {
 
-
-const { campaigns } = useSelector( state => state )
-
+    console.log(props.data)
     return (
         <Hero>
             <DataTable
                 columns={columns}
-                data={data}
+                data={props.data}
                 theme="dark"
                 highlightOnHover="true"
                 expandableRows="true"          
