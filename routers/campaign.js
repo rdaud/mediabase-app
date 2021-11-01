@@ -99,6 +99,8 @@ router.get('/campaigns/:id', auth, async (req,res) => {
 
     try {
         const campaign = await Campaign.findOne({ _id, owner: req.user._id })
+        console.log("Campaign Id", _id)
+        console.log("User ID",req.user._id)
         if (!campaign) {
             return res.status(404).send()
         }

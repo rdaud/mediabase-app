@@ -33,26 +33,3 @@ export default connect(mapStateToProps)(PrivateRoute);
 
 
 
-
-
-
-// export const PrivateRoute = ({
-//   component,
-//   path,
-//   ...rest
-// }) => {
-
-//   const { isAuthenticated } = useSelector(
-//     (state) => state.authentication
-//   );
-
-
-//   return isAuthenticated ? (
-//     <Route exact path={path} component={component} {...rest} />
-//   ) : (
-//       <Redirect to={"/entrar"} />
-//     );
-// };
-
-
-

@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 
-
-export default function NotFoundPage() {
+export const NotFoundPage = () => {
     return (
       <h1>
         Essa página não existe

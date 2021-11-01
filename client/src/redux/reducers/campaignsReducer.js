@@ -4,11 +4,11 @@ const initState = {
     loading: false,
     addCampaignModal: false,
     error: "",
-    campaigns: []
+    campaigns: [],
+    currentPageCampaign: {}
 
 }
 
-let status;
 
 const campaignsReducer = (state = initState, action) => {
   
@@ -17,20 +17,32 @@ const campaignsReducer = (state = initState, action) => {
         return {
           ...state,
           addCampaignModal: true
-        }
+        };
+        case "OPEN_ADD_FORMAT_MODAL_REQUEST":
+          return {
+            ...state,
+            addFormatModal: true
+        };
+        case "CLOSE_ADD_FORMAT_MODAL_REQUEST":
+          return {
+            ...state,
+            addFormatModal: false
+        };
         case "CLOSE_ADD_CAMPAIGN_MODAL_REQUEST":
         return {
           ...state,
           addCampaignModal: false
-        }
+        };
       case "GET_CAMPAIGNS_REQUEST":
       case 'CREATE_CAMPAIGN_REQUEST':
+      case 'GET_CAMPAIGN_BY_ID_REQUEST':
         return {
           ...state,
           loading: true,
-        }
+        };
       case 'CREATE_CAMPAIGN_FAILURE':
       case 'GET_CAMPAIGNS_FAILURE':
+      case 'GET_CAMPAIGN_BY_ID_FAILURE':
         return {
           ...state,
           error: action.payload
@@ -40,15 +52,22 @@ const campaignsReducer = (state = initState, action) => {
           ...state,
           loading: false,
           status: 'updated',
-          campaigns: [ ...state.campaigns, ...action.payload ]
-        }
+          campaigns: [ ...action.payload ]
+        };
+      case "GET_CAMPAIGN_BY_ID_SUCCESS":
+        console.log(action.payload)
+        return {
+          ...state,
+          loading: false,
+          currentPageCampaign: action.payload
+        };
       case "CREATE_CAMPAIGN_SUCCESS":
         return {
           ...state,
           loading: false,
           status: 'readyToUpdate',
           campaigns: [ ...state.campaigns, action.payload ]
-        }
+        };
       default:
         return { ...state }; 
     }

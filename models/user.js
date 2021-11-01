@@ -43,7 +43,7 @@ const userSchema = new mongoose.Schema({
     timestamps: true
 })
 
-//
+// 
 userSchema.virtual('campaigns', {
     ref: 'Campaign',
     localField: '_id',

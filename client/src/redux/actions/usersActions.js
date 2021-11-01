@@ -136,7 +136,6 @@ export const signOut = function (history,token) {
 
     dispatch(signOutRequest());
 
-    const { token } = getState().authentication;
     
     axios.post('/users/logoutAll',token,{
       headers: {

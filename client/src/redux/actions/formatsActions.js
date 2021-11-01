@@ -15,29 +15,37 @@ const getFormatosSuccess = (data) => {
     };
   };
   
-  const getFormatosFailure = () => {
+  const getFormatosFailure = (error) => {
     return {
-      type: 'GET_FORMATOS_FAILURE'
+      type: 'GET_FORMATOS_FAILURE',
+      payload: error
     };
   };
   
   
   export const getFormatos = () => {
   
-    const arr = [];
   
     return (dispatch,getState) => {
   
       dispatch(getFormatosRequest());
+
+      let arr = [];
   
       axios.get('/formats',{
         'Content-Type': 'application/json',
       }).then(response => {
-        response.data.forEach(element => {
-          const rowData = element.fields
-          arr.push(rowData)
+        response.data.forEach((element,index) => {
+        const rowData = element.fields
+        arr.push({id:index,...rowData})
         });
-        dispatch(getFormatosSuccess(arr))
-      }).catch( e => alert(e))
+        return arr
+      }).then( result => {
+        dispatch(getFormatosSuccess(result))
+      }).catch( error => {
+        console.log(error)
+        dispatch(getFormatosFailure(error))
+      })
     }
   }
+

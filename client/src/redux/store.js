@@ -1,46 +1,56 @@
-import { applyMiddleware, createStore, compose } from "redux";
+import { applyMiddleware, createStore, compose, combineReducers } from "redux";
 import { configureStore } from '@reduxjs/toolkit'
-import thunk from "redux-thunk";
-import { combineReducers } from "redux";
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'redux-persist'
+import storage from "redux-persist/lib/storage";
+
 import authenticationReducer from "./reducers/authReducer";
 import campaignsReducer from "./reducers/campaignsReducer";
+import formatosReducer from "./reducers/formatosReducer";
 
+const persistConfig = {
+  key: 'root',
+  storage,
+  whitelist: ['campaigns', 'formatos', 'authentication']
+}
+
+const reducers = combineReducers({
+  authentication: authenticationReducer,
+  campaigns: campaignsReducer,
+  formatos: formatosReducer
+})
+
+
+const persistedReducer = persistReducer(persistConfig, reducers)
 
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-let initState = {
-  authentication: {
-    user: null,
-    token: "",
-    error: "",
-    loading: false,
-    isAuthenticated: false
-  },
-  campaigns: {
-    status: "idle",
-    loading: false,
-    error: "",
-    addCampaignModal: true,
-    campaigns: []
-  }
-}
 
 
 
-export default configureStore({
-    reducer: {
-      authentication: authenticationReducer,
-      campaigns: campaignsReducer
-    },
+const store = configureStore({
+    reducer: persistedReducer,
     middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      serializableCheck: false,
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
     }),
-    devTools: process.env.NODE_ENV !== 'production',
-    initState
-
+    devTools: process.env.NODE_ENV !== 'production'
 });
+
+let persistor = persistStore(store);
+
+export { store, persistor }
 
 
 

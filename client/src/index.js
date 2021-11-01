@@ -1,18 +1,21 @@
 import React from 'react';
 import { render }  from 'react-dom';
 import { Provider } from "react-redux";
-import { CookiesProvider } from 'react-cookie'
-import './index.css';
+import { PersistGate } from 'redux-persist/integration/react';
+import './App.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import store from "./redux/store";
+import { store, persistor } from "./redux/store";
 
 
 const renderApp = () => (
   render (
       <Provider store={store}>
-        <App />
-      </Provider>,
+        <PersistGate loading={null} persistor={persistor}>
+          <App />
+        </PersistGate>
+      </Provider>
+      ,
     document.getElementById('root')
   )
 );

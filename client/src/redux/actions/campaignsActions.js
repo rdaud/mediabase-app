@@ -15,6 +15,21 @@ export const closeAddCampaignModalRequest = () => {
   }
 }
 
+export const openAddFormatModalRequest = () => {
+  return {
+    type: 'OPEN_ADD_FORMAT_MODAL_REQUEST'
+  }
+}
+
+export const closeAddFormatModalRequest = () => {
+  return {
+    type: 'CLOSE_ADD_FORMAT_MODAL_REQUEST'
+  }
+}
+
+
+
+
 /**
  * 
  *  Create campaigns actions
@@ -40,6 +55,7 @@ const createCampaignRequest = () => {
   const createCampaignFailure = (payload) => {
     return {
       type: 'CREATE_CAMPAIGN_FAILURE',
+      loading: false,
       payload
     }
   }
@@ -61,7 +77,6 @@ const createCampaignRequest = () => {
         dataDeVeiculacaoFim
       }
 
-      console.log(campaignTest)
 
       axios.post('/campaigns',{
         nome,
@@ -80,15 +95,14 @@ const createCampaignRequest = () => {
         const data = response.data;
         console.log(data)
           dispatch(createCampaignSuccess(data));
-          dispatch(closeAddCampaignModalRequest())
+          dispatch(closeAddCampaignModalRequest());
+          history.push(`home/campanha/${data._id}`)
           alert('Campanha criada com sucesso');
         })
       .catch((error) => {
-        dispatch(createCampaignFailure(error));
-        alert(error)
-      });
-  
-     
+          dispatch(createCampaignFailure(error));
+          alert(error);
+      }); 
     };
   }
   
@@ -141,3 +155,53 @@ const createCampaignRequest = () => {
     };
   };
   
+
+   /**
+   * 
+   *  Get campaign by ID
+   */
+
+    const getCampaignByIdRequest = () => {
+      return {
+        type: 'GET_CAMPAIGN_BY_ID_REQUEST'
+      };
+    };
+    
+    const getCampaignByIdSuccess = (data) => {
+      return {
+        type: 'GET_CAMPAIGN_BY_ID_SUCCESS',
+        payload: data
+      };
+    };
+    
+    const getCampaignByIdFailure = (data) => {
+      return {
+        type: 'GET_CAMPAIGN_BY_ID_FAILURE',
+        payload: data
+      };
+    };
+
+
+    export const getCampaignById = (id,token) => {
+  
+      return function(dispatch) {
+
+        dispatch(getCampaignByIdRequest());
+        const url = `/campaigns/${id}`
+
+        axios.get(url,{
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          }
+        })
+        .then((response) => {
+          console.log(response.data)
+          return dispatch(getCampaignByIdSuccess(response.data))
+        })
+        .catch((error) => {
+          dispatch(getCampaignByIdFailure())
+          return console.log(error)
+        });
+      };
+    };

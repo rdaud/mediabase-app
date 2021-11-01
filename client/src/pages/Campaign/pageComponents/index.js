@@ -1,0 +1,5 @@
+export * from './AddFormatModal'
+export * from './ContentPlate'
+export * from './CriativosContent'
+export * from './FormatosContent'
+export * from './PageHeader'

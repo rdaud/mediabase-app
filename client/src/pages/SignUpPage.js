@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import { signUp } from "../redux/actions/usersActions";
-import { ThemeButton } from "../components/Button";
-import logo from "../utils/logo.svg"
-import styled from 'styled-components'
+import { ThemeButton } from "../components";
+import logo from "../assets/logo/logo.svg";
+import styled from 'styled-components';
 import { useDispatch, useSelector } from "react-redux";
-import { useCookies } from 'react-cookie';
 
 
 const Logo = styled.div`
@@ -17,7 +16,7 @@ const Logo = styled.div`
 `
 
 
-export default function SignUpPage() {
+export const SignUpPage = () => {
 
     const { user } = useSelector((state) => state.authentication);
 
