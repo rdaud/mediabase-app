@@ -7,7 +7,7 @@ export const SearchWrapper = styled.div`
     min-width: 150px;
     max-width: 300px;
     border: 1px solid transparent;
-    border-color: ${ props => props.onfocus ? COLOR.white : COLOR.gray90 };
+    border-color: ${ props => props.lighter ? COLOR.gray90 : COLOR.gray100 };
     padding-left: 1rem;
     display: inline-flex;
     align-itens: center;
@@ -27,7 +27,7 @@ export const SearchWrapper = styled.div`
 
 export const StyledInput = styled.input`
     padding-left: -3rem;
-    height: 48px;
+    height: ${ props => props.small ? "2rem" : "3rem"};
     width: 100%;
     background: transparent;
     border: 0;
@@ -36,4 +36,5 @@ export const StyledInput = styled.input`
     &:focus {
         outline: none;
     }
+    
 `

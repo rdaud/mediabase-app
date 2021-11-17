@@ -30,7 +30,7 @@ router.post('/campaigns', auth, async (req,res) => {
 router.patch('/campaigns/:id',auth, async(req,res) => {
 
     const updates = Object.keys(req.body)
-    const allowedUpdates = ['nome','cliente','campanha','status','dataDeVeiculacaoInicio', 'dataDeVeiculacaoFim']
+    const allowedUpdates = ['nome','cliente','campanha','status','dataDeVeiculacaoInicio', 'formatos', 'dataDeVeiculacaoFim']
     const isValidOperation = updates.every( update => allowedUpdates.includes(update) )
 
     if (!isValidOperation) {
@@ -44,11 +44,19 @@ router.patch('/campaigns/:id',auth, async(req,res) => {
         // Find campaigns by Owner
         const campaign = await Campaign.findOne({ _id: req.params.id, owner: req.user._id})
 
+        console.log(campaign)
+   
         if (!campaign) {
             return res.status(404).send()
         }
 
-        updates.forEach(update => campaign[update] = req.body[update])
+        updates.forEach(update => {
+            if (update === 'formatos') {
+                return campaign[update].push(...req.body[update])
+            }
+            return campaign[update] = req.body[update]
+        })
+
         await campaign.save()
         res.send(campaign)
 
@@ -99,8 +107,6 @@ router.get('/campaigns/:id', auth, async (req,res) => {
 
     try {
         const campaign = await Campaign.findOne({ _id, owner: req.user._id })
-        console.log("Campaign Id", _id)
-        console.log("User ID",req.user._id)
         if (!campaign) {
             return res.status(404).send()
         }

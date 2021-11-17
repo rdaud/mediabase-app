@@ -31,7 +31,7 @@ export const FormatosList = styled.ul`
     padding-left: 0 !important;
 `
 
-export const DashedContainer = styled.div`
+export const EmptyStateContainer = styled.div`
 
     width: 100%;
     border: 1px dashed ${COLOR.gray90};

@@ -36,6 +36,7 @@ const campaignsReducer = (state = initState, action) => {
       case "GET_CAMPAIGNS_REQUEST":
       case 'CREATE_CAMPAIGN_REQUEST':
       case 'GET_CAMPAIGN_BY_ID_REQUEST':
+      case 'UPDATE_CAMPAIGN_REQUEST':
         return {
           ...state,
           loading: true,
@@ -43,6 +44,7 @@ const campaignsReducer = (state = initState, action) => {
       case 'CREATE_CAMPAIGN_FAILURE':
       case 'GET_CAMPAIGNS_FAILURE':
       case 'GET_CAMPAIGN_BY_ID_FAILURE':
+      case 'UPDATE_CAMPAIGN_FAILURE':
         return {
           ...state,
           error: action.payload
@@ -54,8 +56,11 @@ const campaignsReducer = (state = initState, action) => {
           status: 'updated',
           campaigns: [ ...action.payload ]
         };
+      case 'UPDATE_CAMPAIGN_SUCCESS':
+        return {
+          ...state
+        }
       case "GET_CAMPAIGN_BY_ID_SUCCESS":
-        console.log(action.payload)
         return {
           ...state,
           loading: false,

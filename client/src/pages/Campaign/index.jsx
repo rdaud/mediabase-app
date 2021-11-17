@@ -23,12 +23,12 @@ useEffect(() => {
 
 useEffect( () => {
    dispatch(getFormatos())
-},[dispatch])
+},[])
 
     return (
         <div>
             <Hero>
-            { addFormatModal && <AddFormatModal /> }
+            { addFormatModal && <AddFormatModal id={props.match.params.id}/> }
                 <Navbar />
                 <MainContainer>
                     <PageHeader id={props.match.params.id}/>

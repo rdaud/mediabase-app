@@ -1,19 +1,30 @@
 import React, { useEffect, useState } from 'react';
-import { Navbar, MainContainer, Search, RegularButton } from '../../components';
+import { Navbar, MainContainer } from '../../components';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFormatos } from '../../redux/actions/formatsActions';
+import { openAddCampaignModalRequest, getCampaigns } from '../../redux/actions/campaignsActions';
 import { AddCampaignModal, CampaignsTable, PageHeader } from './pageComponents';
-import { Hero, ActionsWrapper, ButtonWrapper } from './styles';
-import chevron from '../../assets/icons/chevron-down.svg'
+import { Hero, EmptyStateContainer, EmptyStateWrapper } from './styles';
 
 
 
 export const HomePage = () => {
 
-    const { addCampaignModal,  loading } = useSelector(state => state.campaigns)
+    const { addCampaignModal,  loading, campaigns } = useSelector(state => state.campaigns)
+    const { token } = useSelector(state => state.authentication)
     const [ isPageLoaded , setIsPageLoaded ] = useState(false)
-
     const dispatch = useDispatch()
+
+
+    const handleClick = () => {
+      dispatch(openAddCampaignModalRequest())
+    }
+
+
+    useEffect(() => { 
+      dispatch(getCampaigns(token))
+    },[])
+
 
     useEffect(() => { 
       if (!isPageLoaded) {
@@ -22,28 +33,21 @@ export const HomePage = () => {
       }
     },[isPageLoaded])
 
+   
+
 
     return (
       <Hero>
         { addCampaignModal && <AddCampaignModal loading={loading}/> }
         <Navbar />
         <MainContainer>
-            <PageHeader />
-            <ActionsWrapper>
-            <ButtonWrapper>
-                <RegularButton iconRight={chevron}>Clientes</RegularButton>
-              </ButtonWrapper>
-              <ButtonWrapper>
-                <RegularButton iconRight={chevron}>Produtos</RegularButton>
-              </ButtonWrapper>
-              <ButtonWrapper>
-                <RegularButton iconRight={chevron}>Status</RegularButton>
-              </ButtonWrapper>
-              <ButtonWrapper>
-                <Search />
-              </ButtonWrapper>
-            </ActionsWrapper>
-            <CampaignsTable />
+            <PageHeader />     
+            { campaigns !== undefined && campaigns.length > 0 ? <CampaignsTable /> :
+            <EmptyStateWrapper>
+              <EmptyStateContainer>
+                    <p>Você ainda não possui campanha adicionada. Clique em <span onClick={handleClick}>Adicionar campanha</span> para iniciar.</p>
+              </EmptyStateContainer>
+            </EmptyStateWrapper> }          
         </MainContainer>
       </Hero>
     );

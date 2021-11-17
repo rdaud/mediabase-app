@@ -4,7 +4,7 @@ import { SearchWrapper, StyledInput } from './styles';
 
 
 
-export const Search = () => {
+export const Search = (props) => {
 
     const [ onFocus, setOnFocus ] = useState(false);
 
@@ -17,9 +17,9 @@ export const Search = () => {
     };
 
     return (
-        <SearchWrapper onfocus={onFocus}>
-        <img src={search} />
-        <StyledInput onFocus={focusHandler} onBlur={blurHandler} id="input" placeholder="Buscar" label=""/>
+        <SearchWrapper onfocus={onFocus} {...props} >
+            <img src={search} />
+            <StyledInput onFocus={focusHandler} {...props} onBlur={blurHandler} id="input" placeholder="Buscar" label=""/>
         </SearchWrapper>
     );
 }

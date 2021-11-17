@@ -100,7 +100,7 @@ const createCampaignRequest = () => {
           alert('Campanha criada com sucesso');
         })
       .catch((error) => {
-          dispatch(createCampaignFailure(error));
+          dispatch(createCampaignFailure(JSON.stringify(error)));
           alert(error);
       }); 
     };
@@ -149,11 +149,69 @@ const createCampaignRequest = () => {
         return dispatch(getCampaignsSuccess(response.data))
       })
       .catch((error) => {
-        dispatch(getCampaignsFailure(error))
+        dispatch(getCampaignsFailure(JSON.stringify(error)))
         return console.log(error)
       });
     };
   };
+
+  /**
+   * 
+   * Update campaigns
+   */
+
+
+  const updateCampaignRequest = () => {
+    return {
+      type: 'UPDATE_CAMPAIGN_REQUEST'
+    };
+  };
+
+  const updateCampaignFailure = (data) => {
+    return {
+      type: 'UPDATE_CAMPAIGN_FAILURE',
+      payload: data
+    };
+  };
+
+  const updateCampaignSuccess = (data) => {
+    return {
+      type: 'UPDATE_CAMPAIGN_SUCCESS',
+      payload: data
+    };
+  };
+
+  export const updateCampaign = (payload) => {
+    return function(dispatch, getState) {
+
+      const { token } = getState().authentication
+      const { currentPageCampaign: { _id } } = getState().campaigns
+
+      dispatch(updateCampaignRequest());
+
+      axios.patch(
+        `/campaigns/${_id}`,
+        payload,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          }
+        }
+      )
+      .then((response) => {
+        const data = response.data;
+        dispatch(updateCampaignSuccess(data));
+        alert('Formato adicionado com sucesso');
+      })
+      .catch((error) => {
+        dispatch(updateCampaignFailure(JSON.stringify(error)));
+        alert(error);
+      }); 
+    };
+
+  }
+  
   
 
    /**
@@ -196,7 +254,6 @@ const createCampaignRequest = () => {
           }
         })
         .then((response) => {
-          console.log(response.data)
           return dispatch(getCampaignByIdSuccess(response.data))
         })
         .catch((error) => {

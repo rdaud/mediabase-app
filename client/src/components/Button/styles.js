@@ -11,6 +11,7 @@ export const StyledButton = styled.button`
     outline: none;
     display: inline-flex;
     align-items: center;
+    overflow: hidden;
 
     &::after {
         content: '';

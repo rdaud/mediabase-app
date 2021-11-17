@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { ThemeButton, Modal } from "../../../../components";
+import { ThemeButton, Modal, FormGroup, TextInput, Select } from "../../../../components";
 import { createCampaign } from "../../../../redux/actions/campaignsActions";
 import { closeAddCampaignModalRequest } from '../../../../redux/actions/campaignsActions';
 import { FormWrapper, FormContainer } from './styles';
+import { COLOR } from '../../../../tokens/colors';
 
 
 
@@ -37,52 +38,52 @@ export const AddCampaignModal = (props) => {
         dispatch(closeAddCampaignModalRequest())
     };
 
+    const options = [
+        'Em produção', 
+        'Finalizada'
+      ]
+
 
     return (
         <Modal headerTitle="Nova Campanha" modalWidth="600px" handleClickOnCloseButton={handleClickOnCloseButton}>
            { props.loading ? <div>Is loading </div> : 
-           
            <FormWrapper>
                 <FormContainer onSubmit={handleSubmitFormClick}>
-                                            <div className="form-group">
-                            <label>Nome da campanha</label>
-                            <input type="text" onChange={e => setNome(e.target.value)} value={nome} className="form-control" placeholder="Nome da campanha" />
-                        </div>
+                    
+                        <FormGroup>
+                            <TextInput label="Nome da campanha" onChange={val => setNome(val.target.value)} value={nome} placeholder="Nome da campanha" />
+                        </FormGroup>
 
-                        <div className="form-group">
-                            <label>Cliente</label>
-                            <input type="text" onChange={e => setCliente(e.target.value)} value={cliente} className="form-control" placeholder="Cliente" />
-                        </div>
+                        <FormGroup>
+                            <TextInput label="Cliente" onChange={val => setCliente(val.target.value)} value={cliente} placeholder="Cliente" />
+                        </FormGroup>
 
-                        <div className="form-group">
-                            <label>Produto</label>
-                            <input type="text" onChange={e => setProduto(e.target.value)} value={produto} className="form-control" placeholder="Produto" />
-                        </div>
+                        <FormGroup>
+                            <TextInput label="Produto" onChange={val => setProduto(val.target.value)} value={produto} placeholder="Produto" />
+                        </FormGroup>
 
-                        <div className="form-group">
-                            <label>Status</label>
-                            <select type="text" value={status} onChange={e => setStatus(e.target.value)} className="form-control" placeholder="Status">
-                                <option value="Selecione o status">Selecione o status</option>
-                                <option value="Em produção">Em produção</option>
-                                <option value="Finalizada">Finalizada</option>
-                            </select>
-                        </div>
+                        <FormGroup>
+                            <Select onChange={ val => setStatus(val)} value={status} options={options} prompt="Status" label="Status"/>
+                        </FormGroup>
 
-                        <div className="form-group">
+                    <FormGroup>
                             <label>Período de Veiculação</label>
                             <div style={{
                                 "display": "flex",
                                 "gap": "1rem"
                             }}>
-                            <input type="date" onChange={e => setDataDeVeiculacaoInicio(e.target.value)} value={dataDeVeiculacaoInicio} className="form-control"/>
-                            <input type="date" onChange={e => setDataDeVeiculacaoFim(e.target.value)} value={dataDeVeiculacaoFim} className="form-control"/>
+                                <input type="date" onChange={e => setDataDeVeiculacaoInicio(e.target.value)} value={dataDeVeiculacaoInicio} className="form-control"/>
+                                <input type="date" onChange={e => setDataDeVeiculacaoFim(e.target.value)} value={dataDeVeiculacaoFim} className="form-control"/>
                             </div>
-                     </div>
+                    </FormGroup>
+
                      <div>
-                        <ThemeButton corDaOrelha="#323232">
+                        <ThemeButton corDaOrelha={COLOR.black} style={{
+                            marginTop: "1rem"
+                        }}>
                             Criar campanha
                         </ThemeButton>
-                        </div>
+                    </div>
                  </FormContainer>
             </FormWrapper>
            

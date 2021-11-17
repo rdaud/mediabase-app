@@ -298,5 +298,26 @@ button {
 
 a {
    text-decoration: none !important;
-   color: inherit;
+}
+
+.form-group {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.form-group > button {
+  margin-top: 1rem;
+}
+
+.form-group {
+  opacity: 0;
+  flex-grow: 4;
+}
+
+.open {
+  display: flex !important;
+}
+
+.selected {
+  color: white !important;
 }

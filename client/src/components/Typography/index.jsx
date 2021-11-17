@@ -11,6 +11,16 @@ export const Heading1 = styled.h1`
 export const Heading2 = styled.h2`
     font-family: 'Heebo',sans-serif;
     font-weight: 400;
+    font-size: 20px;
+    line-height: 18px;
+    letter-spacing: 5%;
+    color: ${ props => props.color };
+`
+
+
+export const Heading3 = styled.h2`
+    font-family: 'Heebo',sans-serif;
+    font-weight: 400;
     font-size: 14px;
     line-height: 18px;
     letter-spacing: 5%;

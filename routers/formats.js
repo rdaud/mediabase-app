@@ -20,7 +20,7 @@ router.get('/formats', async (req,res) => {
 
             fields: ['Formato', 'NomeDoFormato', 'Veículo','Tamanho','Meio', 'FormatoDoArquivo' ],
             view: 'Todos',
-            maxRecords: 80
+            maxRecords: 15
             // filterByFormula :`AND(NOT(Confirmed), Token = '${Token}')`,
 
         }).eachPage( function page(records, next) {
