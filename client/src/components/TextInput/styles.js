@@ -8,21 +8,17 @@ export const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-itens: center;
-
-  
 `
 
 export const StyledInput = styled.input`
     box-sizing: border-box;
     padding-left: 1rem;
-    border-radius: 0.250rem;
     height: 48px;
     width: 100%;
-    margin-bottom: 1rem;
-
-    background: ${COLOR.gray100};
-    border: ${ props => props.error ? "1px solid darkgray" : "1px solid transparent"};
+    background: rgba(0,0,0,.3);
+    border: ${ props => props.error ? "1px solid darkgray" : `1px solid ${COLOR.gray80}`};
     color: ${COLOR.white};
+    font-size: 14px;
 
     &:focus {
         outline: 0;
@@ -30,12 +26,13 @@ export const StyledInput = styled.input`
     }
 
     &:hover {
-        border: 1px solid ${COLOR.gray90};
+        border: 1px solid ${COLOR.gray70};
+        cursor: pointer;
     }
 `
 
 export const Label = styled.label`
-
+    color: ${COLOR.gray70};
 `
 export const AssistiveText = styled.p`
     color: ${COLOR.white};

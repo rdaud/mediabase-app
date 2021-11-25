@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { ThemeButton, Modal, FormGroup, TextInput, Select } from "../../../../components";
+import { ThemeButton, Modal, FormGroup, TextInput, Select, Datepicker } from "../../../../components";
 import { createCampaign } from "../../../../redux/actions/campaignsActions";
 import { closeAddCampaignModalRequest } from '../../../../redux/actions/campaignsActions';
 import { FormWrapper, FormContainer } from './styles';
@@ -51,7 +51,7 @@ export const AddCampaignModal = (props) => {
                 <FormContainer onSubmit={handleSubmitFormClick}>
                     
                         <FormGroup>
-                            <TextInput label="Nome da campanha" onChange={val => setNome(val.target.value)} value={nome} placeholder="Nome da campanha" />
+                            <TextInput lighter label="Nome da campanha" onChange={val => setNome(val.target.value)} value={nome} placeholder="Nome da campanha" />
                         </FormGroup>
 
                         <FormGroup>
@@ -66,16 +66,36 @@ export const AddCampaignModal = (props) => {
                             <Select onChange={ val => setStatus(val)} value={status} options={options} prompt="Status" label="Status"/>
                         </FormGroup>
 
-                    <FormGroup>
-                            <label>Período de Veiculação</label>
-                            <div style={{
-                                "display": "flex",
-                                "gap": "1rem"
+                        <FormGroup
+                            style={{
+                                "display": "inline-flex",
+                                "gap": "1rem",
                             }}>
-                                <input type="date" onChange={e => setDataDeVeiculacaoInicio(e.target.value)} value={dataDeVeiculacaoInicio} className="form-control"/>
-                                <input type="date" onChange={e => setDataDeVeiculacaoFim(e.target.value)} value={dataDeVeiculacaoFim} className="form-control"/>
+                                    <div style={{
+                                "flex-grow": 1,
+                                "width": "100%"
+                                
+                            }}>
+                            <Datepicker
+                                label="Início"
+                                prompt="DD-MM-AAAA"
+                                onChange={e => setDataDeVeiculacaoInicio(e.target.value)}
+                                value={dataDeVeiculacaoInicio}
+                            />
                             </div>
-                    </FormGroup>
+                            <div style={{
+                                "flex-grow": 1,
+                                "width": "100%"
+                            }}>
+                            <Datepicker
+                                label="Fim"
+                                placeholder="DD-MM-AAAA"
+                                onChange={e => setDataDeVeiculacaoFim(e.target.value)}
+                                value={dataDeVeiculacaoFim}
+                            />
+                            </div>
+                            
+                        </FormGroup>
 
                      <div>
                         <ThemeButton corDaOrelha={COLOR.black} style={{

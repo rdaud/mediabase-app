@@ -3,10 +3,11 @@ import { useHistory } from "react-router-dom";
 import { MdWest as BackArrow } from "react-icons/md";
 import chevron from '../../../../assets/icons/chevron-down.svg';
 import icon from '../../../../assets/icons/info.svg';
-import { StatusButton, Dropdown, DropdownItem } from "../../../../components";
+import { StatusButton, Dropdown, DropdownItem, Select } from "../../../../components";
 import { useDispatch, useSelector } from "react-redux";
 import { Header, Nome, Produto, Cliente, Status, InfoIcon, BackButton } from './styles';
 import { Heading1 } from '../../../../components/Typography';
+import { StyledStatusButton } from '../../../../components/Button/styles';
 
 
 
@@ -60,11 +61,9 @@ export const PageHeader = ({id}) => {
                 <p>{cliente}</p>
             </Cliente>
             <Status isShown={isShown} onMouseOver={() => setIsShown(true)} onMouseLeave={() => setIsShown(false)}>
-                <StatusButton IconRight={chevron} DotLeft status={status}>{status}</StatusButton>
-                <Dropdown isShown={isShown} right="0" top="46px">
-                    <DropdownItem>Finalizada</DropdownItem>
-                    <DropdownItem>Em produção</DropdownItem>
-                </Dropdown>
+                
+                <Select options={[' 🔴 Finalizada', '🟢 Em produção']} value={status} />
+              
             </Status>
         </Header>
     )

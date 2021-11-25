@@ -9,6 +9,7 @@ import { Hero, EmptyStateContainer, EmptyStateWrapper } from './styles';
 
 
 export const HomePage = () => {
+  console.log('Test')
 
     const { addCampaignModal,  loading, campaigns } = useSelector(state => state.campaigns)
     const { token } = useSelector(state => state.authentication)
@@ -37,9 +38,8 @@ export const HomePage = () => {
 
 
     return (
-      <Hero>
+      <>
         { addCampaignModal && <AddCampaignModal loading={loading}/> }
-        <Navbar />
         <MainContainer>
             <PageHeader />     
             { campaigns !== undefined && campaigns.length > 0 ? <CampaignsTable /> :
@@ -49,7 +49,7 @@ export const HomePage = () => {
               </EmptyStateContainer>
             </EmptyStateWrapper> }          
         </MainContainer>
-      </Hero>
+      </>
     );
 
 }

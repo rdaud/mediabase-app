@@ -18,7 +18,9 @@ export const Header = styled.div`
     position: relative;
     display: flex;
     justify-content: space-between;
-    padding: 2rem 2rem 0 2rem;
+    background: ${COLOR.gray80};
+    align-items: center;
+    padding: 1rem 2rem 1rem 2rem;
 `
 
 export const ModalContainer = styled.div`

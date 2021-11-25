@@ -4,17 +4,17 @@ import React from 'react';
 export const FormItem = ({children}) => {
     return (
         <>
-        <div>
-            {children}
-        </div>
+            <div>
+                {children}
+            </div>
         </>
     )
 }
 
-export const FormGroup = ({children}) => {
+export const FormGroup = ({children, ...rest}) => {
     return (
-        <div>
+        <form {...rest}>
             { children } 
-        </div>
+        </form>
     )
 }

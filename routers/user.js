@@ -2,6 +2,8 @@ const express = require('express')
 const User = require('../models/user')
 const router = new express.Router()
 const auth = require('../middleware/auth')
+const multer = require('multer')
+const { restart } = require('nodemon')
 
 /**
  * Users
@@ -96,6 +98,52 @@ router.delete('/users/me', auth, async (req,res) => {
     } catch (e) {
         res.status(500).send()
     }
+})
+
+const upload = multer({
+    limits: {
+        fileSize: 1000000
+    },
+    fileFilter(req,file,cb) {
+        if (!file.originalname.match(/\.(jpg|jpeg|png|pdf)$/)) {
+            return cb(new Error('Por favor, envie apenas arquivos no formato jpg ou png.'))
+        }
+        cb(undefined,true)
+    }
+})
+
+
+// Upload avatar image
+router.post('/users/me/avatar', auth, upload.single('avatar'), async (req,res) => {
+    req.user.avatar = req.file.buffer
+    await req.user.save()
+    res.send()
+}, (error,req,res,next) => {
+    res.status(400).send({ error: error.message })
+})
+
+// Read avatar image
+router.get('/users/:id/avatar', auth, async (req,res) => {
+    try {
+        const user = await User.findById(req.params.id)
+
+        if (!user || !user.avatar) {
+            throw new Error()
+        }
+
+        res.set('Content-Type', 'image/jpg')
+        res.send(user.avatar)
+        
+    } catch (e) {
+        res.status(404).send()
+    }
+})
+
+// Delete avatar image
+router.delete('/users/me/avatar', auth, async (req,res) => {
+    req.user.avatar = undefined
+    await req.user.save()
+    res.send()
 })
 
 

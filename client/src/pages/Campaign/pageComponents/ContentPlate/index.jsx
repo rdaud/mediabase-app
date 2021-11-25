@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
-import { CampaignsSectionWrapper, CampaignSectionHeader, CampaignSectionBody } from './styles';
-import { ThemeButton, TabBar, Tab } from '../../../../components';
+import { Wrapper, Body } from './styles';
+import {  TabBar, Tab } from '../../../../components';
 import { Formatos, Criativos } from '../';
-import { COLOR } from '../../../../tokens/colors';
 
-export const ContentPlate = ({ hasFormatos }) => {
+export const ContentPlate = () => {
 
     const [ isFormatosSelected, setIsFormatosSelected ] = useState(true)
 
     return (
-        <CampaignsSectionWrapper>
-            <TabBar>
+        <Wrapper>
+            <TabBar style={{flexGrow: 0}}>
                 <Tab onClick={() => setIsFormatosSelected(true)}
                      isFormatosSelected={isFormatosSelected}
                      tabShow={isFormatosSelected ? 'block' : 'none'}>
@@ -22,10 +21,10 @@ export const ContentPlate = ({ hasFormatos }) => {
                      Criativos
                 </Tab>
             </TabBar>            
-            <CampaignSectionBody>                      
+            <Body>                      
                 { isFormatosSelected ?
                 <Formatos /> : <Criativos />}
-            </CampaignSectionBody>
-        </CampaignsSectionWrapper>
+            </Body>
+        </Wrapper>
     )
 }

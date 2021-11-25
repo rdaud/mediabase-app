@@ -169,8 +169,6 @@ export const CampaignsTable = (props) => {
 
     return (
         <Wrapper>
-           
-
             <DataTable
                 columns={columns}
                 data={filteredItems}

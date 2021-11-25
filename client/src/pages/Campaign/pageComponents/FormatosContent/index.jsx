@@ -1,211 +1,228 @@
 import React, { useState, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { openAddFormatModalRequest } from '../../../../redux/actions/campaignsActions';
-import { FormatsSection,
+import { Wrapper,
     ActionsWrapper,
-    FormatosList,
+    ExpandableRowsComponent,
     EmptyStateContainer,
-    Button,
-    FormatWrapper,
-    Checkbox,
-    FormatName,
-    ButtonWrapper
+    AdicionarCriativo,
+    ButtonWrapper,
+    customStyles
  } from './styles';
+ import styled from 'styled-components';
 import DataTable from 'react-data-table-component';
-import chevron from '../../../../assets/icons/chevron-down.svg';
-import filter from '../../../../assets/icons/filter.svg';
 import plus from '../../../../assets/icons/plus.svg';
-import { ThemeButton, RegularButton, Search, Info1 } from '../../../../components';
-import { ImCheckboxUnchecked, ImCheckboxChecked} from "react-icons/im";
+import { ThemeButton, Search, Select } from '../../../../components';
 import { COLOR } from '../../../../tokens/colors';
 
 
 
-const MeioGroup = ({ nome, children }) => {
 
-    const [ isChecked, setIsChecked ] = useState(false);
 
-    return ( 
-        <>
-        <FormatWrapper>
-            <Checkbox onClick={() => setIsChecked(!isChecked)}>
-                { isChecked ? <ImCheckboxChecked/> : <ImCheckboxUnchecked/> }
-            </Checkbox>
-            <FormatName>
-                { nome }
-            </FormatName>
-            <Button>
-                Expandir
-                <span>
-                    <img src={chevron} alt="" />
-                </span>
-            </Button>
-        </FormatWrapper>
-        {children}
-        </>
-    
-    );
+const space = " | "
+
+const Tag = styled.small`
+    background: #FBD6CF;
+    color: ${COLOR.brandRed100};
+    padding: 0 .2rem;
+    font-size: 10px;
+`
+
+
+const CustomCell = ({row}) => {
+
+    return (
+     
+        <div style={{
+            display: "inline-flex",
+            height: "18px",
+            alignItems: "center"
+        }}>
+        <Tag>
+        {row.Tamanho}
+        </Tag> <small style={{fontSize: "10px"}}> &nbsp; | &nbsp; {
+        row.FormatoDoArquivo !== undefined && row.FormatoDoArquivo.join(', ') 
+        }</small>
+        </div>
+    )
 }
 
-const Formato = ({ nome }) => {
+const StatusBar = () => {
 
-    const [ isChecked, setIsChecked ] = useState(false);
-
-    return ( 
-    
-        <FormatWrapper>
-            <Checkbox onClick={() => setIsChecked(!isChecked)}>
-                { isChecked ? <ImCheckboxChecked/> : <ImCheckboxUnchecked/> }
-            </Checkbox>
-            <Info1 color="white">
-                { nome }
-            </Info1>
-            <Button>
-                Expandir
-                <span>
-                    <img src={chevron} alt="" />
-                </span>
-            </Button>
-        </FormatWrapper>
-    
-    );
+    return (
+        <div style={{
+            background: `${COLOR.gray90}`,
+            borderRadius: '20px',
+            width: '120px',
+            height: '8px'
+        }}>
+        
+        </div>
+    )
 }
 
-
-
-
+const NoDataComponent = ({handleClick}) => {
+    return (
+        <Wrapper>
+             <EmptyStateContainer>
+                <p>Essa campanha ainda não possuí nenhum formato. Clique em <span onClick={handleClick}>Adicionar formatos</span> para iniciar.</p>
+             </EmptyStateContainer>
+        </Wrapper>
+    )
+}
 
 export const Formatos = (props) => {
 
     const dispatch = useDispatch();
     const { formatos } = useSelector( state => state.campaigns.currentPageCampaign )
+    const [  filterText, setFilterText ] = useState('');
+    const [ meio, setMeio ] = useState('')
+
     const handleClick = () => {
         dispatch(openAddFormatModalRequest())
     }
-
-    //
-    const removedDuplicates = () => {
+    
+    const filteredArrayOfMeio = () => {
         let arr = []
-        formatos.forEach( item => arr.push(item.Meio))
-        return [ ...new Set(arr)]
+        if ( formatos !== undefined ) {
+            formatos.forEach( item => arr.push(item.Meio))
+        }
+        return [ ...new Set(arr) ]
+    }
+
+    const handleRowClick = () => {
+      
     }
 
     const columns = React.useMemo(
         () => [
             {
-                name: 'Veículo',
-                selector: row => row.Veículo,
-                maxWidth: '600px',
+                name: 'Formato',
+                selector: row => row.NomeDoFormato,
+                minWidth: '200px',
+                cell: row => {
+                    return (
+                        <div style={{
+                            display: 'inline-flex',
+                            flexBasis: 'fit-content',
+                            alignItems: 'center',
+                            gap: '.5rem'
+                            }}>
+                            {row.NomeDoFormato}
+                            <AdicionarCriativo />
+                        </div>
+                    )
+                },
+                sortable: true,
+                reorder: true,  
             },
             {
-                name: 'Specs',
-                selector: row => row.Specs,
+                name: 'Veículo',
+                selector: row => row.Veículo,
+                minWidth: '100px',
+                sortable: true,
+
+            },
+          
+            {
+                name: 'Meio',
+                selector: row => row.Meio,
+                minWidth: '100px',
+                sortable: true,
+
+
+            },
+            {
+                name: 'Specs / Arquivo',
+                minWidth: '200px',
+                selector: row => row.NomeDoFormato,
+                selector: row => row.Veículo,
+                cell: row => <CustomCell row={row} />,
+                sortable: true,
+            },
+            {
+                name: 'Veiculação',
+                minWidth: '200px',
+
+                selector: row => row.Veiculacao,
                 sortable: true,
             },
             {
                 name: 'Prazo',
+                minWidth: '200px',
+
                 selector: row => row.Prazo,
                 sortable: true,
         
             },
             {
                 name: 'Status',
+                minWidth: '200px',
                 selector: row => row.Status,
                 sortable: true,
+                cell: () => <StatusBar />
         
             },
         ],
         []
       )
 
-      const data = [
-          {
-              id: 1,
-              Veiculo: 'Google',
-              Specs: 'JPG, MOV',
-              Prazo: '12/12/2021',
-              Status: 'Finalizada'
-          }
-      ]
+    
+
+      const allowed = ['Veículo','Meio','NomeDoFormato','Tamanho','FormatoDoArquivo']
+
+
+      const subHeaderComponentMemo = React.useMemo(() => {
+
+        return (
+
+        <ActionsWrapper>
+                <ButtonWrapper>
+                    <Select
+                        prompt="Meio"
+                        value={meio}
+                        options={filteredArrayOfMeio()}
+                        onChange={val => setMeio(val)}
+                        lighter
+                    />
+                </ButtonWrapper>
+                <ButtonWrapper>
+                    <Search lighter onChange={e => setFilterText(e.target.value)} filterText={filterText} />
+                </ButtonWrapper>
+                <ButtonWrapper>           
+                    <ThemeButton
+                        cor={COLOR.brandRed90}
+                        corDaOrelha={COLOR.gray100}
+                        iconLeft={plus}
+                        onClick={handleClick}>
+                    Adicionar formato
+                    </ThemeButton>
+                </ButtonWrapper>
+        </ActionsWrapper>
+            
+        );
+	}, [meio, filterText]);
 
  
     return (
         <>
-        { formatos !== undefined && formatos.length > 0  ?  <FormatsSection>
-            <ActionsWrapper>
-                <div>
-                    <Search lighter/>
-                </div>
-                    <div>
-                        <RegularButton iconRight={chevron} iconLeft={filter}>
-                        Filtrar
-                        </RegularButton>
-                   
-                    </div>
-                    <div>
-                    <ThemeButton
-                        cor={COLOR.brandRed90}
-                        corDaOrelha={COLOR.gray100}
-                        iconLeft={plus}
-                        onClick={handleClick}>
-                    Adicionar formato
-                    </ThemeButton>
-                </div>
-            </ActionsWrapper>
-            <FormatosList>
-               
-                 {removedDuplicates().map((item,index) => {
-                    return (
-                        <MeioGroup key={index} nome={item}>
-                        {formatos.map((formato,key) => {
-                            if (item === formato.Meio) {
-                                return (
-                                    // <Formato key={key} nome={formato.Formato}/>
-                                    <DataTable
-                                    columns={columns}
-                                    data={data}
-                                    theme="dark"
-                                    highlightOnHover="true"
-                                    selectableRows
-                                    // onSelectedRowsChange={handleSelectedRows}
-                                    />
-                                )
-                            }
-                            return
-                           
-                        })}
-                        </MeioGroup>
-                    )
-                })}
-            </FormatosList>
-        </FormatsSection> : 
         
-        <FormatsSection>
-            <ActionsWrapper>
-                <ButtonWrapper>
-                    <Search />
-                    </ButtonWrapper>
-                    <ButtonWrapper>
-                    <RegularButton iconRight={chevron} iconLeft={filter}>
-                        Filtrar
-                        </RegularButton>
-                        </ButtonWrapper>
-                        <ButtonWrapper>           
-                    <ThemeButton
-                        cor={COLOR.brandRed90}
-                        corDaOrelha={COLOR.gray100}
-                        iconLeft={plus}
-                        onClick={handleClick}>
-                    Adicionar formato
-                    </ThemeButton>
-                    </ButtonWrapper>
-             </ActionsWrapper>
-             <EmptyStateContainer>
-                <p>Essa campanha ainda não possuí nenhum formato. Clique em <span onClick={handleClick}>Adicionar formatos</span> para iniciar.</p>
-             </EmptyStateContainer>
-        </FormatsSection>
-        
-        }
+        <DataTable
+            columns={columns}
+            data={formatos}
+            theme="dark"
+            fixedHeader
+            subHeader
+            subHeaderComponent={subHeaderComponentMemo}
+            highlightOnHover="true"
+            onRowClicked={handleRowClick}
+            expandOnRowClicked="true"
+            expandableRows
+            expandableRowsComponent={ () => <ExpandableRowsComponent /> }
+            selectableRows
+            customStyles={customStyles}
+            noDataComponent={ <NoDataComponent handleClick={handleClick}/> }
+        />
  
         </>
     )

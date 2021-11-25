@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import search from '../../assets/icons/search.svg';
-import { SearchWrapper, StyledInput } from './styles';
+import { Wrapper, StyledInput } from './styles';
 
 
 
@@ -17,9 +17,9 @@ export const Search = (props) => {
     };
 
     return (
-        <SearchWrapper onfocus={onFocus} {...props} >
+        <Wrapper onfocus={onFocus} {...props} >
             <img src={search} />
-            <StyledInput onFocus={focusHandler} {...props} onBlur={blurHandler} id="input" placeholder="Buscar" label=""/>
-        </SearchWrapper>
+            <StyledInput onFocus={focusHandler} {...props} onBlur={blurHandler}  placeholder="Buscar" label=""/>
+        </Wrapper>
     );
 }

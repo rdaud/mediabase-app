@@ -7,6 +7,7 @@ import plus from '../../../../assets/icons/plus.svg'
 import { TableWrapper, ActionsWrapper, ButtonWrapper, customStyles } from './styles';
 import styled from 'styled-components';
 import { COLOR } from '../../../../tokens/colors';
+import { useEffect } from 'react';
 
 
 const space = " | "
@@ -52,6 +53,37 @@ const CustomCell = ({row}) => {
 
 export const AddFormatModal = () => {
 
+
+    const [ data, setData ] = useState([])
+    const [ veiculo, setVeiculo ] = useState('')
+    const [ meio, setMeio ] = useState('')
+    const [ filterText, setFilterText ] = useState(null);
+    const dispatch = useDispatch()
+    const [ hasSelectedRows, setHasSelectedRows ] = useState(false)
+    const { formatos } = useSelector( state => state.formatos )
+    const [ count, setCount ] = useState(null)
+
+
+    
+    const filteredArrayOfVeiculo = () => {
+        let arr = []
+        if ( formatos !== undefined ) {
+            formatos.forEach( item => arr.push(item.Veículo))
+        }
+        return [ ...new Set(arr) ]
+    }
+
+
+    const filteredArrayOfMeio = () => {
+        let arr = []
+        if ( formatos !== undefined ) {
+            formatos.forEach( item => arr.push(item.Meio))
+        }
+        return [ ...new Set(arr) ]
+    }
+
+
+
     const columns = React.useMemo(
         () => [
             {
@@ -68,7 +100,7 @@ export const AddFormatModal = () => {
                 sortable: true,
             },
             {
-                name: 'Mídia',
+                name: 'Meio',
                 selector: row => row.Meio,
                 sortable: true,
         
@@ -76,13 +108,6 @@ export const AddFormatModal = () => {
         ],
         []
       )
-
-    const [ data, setData ] = useState([])
-    const dispatch = useDispatch()
-    const [ hasSelectedRows, setHasSelectedRows ] = useState(false)
-    const { formatos } = useSelector( state => state.formatos )
-    const [ count, setCount ] = useState(null)
-
 
     const handleClickOnCloseButton = () => {
         dispatch(closeAddFormatModalRequest())
@@ -96,11 +121,15 @@ export const AddFormatModal = () => {
         } else {
             setHasSelectedRows(false)
         }
+        console.log(data)
 
     }
 
 
     const handleSubmit = () => {
+
+      
+        
         const obj = {
             formatos: data
         }
@@ -114,57 +143,83 @@ export const AddFormatModal = () => {
                 width: "100%",
                 position: "absolute",
                 bottom: 0,
-                background: `${COLOR.gray100}`,
+                background: `${COLOR.gray70}`,
                 display: "inline-flex",
                 justifyContent: "space-between",
                 alignItems: "center",
-                padding: "0 1rem",
+                padding: "0 2rem",
                 zIndex: 999
             }}>
                 <div>
-                <Info2 color={COLOR.white}>{count} formatos selecionados. </Info2>
+                <Info2 color={COLOR.white}>{count} formato(s) selecionado(s)</Info2>
                 </div>
                 <div>
-                    <ThemeButton iconLeft={plus} corDaOrelha={COLOR.gray100} onClick={handleSubmit}>Adicionar formato</ThemeButton>
+                    <ThemeButton iconLeft={plus} corDaOrelha={COLOR.gray70} onClick={handleSubmit}>Adicionar</ThemeButton>
                 </div>
     
             </div>
         )
     }
-    
+
+    useEffect(() => { console.log(formatos)},[])
+
+    const subHeaderComponentMemo = React.useMemo(() => {
+
+        return (
+            <ActionsWrapper>  
+                <ButtonWrapper>
+                    <Select
+                        prompt="Veiculo"
+                        value={veiculo}
+                        options={filteredArrayOfVeiculo()}
+                        onChange={val => setVeiculo(val)}
+                        lighter
+                    />
+                </ButtonWrapper>
+                <ButtonWrapper>
+                    <Select 
+                        prompt="Meio"
+                        value={meio}
+                        options={filteredArrayOfMeio()}
+                        onChange={val => setMeio(val)}
+                        lighter
+                    />
+                </ButtonWrapper>
+                <ButtonWrapper>
+                    <Search
+                        lighter
+                        onChange={e => setFilterText(e.target.value)}
+                        filterText={filterText}
+                    />
+                </ButtonWrapper>
+            </ActionsWrapper>  
+        );
+
+	}, [meio,veiculo]);
+
+    const filteredItems = formatos.map((item,index) => {
+        return { id: item.id , ...item.fields}
+    });
 
 
     return (
         <Modal headerTitle="Adicionar formatos" handleClickOnCloseButton={handleClickOnCloseButton}>
            { hasSelectedRows && <SelectedsBar count={count} /> }          
-            <ActionsWrapper>  
-                <ButtonWrapper>
-                <Select small placeholder="Formato" options={['Status']} />
-                </ButtonWrapper>
-                <ButtonWrapper>
-                <Select small placeholder="Mídia" options={['Status']} />
-                </ButtonWrapper>
-                <ButtonWrapper>
-                <Select small placeholder="Formato do arquivo" options={['Status']} />
-                </ButtonWrapper>
-                <ButtonWrapper>
-                <Search small/>
-                </ButtonWrapper>
-            </ActionsWrapper>
             <TableWrapper>
                 <DataTable
                 columns={columns}
-                data={formatos}
+                data={filteredItems}
                 theme="dark"
                 highlightOnHover="true"
+                selectableRowsHighlight="true"
+                subHeader
+                subHeaderComponent={subHeaderComponentMemo}
                 selectableRows
                 onSelectedRowsChange={handleSelectedRows}
                 fixedHeader
                 customStyles={customStyles}
                 />
             </TableWrapper>
-        
-
         </Modal>
     )
 }

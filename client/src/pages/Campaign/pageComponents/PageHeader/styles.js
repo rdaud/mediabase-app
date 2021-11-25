@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { COLOR } from '../../../../tokens/colors';
 
 
 export const Header = styled.div`

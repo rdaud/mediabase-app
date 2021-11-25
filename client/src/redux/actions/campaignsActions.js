@@ -202,7 +202,7 @@ const createCampaignRequest = () => {
       .then((response) => {
         const data = response.data;
         dispatch(updateCampaignSuccess(data));
-        alert('Formato adicionado com sucesso');
+        window.location.reload();
       })
       .catch((error) => {
         dispatch(updateCampaignFailure(JSON.stringify(error)));

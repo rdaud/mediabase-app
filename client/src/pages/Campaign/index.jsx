@@ -1,41 +1,37 @@
 import React, { useEffect, useState } from 'react';
 import {  useDispatch, useSelector } from 'react-redux';
 import { getFormatos } from '../../redux/actions/formatsActions';
-import { getCampaigns, getCampaignById } from '../../redux/actions/campaignsActions';
-import  { Navbar, MainContainer } from '../../components';
+import {  getCampaignById } from '../../redux/actions/campaignsActions';
+import  { MainContainer } from '../../components';
 import  { PageHeader, ContentPlate, AddFormatModal }  from './pageComponents';
-import { Hero } from './styles';
-import { get } from 'mongoose';
 
 
 export const CampaignPage = (props) => {
+    // State selectors
+    const { addFormatModal } = useSelector( state => state.campaigns )
+    const { token } = useSelector(state => state.authentication)
+    const dispatch = useDispatch();
+    const [ loadFormatos, setLoadFormatos] = useState(false)
 
-// State selectors
-const { addFormatModal } = useSelector( state => state.campaigns )
-const { token } = useSelector(state => state.authentication)
-const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(getCampaignById(props.match.params.id,token))
+    },[])
 
+    useEffect( () => {
+    dispatch(getFormatos())
+    },[loadFormatos])
 
+    console.log('test')
 
-useEffect(() => {
-    dispatch(getCampaignById(props.match.params.id,token))
-},[])
-
-useEffect( () => {
-   dispatch(getFormatos())
-},[])
 
     return (
-        <div>
-            <Hero>
+        <>
             { addFormatModal && <AddFormatModal id={props.match.params.id}/> }
-                <Navbar />
-                <MainContainer>
-                    <PageHeader id={props.match.params.id}/>
-                    <ContentPlate/>
-                </MainContainer>
-            </Hero>
-        </div>
+            <MainContainer>
+                <PageHeader id={props.match.params.id}/>
+                <ContentPlate/>
+            </MainContainer>
+        </>
     )
 }
 

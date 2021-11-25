@@ -22,13 +22,49 @@ const authReducer = function (state = initState, action) {
 
   switch (action.type) {
   
-  case "SIGN_IN_REQUEST":
+    case "SIGN_IN_REQUEST":
     case "SIGN_UP_REQUEST":
     case "SIGN_OUT_REQUEST":
       return {
         ...state,
         loading: true,
         isAuthenticated: false,
+      };
+    case "GET_USER_REQUEST":
+      return {
+        ...state
+      };
+      case "GET_AVATAR_REQUEST":
+        return {
+          ...state
+        };
+    case "GET_USER_SUCCESS":
+        return {
+          ...state,
+          isAuthenticated: true,
+          user: {
+            name: action.payload.name,
+            email: action.payload.email,
+            password: action.payload.password
+          }
+        };
+        case "GET_AVATAR_SUCCESS":
+          return {
+            ...state,
+            user: {
+              avatar: action.payload
+            }
+          };
+          case "GET_AVATAR_FAILURE":
+      return {
+        ...state,
+        error: action.payload
+      };
+    case "GET_USER_FAILURE":
+      return {
+        ...state,
+        isAuthenticated: false,
+        error: action.payload
       };
     case "SIGN_IN_FAILURE":
     case "SIGN_UP_FAILURE":

@@ -1,24 +1,21 @@
 import styled from "styled-components";
 import { COLOR } from "../../../../tokens/colors";
 
-export const CampaignsSectionWrapper = styled.section`
+export const Wrapper = styled.section`
     width: 100%;
     height: 100%;
-    position: relative;
     display: flex;
+    position: relative;
     flex-direction: column;
 `
 
-export const CampaignSectionHeader = styled.div`
-    width: 100%;
-    display: flex;
-    gap: 1rem;
-    padding-left: 2rem;
-`
 
-export const CampaignSectionBody = styled.div`
+export const Body = styled.div`
     width: inherit;
-    height: 100%;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
+
     background: ${COLOR.gray100};
-    padding: 2rem;
 `

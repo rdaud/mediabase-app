@@ -98,6 +98,8 @@ export const signIn = (userLoginData = {}, history) => {
       const data = response.data;
       localStorage.setItem("USER-TOKEN", data.token);
       localStorage.setItem("USER-ID", data.user._id);
+      localStorage.setItem("USER-NAME", data.user.name);
+      localStorage.setItem("USER-EMAIL", data.user.email);
       alert('Logado com sucesso');
       dispatch(signInSuccess(data))
       history.push("/home");
@@ -155,5 +157,97 @@ export const signOut = function (history,token) {
 };
 
 
+// Read users
+
+export const getUserRequest = function () {
+  return {
+    type: 'GET_USER_REQUEST',
+  };
+};
+
+export const getUserSuccess = function (data) {
+  return {
+    type: 'GET_USER_SUCCESS',
+    payload: data
+  };
+};
+
+export const getUserFailure = function (data) {
+  return {
+    type: 'GET_USER_FAILURE',
+    payload: data
+  };
+};
+
+export const getUser = function () {
+
+  return function (dispatch,getState) {
+
+    dispatch(getUserRequest());
+
+    const { token } = getState().authentication
 
 
+    axios.get('/users/me',{
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Access-Control-Allow-Origin': '*',
+      }
+    }).then(result => {
+      console.log(result)
+      dispatch(getUserSuccess(result.data));
+    }).catch( error => {
+      dispatch(getUserFailure());
+      console.log(error)
+    })
+
+  };
+};
+
+
+// Get avatar
+
+export const getAvatarRequest = function () {
+  return {
+    type: 'GET_AVATAR_REQUEST',
+  };
+};
+
+export const getAvatarSuccess = function (data) {
+  return {
+    type: 'GET_AVATAR_SUCCESS',
+    payload: data
+  };
+};
+
+export const getAvatarFailure = function (data) {
+  return {
+    type: 'GET_AVATAR_FAILURE',
+    payload: data
+  };
+};
+
+export const getAvatar = function () {
+
+  return function (dispatch,getState) {
+
+    dispatch(getAvatarRequest());
+
+    const { token } = getState().authentication
+    const url = `/users/${localStorage.getItem("USER-ID")}/avatar`
+
+    axios.get(url,{
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Access-Control-Allow-Origin': '*',
+      }
+    }).then(result => {
+      console.log(result)
+      dispatch(getAvatarSuccess(result.data));
+    }).catch( error => {
+      dispatch(getAvatarFailure());
+      console.log(error)
+    })
+
+  };
+};

@@ -1,5 +1,6 @@
 
 import styled from 'styled-components'
+import { COLOR } from '../../../../tokens/colors'
 
 
 export const TableWrapper = styled.div`
@@ -32,18 +33,32 @@ export const customStyles = {
     rows: {
         style: {
             minHeight: '56px', // override the row height
+            padding: '0 1rem',
+            background: `${COLOR.black} !important`,
+            cursor: 'pointer'
+
         },
     },
-    headCells: {
-        style: {
-            paddingLeft: '8px', // override the cell padding for head cells
-            paddingRight: '8px',
-        },
+    highlightOnHoverStyle: {
+        background: `${COLOR.white} !important`,
     },
-    cells: {
+    subHeader: {
         style: {
-            paddingLeft: '8px', // override the cell padding for data cells
-            paddingRight: '8px',
-        },
+            background: `${COLOR.gray100} !important`,
+            paddingLeft: 0,
+            paddingRight: 0,
+            paddingTop: '1rem'
+        }
+    },
+    headRow: {
+        style: {
+            borderBottomColor: `${COLOR.gray100}`,
+            flex: 'inline-flex',
+            overflow: 'visible',
+            whiteSpace: 'normal',
+            boxShadow: '0 10px 10px rgb(0 0 0 / 0.2)',
+            background: `${COLOR.gray100} !important`,
+            padding: '0 1rem'   
+        }
     },
 };

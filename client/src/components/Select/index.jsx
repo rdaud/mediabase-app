@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 
 
 
-export const Select = ({ value, options, prompt, onChange, label }) => {
+export const Select = ({ value, options, prompt, onChange, label, style, ...rest }) => {
 
     console.log(value)
     const [ isOpen, setIsOpen ] = useState(false)
@@ -30,7 +30,7 @@ export const Select = ({ value, options, prompt, onChange, label }) => {
                 <Control ref={ref} onClick={(e) => {
                     e.stopPropagation()
                     setIsOpen(!isOpen)
-                }}>
+                }} style={style} {...rest}>
                     <SelectedValue >
                         { value ? value : prompt}
                     </SelectedValue>

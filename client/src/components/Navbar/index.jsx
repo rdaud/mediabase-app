@@ -23,6 +23,10 @@ export const Navbar = () => {
         console.log("clicked")
     }
 
+    const handlePerfilClick = () => {
+        history.go('/perfil')
+    }
+
     return (      
         <Navigation>
             <Logo>
@@ -37,7 +41,7 @@ export const Navbar = () => {
                     <UserOutlined />
                 </Avatar>
                 <Dropdown isShown={isShown} bottom="0" right="0" left="56px">
-                    <DropdownItem>
+                    <DropdownItem onClick={handlePerfilClick}>
                         <Link to='/perfil'>
                         Perfil
                         </Link>

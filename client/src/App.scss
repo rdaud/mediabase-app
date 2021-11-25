@@ -321,3 +321,23 @@ a {
 .selected {
   color: white !important;
 }
+
+
+// input[type="checkbox"] {
+//   /* Add if not using autoprefixer */
+//   -webkit-appearance: none;
+//   appearance: none;
+//   /* For iOS < 15 to remove gradient background */
+//   background-color: #fff;
+//   /* Not removed via appearance */
+//   margin: 0;
+//   cursor: pointer;
+// }
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  width: 100%;
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+
+}

@@ -25,7 +25,6 @@ const getFormatosSuccess = (data) => {
   
   export const getFormatos = () => {
   
-  
     return (dispatch,getState) => {
   
       dispatch(getFormatosRequest());
@@ -34,15 +33,9 @@ const getFormatosSuccess = (data) => {
   
       axios.get('/formats',{
         'Content-Type': 'application/json',
-      }).then(response => {
-        response.data.forEach((element,index) => {
-        const rowData = element.fields
-        arr.push({id:index,...rowData})
-        });
-        return arr
-      }).then( result => {
-        dispatch(getFormatosSuccess(result))
-      }).catch( error => {
+      }).then(result => {
+        dispatch(getFormatosSuccess(result.data))
+      }).catch(error => {
         console.log(error)
         dispatch(getFormatosFailure(error))
       })

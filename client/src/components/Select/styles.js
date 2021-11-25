@@ -3,9 +3,9 @@ import { COLOR } from '../../tokens/colors';
 
 
 export const Wrapper = styled.div`
-position: relative;
-width: auto;
-height: auto;
+    position: relative;
+    width: auto;
+    height: auto;
 `
 
 export const Icon = styled.span`
@@ -28,13 +28,12 @@ export const Control = styled.div`
     position: relative;
     justify-content: space-between;
     outline: none;
-    border: 1px solid ${ props => props.lighter ? COLOR.gray90 : COLOR.gray100};
+    border: 1px solid ${ props => props.lighter ? COLOR.gray70 : COLOR.gray100};
     font-size: 14px;
     margin: 0;
    
     &:hover {
-        border-color: ${COLOR.gray90};
-        background: rgba(255,255,255,.1);
+        border-color: ${ props => props.lighter ? COLOR.white : COLOR.gray70 };
         cursor: pointer;
     }
 
@@ -42,7 +41,7 @@ export const Control = styled.div`
 
 
 export const Label = styled.label`
-
+    color: ${COLOR.gray70};
 `
 
 export const Options = styled.div`
@@ -65,7 +64,7 @@ export const Option = styled.div`
     display: flex;
     align-items: center;
     text-align: left;
-    color: ${COLOR.gray90};
+    color: ${COLOR.gray70};
     font-size: 14px;
     margin: 0;
     border: 1px solid transparent;
