@@ -8,7 +8,7 @@ export const Hero = styled.div`
     height: 100%;
     position: absolute;
     z-index: 9999;
-    background-color: rgba(0,0,0,.9);
+    background-color: rgba(0,0,0,.7);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -24,8 +24,8 @@ export const Header = styled.div`
 `
 
 export const ModalContainer = styled.div`
-    width:  ${ props => props.modalWidth || "1024px" };;
-    height: 600px;
+    width:  ${ props => props.width || "1024px" };
+    height:  ${ props => props.height || "600px" };
     background-color: ${COLOR.black};
     position: relative;
     margin: 0 auto;

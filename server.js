@@ -4,9 +4,13 @@ const cors = require('cors')
 const userRouter = require('./routers/user')
 const campaignRouter = require('./routers/campaign')
 const formatsRouter = require('./routers/formats')
+const criativosRouter = require('./routers/criativo')
 const multer = require('multer')
 
 const app = express()
+
+// For parsing application/x-www-form-urlencoded
+app.use(express.urlencoded({ extended: true }));
 
 app.use(cors({
     origin: '*'
@@ -18,6 +22,9 @@ app.use(express.json())
 app.use(userRouter)
 app.use(campaignRouter)
 app.use(formatsRouter)
+app.use(criativosRouter)
+
+
 
 
 

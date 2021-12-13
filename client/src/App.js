@@ -13,7 +13,7 @@ export default function App() {
         <Switch>
           <PublicRoute  exact path="/entrar" component={SignInPage}/>
           <PublicRoute  exact path="/cadastrar" component={SignUpPage}/>
-          <PrivateRoute exact path="/home/campanha/:id" component={CampaignPage} />
+          <PrivateRoute exact path="/campanha/:id" component={CampaignPage} />
           <PrivateRoute exact path="/home" component={HomePage} />
           <PrivateRoute exact path="/perfil" component={ProfilePage} />
           <PrivateRoute exact path="/playground" component={Playground} />

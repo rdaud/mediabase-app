@@ -9,7 +9,6 @@ import { Hero, EmptyStateContainer, EmptyStateWrapper } from './styles';
 
 
 export const HomePage = () => {
-  console.log('Test')
 
     const { addCampaignModal,  loading, campaigns } = useSelector(state => state.campaigns)
     const { token } = useSelector(state => state.authentication)

@@ -29,6 +29,7 @@ export const StyledSection4 = styled(Section4)`
         height: 4px;
         width: 100%;
         background: red;
+        fontSize: 16px;
         display: ${ props => props.tabShow };
     }
 

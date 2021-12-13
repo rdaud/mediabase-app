@@ -22,8 +22,10 @@ export const DropdownItemWrapper = styled.button`
     width: auto;
     padding: .5rem;
     position: relative;
+    border: 1px solid transparent;
     &:hover {
-        background: ${COLOR.gray90};
+        border-color: ${COLOR.gray70};
+        background: ${COLOR.gray80};
     }
     & > p, a {
         color: white;

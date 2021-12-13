@@ -2,6 +2,8 @@ const express = require('express')
 const Campaign = require('../models/campaign')
 const router = new express.Router()
 const auth = require('../middleware/auth')
+const multer = require('multer')
+
 
 /**
  * Campaigns
@@ -26,11 +28,23 @@ router.post('/campaigns', auth, async (req,res) => {
 
 })
 
+const upload = multer({
+    limits: {
+        fileSize: 1000000
+    },
+    fileFilter(req,file,cb) {
+        if (!file.originalname.match(/\.(jpg|jpeg|png|pdf)$/)) {
+            return cb(new Error('Por favor, envie apenas arquivos no formato jpg ou png.'))
+        }
+        cb(undefined,true)
+    }
+})
+
 // Update Campaign
 router.patch('/campaigns/:id',auth, async(req,res) => {
 
     const updates = Object.keys(req.body)
-    const allowedUpdates = ['nome','cliente','campanha','status','dataDeVeiculacaoInicio', 'formatos', 'dataDeVeiculacaoFim']
+    const allowedUpdates = ['nome','cliente','campanha','status','dataDeVeiculacaoInicio', 'formatos', 'criativos', 'dataDeVeiculacaoFim']
     const isValidOperation = updates.every( update => allowedUpdates.includes(update) )
 
     if (!isValidOperation) {
@@ -54,6 +68,7 @@ router.patch('/campaigns/:id',auth, async(req,res) => {
             if (update === 'formatos') {
                 return campaign[update].push(...req.body[update])
             }
+
             return campaign[update] = req.body[update]
         })
 
@@ -76,13 +91,8 @@ router.get('/campaigns', auth, async (req,res) => {
         match.status = req.query.status
     }
 
-    // if (req.query.sortBy) {
-    //     const parts = req.query.sortBy.split(':')
-    //     sort[parts[0]] = parts[1] === 'desc' ? -1 : 1
-    // }
 
     try {
-
         await req.user.populate({
             path: 'campaigns',
             // match,
@@ -92,6 +102,8 @@ router.get('/campaigns', auth, async (req,res) => {
             //     sort
             // }
         })
+        console.log(req.user.campaigns)
+
         res.send(req.user.campaigns)
 
     } catch (e) {
@@ -131,5 +143,8 @@ router.delete('/campaigns/:id', auth, async (req,res) => {
         res.status(500).send()
     }
 })
+
+
+
 
 module.exports = router

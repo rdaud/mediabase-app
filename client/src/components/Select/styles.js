@@ -48,7 +48,7 @@ export const Options = styled.div`
     position: absolute;
     width: 100%;
     background-color: ${COLOR.black};
-    top: calc(3rem - 1px);
+    top: calc(3rem);
     left: 0;
     z-index: 9999;
     display: none;
@@ -70,9 +70,8 @@ export const Option = styled.div`
     border: 1px solid transparent;
 
     &:hover {
-        border-color: ${COLOR.gray90};
+        border-color: ${COLOR.gray70};
         cursor: pointer;
-
     }
   
 `

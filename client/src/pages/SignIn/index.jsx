@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import { signIn } from "../../redux/actions/usersActions";
-import { ThemeButton, FormGroup, TextInput, Link } from "../../components";
+import { Button, FormGroup, TextInput, Link } from "../../components";
 import logo from "../../assets/logo/logo.svg"
 import { useDispatch, useSelector } from "react-redux";
 import { Hero, TextWrapper, Wrapper, Logo, FormContainer, ButtonWrapper } from './styles';
@@ -32,7 +32,6 @@ export const SignInPage = () => {
     
         dispatch(signIn({email,password}, history));
         
-
     };
 
         return (
@@ -67,7 +66,7 @@ export const SignInPage = () => {
                                     justifyContent: "space-between",
                                     alignItems: "center"
                                     }}>
-                                    <ThemeButton>Entrar</ThemeButton>
+                                    <Button variation="primary">Entrar</Button>
                                     <Link color={COLOR.white} hoverColor={COLOR.gray90} fontSize={14} style={{opacity: "1"}}> 
                                         Esqueceu a senha?
                                     </Link>

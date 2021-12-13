@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import {  useDispatch, useSelector } from 'react-redux';
 import { getFormatos } from '../../redux/actions/formatsActions';
-import {  getCampaignById } from '../../redux/actions/campaignsActions';
+import { getCampaignById } from '../../redux/actions/campaignsActions';
 import  { MainContainer } from '../../components';
-import  { PageHeader, ContentPlate, AddFormatModal }  from './pageComponents';
+import  { PageHeader, ContentPlate, AddFormatModal, AddCriativoModal, EditCriativoModal }  from './pageComponents';
 
 
 export const CampaignPage = (props) => {
+
     // State selectors
-    const { addFormatModal } = useSelector( state => state.campaigns )
+    const { addFormatModal, addCriativoModal } = useSelector( state => state.campaigns )
+    const { editCriativoModal, selected } = useSelector( state => state.criativos )
     const { token } = useSelector(state => state.authentication)
+
     const dispatch = useDispatch();
     const [ loadFormatos, setLoadFormatos] = useState(false)
 
@@ -18,15 +21,14 @@ export const CampaignPage = (props) => {
     },[])
 
     useEffect( () => {
-    dispatch(getFormatos())
+        dispatch(getFormatos())
     },[loadFormatos])
-
-    console.log('test')
-
 
     return (
         <>
             { addFormatModal && <AddFormatModal id={props.match.params.id}/> }
+            { addCriativoModal && <AddCriativoModal /> }
+            { editCriativoModal && <EditCriativoModal criativo={selected}/> }
             <MainContainer>
                 <PageHeader id={props.match.params.id}/>
                 <ContentPlate/>

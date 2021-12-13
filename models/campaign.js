@@ -34,6 +34,10 @@ const campaignSchema = new mongoose.Schema({
     formatos: {
         type: Array
     },
+    // criativos: {
+    //     type: Array,
+    //     ref: 'Criativo' 
+    // },
     owner: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
@@ -43,8 +47,8 @@ const campaignSchema = new mongoose.Schema({
     timestamps: true
 })
 
-const Campaign = mongoose.model('Campaign', campaignSchema
-)
 
+
+const Campaign = mongoose.model('Campaign', campaignSchema)
 
 module.exports = Campaign

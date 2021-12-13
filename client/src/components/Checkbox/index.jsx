@@ -1,3 +1,4 @@
+import { RestOutlined } from '@ant-design/icons';
 import React, { useState } from 'react';
 // import { StyledLink } from './styles';
 import styled from 'styled-components';
@@ -39,14 +40,19 @@ const RedBar = styled.div`
     background: red;
 `
 
-export const Checkbox = () => {
-
-    const [ isClicked, setIsClicked ] = useState(false)
-    return (
-        <Wrapper>
-            { !isClicked && <Default type="checkbox" onClick={() => setIsClicked(!isClicked)}/> }
-            { isClicked && <Checked type="checkbox" onClick={() => setIsClicked(!isClicked)}/> }
-            {/* { isClicked && <Partial /> } */}
-        </Wrapper>
-    )
-}
+export const IndeterminateCheckbox = React.forwardRef(
+    ({ indeterminate, ...rest }, ref) => {
+      const defaultRef = React.useRef()
+      const resolvedRef = ref || defaultRef
+  
+      React.useEffect(() => {
+        resolvedRef.current.indeterminate = indeterminate
+      }, [resolvedRef, indeterminate])
+  
+      return (
+        <>
+          <input type="checkbox" ref={resolvedRef} {...rest} />
+        </>
+      )
+    }
+  )

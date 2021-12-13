@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { ThemeButton, Modal, FormGroup, TextInput, Select, Datepicker } from "../../../../components";
+import { Button, Modal, FormGroup, TextInput, Select, Datepicker } from "../../../../components";
 import { createCampaign } from "../../../../redux/actions/campaignsActions";
 import { closeAddCampaignModalRequest } from '../../../../redux/actions/campaignsActions';
 import { FormWrapper, FormContainer } from './styles';
@@ -98,11 +98,14 @@ export const AddCampaignModal = (props) => {
                         </FormGroup>
 
                      <div>
-                        <ThemeButton corDaOrelha={COLOR.black} style={{
+                        <Button
+                            variation="primary"
+                            corDaOrelha={COLOR.black}
+                            style={{
                             marginTop: "1rem"
                         }}>
                             Criar campanha
-                        </ThemeButton>
+                        </Button>
                     </div>
                  </FormContainer>
             </FormWrapper>

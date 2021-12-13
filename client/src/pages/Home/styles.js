@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "styled-components/macro";
 import { COLOR } from "../../tokens/colors";
 
 export const Hero = styled.div`
@@ -11,25 +11,7 @@ export const Hero = styled.div`
     flex-direction: row;
 `
 
-export const ActionsWrapper = styled.div`
-    position: relative;
-    padding: 0 2rem;
-    display: inline-flex;
-    width: 100%;
-    gap: 1rem;  
 
-    & > div:last-child {
-        align-self: flex-end;
-        flex-grow: 2;
-        text-align: right;
-    }
-`
-
-export const ButtonWrapper = styled.div`
-    padding: 0 !important;
-    margin: 0 !important;
-    line-height: 0;
-`
 
 export const EmptyStateContainer = styled.div`
 

@@ -57,7 +57,7 @@ export const Section3 = styled.p`
 export const Section4 = styled.p`
     font-family: 'Titillium Web',sans-serif;
     font-weight: 400;
-    font-size: 12px;
+    font-size: 14px;
     line-height: 20px;
     letter-spacing: 5%;
     text-transform: uppercase;

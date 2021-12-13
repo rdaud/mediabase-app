@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { Modal, Select, Search, ThemeButton, Info2 } from '../../../../components'
+import { Modal, Select, Search, Button, Info2 } from '../../../../components'
 import DataTable from 'react-data-table-component';
 import { closeAddFormatModalRequest, updateCampaign } from "../../../../redux/actions/campaignsActions";
 import { useDispatch, useSelector } from 'react-redux';
@@ -154,7 +154,7 @@ export const AddFormatModal = () => {
                 <Info2 color={COLOR.white}>{count} formato(s) selecionado(s)</Info2>
                 </div>
                 <div>
-                    <ThemeButton iconLeft={plus} corDaOrelha={COLOR.gray70} onClick={handleSubmit}>Adicionar</ThemeButton>
+                    <Button variation="primary" iconLeft={plus} corDaOrelha={COLOR.gray70} onClick={handleSubmit}>Adicionar</Button>
                 </div>
     
             </div>

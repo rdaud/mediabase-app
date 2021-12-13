@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+import { createReducer, createAction } from "@reduxjs/toolkit";
 
 export const isValidToken = (token) => {
   let decoded = jwt.decode(token);
@@ -17,6 +18,21 @@ const initState = {
   isAuthenticated: false,
 };
 
+// const signInRequest = createAction("SIGN_IN_REQUEST")
+// const signUpRequest = createAction("SIGN_UP_REQUEST")
+// const getUserRequest = createAction("GET_USER_REQUEST")
+// const getAvatarRequest = createAction("GET_AVATAR_REQUEST")
+// const signInFailure = createAction("SIGN_IN_FAILURE")
+// const signInSuccess = createAction("SIGN_IN_SUCCESS")
+// const signUpSuccess = createAction("SIGN_UP_SUCCESS")
+// const signUpFailure = createAction("SIGN_UP_FAILURE")
+// const signOutFailure = createAction("SIGN_OUT_FAILURE")
+
+
+
+/**
+ * Without createReducer
+ *  */ 
 
 const authReducer = function (state = initState, action) {
 
@@ -98,9 +114,73 @@ const authReducer = function (state = initState, action) {
         token: "",
       };
     default:
-      return { ...state };
+      return state;
   }
 };
 
-
 export default authReducer 
+
+
+
+
+/**
+ * Implementation of createReducer
+ */
+
+//  const authReducer = createReducer(initState, (builder) => {
+//   builder
+//     .addMatcher(isAnyOf(signInRequest,signUpRequest), (state,action) => {  
+//         state.loading = true;
+//         state.isAuthenticated = false;  
+//     })
+//     .addCase("SIGN_OUT_REQUEST", (state,action) => { 
+//         state.isAuthenticated = false;   
+//     })
+//     .addMatcher(isAnyOf(getUserRequest,getAvatarRequest), (state,action) => {
+//         return state
+//     })
+//     .addCase("GET_USER_SUCCESS", (state,action) => {  
+//         state.isAuthenticated = true;
+//         state.user.name = action.payload.name;
+//         state.user.email = action.payload.email;
+//         state.user.password = action.payload.password;  
+//     })
+//     .addCase("GET_AVATAR_SUCCESS", (state,action) => {
+//         state.user.avatar = action.payload;
+//     })
+//     .addCase("GET_AVATAR_FAILURE", (state,action) => {
+//         state.error = action.payload
+//     })
+//     .addCase("GET_USER_FAILURE", (state,action) => {
+//         state.isAuthenticated = false;
+//         state.error = action.payload 
+//     })
+//     .addCase("GET_USER_FAILURE", (state,action) => {
+//         state.isAuthenticated = false;
+//         state.error = action.payload 
+//     })
+//     .addMatcher(isAnyOf(signInFailure,signUpFailure,signOutFailure), (state,action) => {
+//         state.loading = false;
+//         state.error = action.payload;
+//         state.user = null;
+//         state.isAuthenticated = false;
+//     })
+//     .addCase("SIGN_IN_REQUEST", (state,action) => {
+//         state.loading = true
+//     })
+//     .addMatcher(isAnyOf(signInSuccess,signUpSuccess), (state,action) => {
+//         state.loading = false
+//         state.isAuthenticated = true
+//         state.user = action.payload.user
+//         state.token = action.payload.token
+//     })
+//     .addCase("SIGN_OUT_SUCCESS", (state,action) => {
+//         state.isAuthenticated = false
+//         state.loading = false
+//         state.user = null
+//         state.token = ""
+//     })
+//     .addDefaultCase((state, action) => {
+//         return state
+//     }) 
+// }) 

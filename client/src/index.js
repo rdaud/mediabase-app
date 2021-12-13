@@ -5,8 +5,12 @@ import { PersistGate } from 'redux-persist/integration/react';
 import './App.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { store, persistor } from "./redux/store";
+import createStore from "./redux/store";
 
+
+const initialState = {}
+
+const { store, persistor } = createStore(initialState)
 
 const renderApp = () => (
   render (

@@ -3,6 +3,7 @@ const initState = {
     status: "readyToUpdate",
     loading: false,
     addCampaignModal: false,
+    addCriativoModal: false,
     error: "",
     campaigns: [],
     currentPageCampaign: {}
@@ -18,6 +19,12 @@ const campaignsReducer = (state = initState, action) => {
           ...state,
           addCampaignModal: true
         };
+     
+        case "OPEN_ADD_CRIATIVO_MODAL_REQUEST":
+          return {
+            ...state,
+            addCriativoModal: true
+          };
         case "OPEN_ADD_FORMAT_MODAL_REQUEST":
           return {
             ...state,
@@ -28,6 +35,12 @@ const campaignsReducer = (state = initState, action) => {
             ...state,
             addFormatModal: false
         };
+   
+        case "CLOSE_ADD_CRIATIVO_MODAL_REQUEST":
+          return {
+            ...state,
+            addCriativoModal: false
+          };
         case "CLOSE_ADD_CAMPAIGN_MODAL_REQUEST":
         return {
           ...state,

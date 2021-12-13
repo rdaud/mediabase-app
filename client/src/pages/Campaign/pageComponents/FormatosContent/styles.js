@@ -4,6 +4,7 @@ import criativo from "../../../../assets/icons/criativo.svg"
 import { COLOR } from "../../../../tokens/colors";
 
 
+
 export const Wrapper = styled.div`
     height: 100%;
     width: 100%;
@@ -22,7 +23,8 @@ export const ActionsWrapper = styled.div`
 
     & > div:last-child {
         align-self: flex-end;
-        flex-grow: 2;
+        flex-grow: 3;
+        flex-shrink: 0;
         text-align: right;
     }
 `
@@ -118,8 +120,9 @@ export const customStyles = {
         minHeight: '52px',
         marginBottom: '1rem',
         padding: 0,
-        position: 'relative',
         flexGrow: 0,
+        alignItems: 'flex-start',
+        position: 'relative',
       },
     },
 
@@ -137,7 +140,7 @@ export const customStyles = {
 	},
     contextMenu: {
 		style: {
-			flexGrow: 1
+			flexGrow: 2
         }
     }
 }
@@ -227,6 +230,7 @@ const Sangria = styled.div`
 export const ExpandableRowsComponent = () => {
 
     return (
+        <>
         <div style={{display: 'inline-flex', position: 'relative', background: `black`, height: '48px', width: '100%', overflow: 'hidden'}}>
            <Sangria>
                 <svg width="20" height="47" viewBox="0 0 20 47" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -235,5 +239,7 @@ export const ExpandableRowsComponent = () => {
            </Sangria>
            <AdicionarCriativoLarge />
         </div>
+    
+      </>
     )
 }

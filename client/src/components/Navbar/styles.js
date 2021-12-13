@@ -4,11 +4,12 @@ import { COLOR } from "../../tokens/colors";
 
 export const Navigation = styled.nav`
     height: 100vh;
-    width: 64px;
+    min-width: 64px;
     position: relative;
     top: 0;
     left: 0;
-    background: black;
+    background: ${COLOR.gray90};
+    border-right: 1px solid ${COLOR.gray80};
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -29,9 +30,11 @@ export const MenuItens = styled.div`
 
 export const NavItem = styled.div`
     position: relative;
-    margin-bottom: .5rem;
-    display: ${ props => props.isShown ? 'block' : 'inline-block'};
+    display: flex;
     width: 100%;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: .5rem;
 `
 
 
@@ -46,12 +49,13 @@ export const Avatar = styled.div`
     width: 44px;
     height: 44px;
     position: relative;
-    background: ${COLOR.black};
-    border-radius: .125rem;
+    border-radius: 10rem;
+    background: ${COLOR.gray90};
+    border: 1px solid transparent;
+    border-color: ${COLOR.gray80};
+    overflow: hidden;
     display: block;
     margin: 0 auto;
-    box-shadow: 0px 8px 16px 0px #101010;
-
 
     span {
         position: absolute;

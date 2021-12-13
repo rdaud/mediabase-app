@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from "react-router-dom";
 import { MdWest as BackArrow } from "react-icons/md";
 import Chevron from '../../assets/icons/chevron-down-icon.svg';
-import { StatusButton, ThemeButton, Dropdown, DropdownItem } from "../";
+import { StatusButton, Button, Dropdown, DropdownItem } from "../";
 import icon from '../../assets/icons/info-icon.svg';
 import { useDispatch } from "react-redux";
 import { openAddCampaignModalRequest } from '../../redux/actions/campaignsActions';
@@ -65,7 +65,7 @@ export const HomeHeader = (props) => {
     return (
         <Header>
             <h1>Campanhas</h1>
-            <ThemeButton onClick={handleCreateCampaignClick}>+ Adicionar campanha</ThemeButton>
+            <Button variation="primary" onClick={handleCreateCampaignClick}>+ Adicionar campanha</Button>
         </Header>
     )
 }

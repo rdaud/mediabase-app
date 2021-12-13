@@ -15,7 +15,7 @@ export const StyledInput = styled.input`
     padding-left: 1rem;
     height: 48px;
     width: 100%;
-    background: rgba(0,0,0,.3);
+    background: ${COLOR.gray90};
     border: ${ props => props.error ? "1px solid darkgray" : `1px solid ${COLOR.gray80}`};
     color: ${COLOR.white};
     font-size: 14px;
@@ -27,7 +27,6 @@ export const StyledInput = styled.input`
 
     &:hover {
         border: 1px solid ${COLOR.gray70};
-        cursor: pointer;
     }
 `
 

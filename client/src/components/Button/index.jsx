@@ -2,18 +2,36 @@ import React from 'react';
 import { StyledButton, StatusButtonWrapper, StyledRegularButton, StyledStatusButton, StyledCloseButton, Dot, Icon } from './styles'
 import { CTA1 } from '../Typography';
 
-export const ThemeButton = ({ iconLeft, children, ...rest }) => {
-    return (
-        <StyledButton type="submit" {...rest}>
+export const Button = ({ variation, iconLeft, children, ...rest }) => {
 
-            { iconLeft && <Icon>
-                <img src={iconLeft} alt="status" />
-            </Icon> } 
-            <CTA1 color="white">
-                {children} 
-            </CTA1>
-        </StyledButton>
-    )
+        switch (variation) {
+            case 'primary':
+            return (
+                <StyledButton type="submit" {...rest}>
+
+                { iconLeft && <Icon>
+                    <img src={iconLeft} alt="status" />
+                </Icon> } 
+                <CTA1 color="white">
+                    {children} 
+                </CTA1>
+            </StyledButton>
+            );
+            default:
+                return (
+                    <StyledButton type="submit" {...rest}>
+                    { iconLeft && <Icon>
+                        <img src={iconLeft} alt="status" />
+                    </Icon> } 
+                    <CTA1 color="white">
+                        {children} 
+                    </CTA1>
+                </StyledButton>
+                );
+            
+        }
+       
+    
 }
 
 export const SystemButton = (props) => {

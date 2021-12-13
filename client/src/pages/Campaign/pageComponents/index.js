@@ -1,4 +1,6 @@
 export * from './AddFormatModal'
+export * from './AddCriativoModal'
+export * from './EditCriativoModal'
 export * from './ContentPlate'
 export * from './CriativosContent'
 export * from './FormatosContent'

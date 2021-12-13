@@ -12,7 +12,7 @@ import { Wrapper,
  import styled from 'styled-components';
 import DataTable from 'react-data-table-component';
 import plus from '../../../../assets/icons/plus.svg';
-import { ThemeButton, Search, Select } from '../../../../components';
+import { Button, Search, Select } from '../../../../components';
 import { COLOR } from '../../../../tokens/colors';
 
 
@@ -175,7 +175,7 @@ export const Formatos = (props) => {
       const subHeaderComponentMemo = React.useMemo(() => {
 
         return (
-
+     
         <ActionsWrapper>
                 <ButtonWrapper>
                     <Select
@@ -190,20 +190,19 @@ export const Formatos = (props) => {
                     <Search lighter onChange={e => setFilterText(e.target.value)} filterText={filterText} />
                 </ButtonWrapper>
                 <ButtonWrapper>           
-                    <ThemeButton
+                    <Button
+                        variation="primary"
                         cor={COLOR.brandRed90}
                         corDaOrelha={COLOR.gray100}
                         iconLeft={plus}
                         onClick={handleClick}>
                     Adicionar formato
-                    </ThemeButton>
+                    </Button>
                 </ButtonWrapper>
         </ActionsWrapper>
-            
         );
 	}, [meio, filterText]);
 
- 
     return (
         <>
         

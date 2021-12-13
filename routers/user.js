@@ -113,6 +113,8 @@ const upload = multer({
 })
 
 
+
+
 // Upload avatar image
 router.post('/users/me/avatar', auth, upload.single('avatar'), async (req,res) => {
     req.user.avatar = req.file.buffer
@@ -123,7 +125,7 @@ router.post('/users/me/avatar', auth, upload.single('avatar'), async (req,res) =
 })
 
 // Read avatar image
-router.get('/users/:id/avatar', auth, async (req,res) => {
+router.get('/users/:id/avatar', async (req,res) => {
     try {
         const user = await User.findById(req.params.id)
 

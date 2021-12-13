@@ -33,7 +33,6 @@ const signUpFailure = (error) => {
 
 export const signUp = (user, history) => {
 
- 
 
   return function (dispatch) {
     dispatch(signUpRequest());
@@ -88,6 +87,8 @@ export const signIn = (userLoginData = {}, history) => {
   }
 
   return (dispatch) => {
+
+    dispatch(signInRequest())
 
     const { email = "", password = "" } = userLoginData
     const userLogin = { email, password }

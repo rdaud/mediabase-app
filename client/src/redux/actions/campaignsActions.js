@@ -9,9 +9,37 @@ export const openAddCampaignModalRequest = () => {
   }
 }
 
+
+export const openAddCriativoModalRequest = () => {
+  return {
+    type: 'OPEN_ADD_CRIATIVO_MODAL_REQUEST'
+  }
+}
+
+export const openEditCriativoModalRequest = (payload) => {
+  return {
+    type: 'OPEN_EDIT_CRIATIVO_MODAL_REQUEST',
+    payload
+  }
+}
+
+
+
 export const closeAddCampaignModalRequest = () => {
   return {
     type: 'CLOSE_ADD_CAMPAIGN_MODAL_REQUEST'
+  }
+}
+
+export const closeEditCriativoModalRequest = () => {
+  return {
+    type: 'CLOSE_EDIT_CRIATIVO_MODAL_REQUEST'
+  }
+}
+
+export const closeAddCriativoModalRequest = () => {
+  return {
+    type: 'CLOSE_ADD_CRIATIVO_MODAL_REQUEST'
   }
 }
 
@@ -27,9 +55,6 @@ export const closeAddFormatModalRequest = () => {
   }
 }
 
-
-
-
 /**
  * 
  *  Create campaigns actions
@@ -41,8 +66,6 @@ const createCampaignRequest = () => {
       loading: true
     }
   }
-
-
   
   const createCampaignSuccess = (payload) => {
     return {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ThemeButton } from "../../../../components";
+import { Button } from "../../../../components";
 import { useDispatch } from "react-redux";
 import { openAddCampaignModalRequest } from '../../../../redux/actions/campaignsActions';
 import { Wrapper } from './styles';
@@ -18,7 +18,7 @@ export const PageHeader = (props) => {
     return (
         <Wrapper>
             <Heading1>Campanhas</Heading1>
-            <ThemeButton onClick={handleCreateCampaignClick} iconLeft={plus}>Adicionar campanha</ThemeButton>
+            <Button variation="primary" onClick={handleCreateCampaignClick} iconLeft={plus}>Adicionar campanha</Button>
         </Wrapper>
     )
 }

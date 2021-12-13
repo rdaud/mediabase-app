@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState, useEffect} from 'react';
 import DataTable from 'react-data-table-component';
 import { useHistory } from "react-router-dom";
 import { Search, Select } from '../../../../components';
@@ -6,7 +6,6 @@ import { useSelector } from 'react-redux';
 import { Wrapper, ActionsWrapper, ButtonWrapper, customStyles } from './styles';
 import moment from 'moment';
 import styled from 'styled-components';
-import { useEffect } from 'react';
 
 
 
@@ -78,13 +77,18 @@ export const CampaignsTable = (props) => {
     const [ cliente, setCliente ] = useState('')
     const [ produtos, setProduto ] = useState('')
     const [ status, setStatus ] = useState('')
+    const [ pending, setPending ] = useState(false)
+
 
 
     const handleRowClick = ({ _id }) => {
-        const url = `/home/campanha/${_id}`
+        const url = `/campanha/${_id}`
         history.push(url)
     }
 
+    // useEffect(() => {
+    //     setTimeout(() => setPending(false), 2000)
+    // },[])
  
     const allowed = ['_id','nome','cliente','status','produto','dataDeVeiculacaoInicio', 'dataDeVeiculacaoFim']
 
@@ -179,6 +183,7 @@ export const CampaignsTable = (props) => {
                 highlightOnHover="true"
                 onRowClicked={handleRowClick}
                 customStyles={customStyles}
+                progressPending={pending}
             />
         </Wrapper>
     )

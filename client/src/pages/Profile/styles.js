@@ -6,6 +6,8 @@ export const FormWrapper = styled.div`
     width: 50%;
 `
 
+
+
 export const Profile = styled.div`
     width: 200px;
     height: 200px;
@@ -19,12 +21,11 @@ export const Profile = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
 
     p {
         color: white;
-        font-size: 12px;
-       
-      
+        font-size: 12px;    
     }
 `
 
@@ -34,8 +35,7 @@ export const ProfileWrapper = styled.div`
     display: flex;
     justify-content: center;
     background: ${COLOR.black};
-    position: relative;
-    
+    position: relative;  
 `
 
 export const InnerWrapper = styled.div`

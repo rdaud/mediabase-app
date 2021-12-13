@@ -20,7 +20,7 @@ export const TextInput = ({ label, error, assistiveText, placeholder,onChange, t
         <Wrapper>
         { label && <Label>{label}</Label>}
         <StyledInput error={error} value={value} onChange={onChange} onFocus={focusHandler} onBlur={blurHandler} placeholder={placeholder} type={type}/>
-       
+       { assistiveText && <AssistiveText>{assistiveText}</AssistiveText> }
         </Wrapper>
         
     );

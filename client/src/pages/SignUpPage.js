@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import { signUp } from "../redux/actions/usersActions";
-import { ThemeButton } from "../components";
+import { Button } from "../components";
 import logo from "../assets/logo/logo.svg";
 import styled from 'styled-components';
 import { useDispatch, useSelector } from "react-redux";
@@ -67,7 +67,7 @@ export const SignUpPage = () => {
                                 <input type="password" onChange={e => setPassword(e.target.value)} value={password} className="form-control" placeholder="Senha" />
                             </div>
 
-                            <ThemeButton>Criar conta</ThemeButton>
+                            <Button variation="primary">Criar conta</Button>
 
                             <p className="forgot-password text-right">
                                 Já é cadastrado? <a href="/entrar">Fazer login</a>

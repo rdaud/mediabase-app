@@ -1,22 +1,46 @@
 import '../../App.scss';
-import React,{ useState }  from 'react';
+import React,{ useState, usem }  from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector,connect } from "react-redux";
 import { useHistory } from 'react-router-dom';
 import { Dropdown, DropdownItem } from "../";
 import logo from '../../assets/logo/logo-vertical.svg';
 import { UserOutlined } from '@ant-design/icons'
 import { signOut } from '../../redux/actions/usersActions';
 import { Navigation, NavItem, Logo, Avatar } from './styles';
+import axios from 'axios';
 
 
 
-export const Navbar = () => {
+const Navbar = ({ userInfo, token }) => {
 
-    const [ isShown, setIsShown ] = useState(false);
-    const dispatch = useDispatch();
+    const [ hasAvatar, setHasAvatar ] = useState(false)
+
+
+    const profilePicUrl = `http://localhost:3001/users/${userInfo._id}/avatar`
+
+    function checkIfHasProfilePic() {
+        axios.get(profilePicUrl,{
+              headers: {
+                  'Authorization': `Bearer ${token}`,
+                  'Access-Control-Allow-Origin': '*',
+              }
+              }).then(result => {
+                  setHasAvatar(true)
+              }).catch( error => {
+                  console.log(error)
+              })
+          
+      }
+
+    checkIfHasProfilePic()
+
+
+    const [ isShown, setIsShown ] = useState(false)
+    const dispatch = useDispatch()
     const history = useHistory()
-    const { token } = useSelector( state => state.authentication )
+
+
 
     const handleLogOutClick = () => {
         dispatch(signOut(history,token))
@@ -27,6 +51,9 @@ export const Navbar = () => {
         history.go('/perfil')
     }
 
+  
+
+      console.log(userInfo)
     return (      
         <Navigation>
             <Logo>
@@ -37,9 +64,15 @@ export const Navbar = () => {
                 </Link>                
             </Logo>
             <NavItem isShown={isShown} onMouseOver={() => setIsShown(true)} onMouseLeave={() => setIsShown(false)}>
-                <Avatar>
-                    <UserOutlined />
-                </Avatar>
+            { hasAvatar ? 
+            <Avatar>
+                <img width="44" src={profilePicUrl}></img>
+            </Avatar>
+             :
+             <Avatar>
+                 <UserOutlined style={{color: `gray`}} />
+             </Avatar>
+             }
                 <Dropdown isShown={isShown} bottom="0" right="0" left="56px">
                     <DropdownItem onClick={handlePerfilClick}>
                         <Link to='/perfil'>
@@ -56,3 +89,12 @@ export const Navbar = () => {
 }
 
 
+function mapStateToProps(state) {
+    const userInfo = state.authentication.user
+    const { token } = state.authentication
+    return { userInfo, token }
+  }
+
+const connectedStore = connect(mapStateToProps)(Navbar)
+
+export { connectedStore as Navbar }
