@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { FormWrapper, Profile, ProfileWrapper, InnerWrapper } from './styles';
 import { useSelector, useDispatch, connect } from 'react-redux';
 import { MainContainer, TextInput, Button, Checkbox } from '../../components';
@@ -42,6 +42,13 @@ const ProfilePage = ( { match, userInfo, token }) => {
         
     }
 
+    const memoizedCheckIfHasProfilePic = useCallback(
+        () => {
+            checkIfHasProfilePic()
+        },
+        [hasAvatar],
+      );
+
     const readProfile = async () => {
         
       
@@ -60,8 +67,8 @@ const ProfilePage = ( { match, userInfo, token }) => {
           
       }
 
-    checkIfHasProfilePic() 
     readProfile()
+    memoizedCheckIfHasProfilePic()
 
 
 

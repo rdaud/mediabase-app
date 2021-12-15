@@ -1,5 +1,5 @@
 import '../../App.scss';
-import React,{ useState, usem }  from 'react';
+import React,{ useState, useCallback }  from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector,connect } from "react-redux";
 import { useHistory } from 'react-router-dom';
@@ -15,32 +15,33 @@ import axios from 'axios';
 const Navbar = ({ userInfo, token }) => {
 
     const [ hasAvatar, setHasAvatar ] = useState(false)
-
-
     const profilePicUrl = `http://localhost:3001/users/${userInfo._id}/avatar`
-
-    function checkIfHasProfilePic() {
-        axios.get(profilePicUrl,{
-              headers: {
-                  'Authorization': `Bearer ${token}`,
-                  'Access-Control-Allow-Origin': '*',
-              }
-              }).then(result => {
-                  setHasAvatar(true)
-              }).catch( error => {
-                  console.log(error)
-              })
-          
-      }
-
-    checkIfHasProfilePic()
-
-
     const [ isShown, setIsShown ] = useState(false)
     const dispatch = useDispatch()
     const history = useHistory()
 
 
+    function checkIfHasProfilePic() {
+        axios.get(profilePicUrl,{
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Access-Control-Allow-Origin': '*',
+            }
+            }).then(result => {
+                setHasAvatar(true)
+            }).catch( error => {
+                console.log(error)
+            })       
+    }
+    
+      const memoizedCheckIfHasProfilePic = useCallback(
+        () => {
+            checkIfHasProfilePic()
+        },
+        [],
+      );
+
+      memoizedCheckIfHasProfilePic()
 
     const handleLogOutClick = () => {
         dispatch(signOut(history,token))
@@ -51,10 +52,7 @@ const Navbar = ({ userInfo, token }) => {
         history.go('/perfil')
     }
 
-  
-
-      console.log(userInfo)
-    return (      
+      return (      
         <Navigation>
             <Logo>
                 <Link

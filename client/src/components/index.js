@@ -15,6 +15,7 @@ export * from './Modal'
 export * from './Navbar'
 export * from './Form'
 export * from './Select'
+export * from './StatusSelect'
 export * from './Checkbox'
 export * from './Typography'
 

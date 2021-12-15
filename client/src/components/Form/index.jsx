@@ -13,8 +13,8 @@ export const FormItem = ({children}) => {
 
 export const FormGroup = ({children, ...rest}) => {
     return (
-        <form {...rest}>
+        <div {...rest}>
             { children } 
-        </form>
+        </div>
     )
 }
