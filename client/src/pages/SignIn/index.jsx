@@ -1,17 +1,12 @@
 import React, { useState } from "react";
-import { NavLink, useHistory } from "react-router-dom";
+import {  useHistory } from "react-router-dom";
 import { signIn } from "../../redux/actions/usersActions";
 import { Button, FormGroup, TextInput, Link } from "../../components";
 import logo from "../../assets/logo/logo.svg"
 import { useDispatch, useSelector } from "react-redux";
-import { Hero, TextWrapper, Wrapper, Logo, FormContainer, ButtonWrapper } from './styles';
+import { Hero,  Wrapper, Logo, FormContainer } from './styles';
 import {  Info2, Info1 } from "../../components/Typography";
 import { COLOR } from "../../tokens/colors";
-import { useEffect } from "react";
-import { ConsoleSqlOutlined } from "@ant-design/icons";
-
-
-
 
 
 
@@ -24,14 +19,9 @@ export const SignInPage = () => {
     const history = useHistory();
     const { user } = useSelector( state => state.authentication )
 
- 
-
-
-    const handleSignInClick = (event) => {
+    function handleSignInClick(event) {
         event.preventDefault();
-    
-        dispatch(signIn({email,password}, history));
-        
+        dispatch(signIn({email,password}, history));       
     };
 
         return (
@@ -41,6 +31,11 @@ export const SignInPage = () => {
                     <Logo>
                         <img src={logo} alt="Mediabase" />
                     </Logo>
+                    <button onClick={(e) => {
+                        e.preventDefault()
+                        dispatch(signIn({email,password}, history));       
+
+                    }}>Teste</button>
                
                     <Info1 style={{ textAlign: "center" }} color={COLOR.white}>Bem vindo ao Mediabase</Info1>
                         <FormContainer> 

@@ -33,7 +33,7 @@
   "scripts": {
     "start": "concurrently \"npm run server\" \"npm run client\"",
     "client": "node start-client.js",
-    "server": "env-cmd -f ./config/dev.env nodemon server.js",
+    "server": "env-cmd -f ./config/dev.env nodemon index.js",
     "build": "react-scripts build",
     "test": "jest --watch",
     "eject": "react-scripts eject"
@@ -57,7 +57,6 @@
     ]
   },
   "devDependencies": {
-    "env-cmd": "^10.1.0",
-    "jest": "^26.6.0"
+    "env-cmd": "^10.1.0"
   }
 }

@@ -4,10 +4,11 @@ import icon from '../../assets/icons/close.svg'
 import { SystemButton } from "../";
 import { Hero, Header, ModalContainer } from './styles';
 
+// Comment
 
 export const Modal = (props) => {
 
-    return (
+    return ( 
         <Hero>
             <ModalContainer {...props}>
                 <Header>
