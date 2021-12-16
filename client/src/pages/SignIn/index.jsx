@@ -43,8 +43,8 @@ export const SignInPage = () => {
                     </Logo>
                
                     <Info1 style={{ textAlign: "center" }} color={COLOR.white}>Bem vindo ao Mediabase</Info1>
-                        <FormContainer> 
-                            <FormGroup onSubmit={handleSignInClick}>
+                        <FormContainer onSubmit={handleSignInClick}> 
+                            <FormGroup>
                                 <TextInput
                                     onChange={e => setEmail(e.target.value,
                                    )}
