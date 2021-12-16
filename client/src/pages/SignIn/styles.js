@@ -52,7 +52,7 @@ export const ButtonWrapper = styled.div`
     padding-top: 2rem;
 `
 
-export const FormContainer = styled.div`
+export const FormContainer = styled.form`
     width: 400px;
     margin: auto;
     transition: all 0.3s;

@@ -16,7 +16,6 @@ app.use(cors({
     origin: '*'
 }))
 
-const port = process.env.PORT || 3001
 
 app.use(express.json())
 app.use(userRouter)
@@ -43,6 +42,11 @@ app.get('/', function (req, res) {
 /**
  * Listen to port 3001
  */
+
+ let port = process.env.PORT;
+ if (port == null || port == "") {
+   port = 3001;
+ }
 
 app.listen(port, () => console.log(`Server is running on port ${port}`))
 
