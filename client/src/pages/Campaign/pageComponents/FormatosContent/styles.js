@@ -11,7 +11,6 @@ export const Wrapper = styled.div`
     position: relative;
     top: 50%;
     padding: 2rem;
-    background: ${COLOR.gray100} !important;
 `
 
 export const ActionsWrapper = styled.div`
@@ -89,7 +88,8 @@ export const customStyles = {
     noData: {
 		style: {
 			display: 'flex',
-            flexGrow: 2
+            flexGrow: 2,
+            background: `${COLOR.gray90}`
 		},
 	},
     table: {
@@ -99,12 +99,12 @@ export const customStyles = {
     },
     headRow: {
       style: {
-        borderBottomColor: `${COLOR.gray100}`,
+        borderBottomColor: `${COLOR.gray90}`,
         flex: 'inline-flex',
         overflow: 'visible',
         whiteSpace: 'normal',
         boxShadow: '0 10px 10px rgb(0 0 0 / 0.2)',
-        background: `${COLOR.gray100} !important`,
+        background: `${COLOR.gray90} !important`,
         padding: '0 1rem'    
         },  
     },
@@ -128,10 +128,16 @@ export const customStyles = {
 
     rows: {
       style: {
-        backgroundColor: `${COLOR.black}`,
+        backgroundColor: `${COLOR.gray80}`,
         cursor: 'pointer',
-        padding: '0 1rem'
-      }
+        padding: '0 1rem',
+        border: `1px solid transparent`
+
+      },
+      highlightOnHoverStyle: {
+        backgroundColor: `${COLOR.gray80}`,
+        border: `1px solid ${COLOR.brandRed90}`
+    },
     },
 	expanderCell: {
 		style: {

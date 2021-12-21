@@ -3,7 +3,7 @@ import { Modal, Button, TextInput, TextArea, FormGroup, FileInput } from '../../
 import { closeEditCriativoModalRequest } from "../../../../redux/actions/campaignsActions";
 import { createCriativo } from "../../../../redux/actions/criativoActions";
 import { useDispatch, useSelector } from 'react-redux';
-import { FormWrapper, FormContainer, ImagemDeCapa } from './styles';
+import { FormWrapper, FormContainer, ImagemDeCapa, AlterarImagem } from './styles';
 import { COLOR } from '../../../../tokens/colors';
 import { useEffect } from 'react';
 import axios from 'axios';
@@ -59,7 +59,10 @@ export const EditCriativoModal = (criativo) => {
 
     return (
         <Modal headerTitle="Detalhe do criativo" height="auto" width="600px" handleClickOnCloseButton={handleClickOnCloseButton}>
-            <ImagemDeCapa><img width="600" src={`/criativo/imagem/${selected}`}></img></ImagemDeCapa>
+            <ImagemDeCapa>
+                <img width="600" src={`/criativo/imagem/${selected}`}></img>
+                <AlterarImagem>Alterar imagem</AlterarImagem>
+                </ImagemDeCapa>
            <FormWrapper>
                 <FormContainer onSubmit={handleSubmitFormClick}>
                     
@@ -84,7 +87,7 @@ export const EditCriativoModal = (criativo) => {
                     </FormGroup> */}
 
                     <FormGroup>
-                        <TextArea lighter label="Descrição" onChange={val => setDescricao(val.target.value)} value={descricao} placeholder="Inserir descrição" />
+                        <TextArea variation="filled" colorMode="dark" label="Descrição" onChange={val => setDescricao(val.target.value)} value={descricao} placeholder="Inserir descrição" />
                     </FormGroup>
 
                     

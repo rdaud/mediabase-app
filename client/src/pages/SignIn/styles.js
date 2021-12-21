@@ -22,6 +22,7 @@ export const TextWrapper = styled.div`
 
 `
 export const Wrapper = styled.div`
+background: ${COLOR.gray90};
     box-shadow: 0px 30px 200px 20px rgba(0,0,0,.3);
     padding: 3rem;
     display: flex;

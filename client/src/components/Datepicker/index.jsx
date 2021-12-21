@@ -15,7 +15,7 @@ export const Datepicker = ({ value, options, placeholder, onChange, label, style
         <>
             { label && <Label>{label}</Label>}
             <Wrapper>
-                <Control type="date" placeholder={placeholder} value={value} onChange={onChange} style={style} />
+                <Control type="date" placeholder={placeholder} value={value} onChange={onChange} style={style} {...rest} />
                     
                 <CalendarOutlined style={{
                     color:"red",

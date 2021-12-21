@@ -14,9 +14,9 @@ export const Profile = styled.div`
     border-radius: 50rem;
     top: 20px;
     position: absolute;
-    background: ${COLOR.black};
+    background: ${COLOR.gray90};
     border: 1px solid ${COLOR.gray100};
-    box-shadow: 5px 5px 20px ${COLOR.black};
+    box-shadow: 5px 5px 20px ${COLOR.gray90};
     z-index: 999;
     display: flex;
     align-items: center;
@@ -34,7 +34,7 @@ export const ProfileWrapper = styled.div`
     height: 150px;
     display: flex;
     justify-content: center;
-    background: ${COLOR.black};
+    background: ${COLOR.gray90};
     position: relative;  
 `
 

@@ -3,7 +3,7 @@ import { Wrapper, StyledTextArea, Label, AssistiveText, Error } from './styles';
 
 
 
-export const TextArea = ({ label, error, assistiveText, placeholder,onChange, type, value}) => {
+export const TextArea = ({ label, error, assistiveText, placeholder,onChange, type, value, ...rest }) => {
 
     const [ onFocus, setOnFocus ] = useState(false);
 
@@ -19,7 +19,7 @@ export const TextArea = ({ label, error, assistiveText, placeholder,onChange, ty
         
         <Wrapper>
         { label && <Label>{label}</Label>}
-        <StyledTextArea  error={error} value={value} onChange={onChange} onFocus={focusHandler} onBlur={blurHandler} placeholder={placeholder} type={type}/>
+        <StyledTextArea {...rest} error={error} value={value} onChange={onChange} onFocus={focusHandler} onBlur={blurHandler} placeholder={placeholder} type={type}/>
        
         </Wrapper>
         

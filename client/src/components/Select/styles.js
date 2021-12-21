@@ -16,7 +16,7 @@ export const Icon = styled.span`
 `
 
 export const SelectedValue = styled.div`
-    color: ${ props => props.isDefault ? COLOR.gray70 : COLOR.white };
+    color: ${ props => props.isDefault ? COLOR.gray60 : COLOR.white };
 `
 
 export const Control = styled.div`
@@ -28,15 +28,28 @@ export const Control = styled.div`
     align-items: center;
     padding: 1rem;
     color: ${COLOR.white} !important;
+    background: ${ props => 
+        props.variation && props.variation === 'filled' && props.colorMode === 'light' ? COLOR.gray70 :
+        props.variation && props.variation === 'filled' && props.colorMode === 'dark' ? COLOR.gray80 :
+        props.variation && props.variation === 'outline' ? 'transparent' :
+        'transparent'
+    };
     position: relative;
     justify-content: space-between;
     outline: none;
-    border: 1px solid ${ props => props.lighter ? COLOR.gray70 : COLOR.gray100};
+    border-width: 1px;
+    border-style: solid;
+    border-color: ${ props => 
+        props.variation && props.variation === 'outline' && props.colorMode === 'light' ? COLOR.gray70 :
+        props.variation && props.variation === 'outline' && props.colorMode === 'dark' ? COLOR.gray80 :
+        props.variation && props.variation === 'filled' ? 'transparent' :
+        'transparent'
+    };
     font-size: 14px;
     margin: 0;
    
     &:hover {
-        border-color: ${ props => props.lighter ? COLOR.white : COLOR.gray70 };
+        border-color: ${ props => props.lighter ? COLOR.white : COLOR.gray60 };
         cursor: pointer;
     }
 

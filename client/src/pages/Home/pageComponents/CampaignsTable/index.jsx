@@ -139,6 +139,8 @@ export const CampaignsTable = (props) => {
 
         <ActionsWrapper>
                     <Select
+                        variation="outline"
+                        colorMode="dark"
                         prompt="Cliente"
                         value={cliente}
                         options={filteredArrayOfClientes()}
@@ -148,6 +150,8 @@ export const CampaignsTable = (props) => {
                     />
                 <ButtonWrapper>
                     <Select
+                        variation="outline"
+                        colorMode="dark"
                         prompt="Produto"
                         value={produtos}
                         options={filteredArrayOfProdutos()}
@@ -156,6 +160,8 @@ export const CampaignsTable = (props) => {
                 </ButtonWrapper>
                 <ButtonWrapper>
                     <Select
+                        variation="outline"
+                        colorMode="dark"
                         prompt="Status"
                         value={status}
                         options={filteredArrayOfStatus()}

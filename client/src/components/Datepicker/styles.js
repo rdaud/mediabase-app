@@ -14,8 +14,12 @@ export const Wrapper = styled.div`
 
 export const Control = styled.input`
     display: inline-flex;
-    background-color: transparent;
-    height: ${ props => props.small ? "2rem" : "3rem" };
+    background: ${ props => 
+        props.variation && props.variation === 'filled' && props.colorMode === 'light' ? COLOR.gray70 :
+        props.variation && props.variation === 'filled' && props.colorMode === 'dark' ? COLOR.gray80 :
+        props.variation && props.variation === 'outline' ? 'transparent' :
+        'transparent'
+    };    height: ${ props => props.small ? "2rem" : "3rem" };
     width: 100%;
     min-width: 150px;
     align-items: center;
@@ -26,13 +30,22 @@ export const Control = styled.input`
     position: relative;
     justify-content: space-between;
     outline: none;
-    border: 1px solid ${ props => props.lighter ? COLOR.gray70 : COLOR.gray100};
-    font-size: 14px;
+
+    border-width: 1px;
+    border-style: solid;
+    border-color: ${ props => 
+        props.variation && props.variation === 'outline' && props.colorMode === 'light' ? COLOR.gray70 :
+        props.variation && props.variation === 'outline' && props.colorMode === 'dark' ? COLOR.gray80 :
+        props.variation && props.variation === 'filled' ? 'transparent' :
+        'transparent'
+    };    font-size: 14px;
+
+
     margin: 0;
    
     &:hover {
-        border-color: ${COLOR.gray90};
-        background: rgba(255,255,255,.1);
+        border-color: ${ props => props.lighter ? COLOR.white : COLOR.gray60 };
+        cursor: pointer;
     }
 
 `

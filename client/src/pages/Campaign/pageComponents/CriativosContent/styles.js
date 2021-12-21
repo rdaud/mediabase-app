@@ -32,7 +32,6 @@ export const EmptyStateContainer = styled.div`
     width: 100%;
     height: 100%;
     margin: 2rem;
-    border: 1px dashed ${COLOR.gray70};
     position: relative;
     color: ${COLOR.white};
     display: flex;
@@ -72,7 +71,7 @@ const Corte = styled.div`
     top: -24px;
     display: inline;
     transform: rotate(45deg);
-    background-color: ${COLOR.gray80};
+    background-color: ${COLOR.gray90};
 `
 
 const Imagem = styled.div`

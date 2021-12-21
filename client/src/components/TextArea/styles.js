@@ -15,8 +15,20 @@ export const StyledTextArea = styled.textarea`
     padding: 1rem 0 0 1rem;
     height: 124px;
     width: 100%;
-    background: ${COLOR.gray90};
-    border: ${ props => props.error ? "1px solid darkgray" : `1px solid ${COLOR.gray80}`};
+    border-width: 1px;
+    border-style: solid;
+    border-color: ${ props => 
+        props.variation && props.variation === 'outline' && props.colorMode === 'light' ? COLOR.gray70 :
+        props.variation && props.variation === 'outline' && props.colorMode === 'dark' ? COLOR.gray80 :
+        props.variation && props.variation === 'filled' ? 'transparent' :
+        'transparent'
+    };
+    background: ${ props => 
+        props.variation && props.variation === 'filled' && props.colorMode === 'light' ? COLOR.gray70 :
+        props.variation && props.variation === 'filled' && props.colorMode === 'dark' ? COLOR.gray80 :
+        props.variation && props.variation === 'outline' ? 'transparent' :
+        'transparent'
+    };    border: ${ props => props.error ? "1px solid darkgray" : `1px solid ${COLOR.gray80}`};
     color: ${COLOR.white};
     font-size: 14px;
 

@@ -34,9 +34,9 @@ export const customStyles = {
         style: {
             minHeight: '56px', // override the row height
             padding: '0 1rem',
-            background: `${COLOR.black} !important`,
-            cursor: 'pointer'
-
+            background: `${COLOR.gray80} !important`,
+            cursor: 'pointer',
+            borderBottomColor: `${COLOR.gray70} !important`
         },
     },
     highlightOnHoverStyle: {
@@ -44,21 +44,19 @@ export const customStyles = {
     },
     subHeader: {
         style: {
-            background: `${COLOR.gray100} !important`,
-            paddingLeft: 0,
-            paddingRight: 0,
-            paddingTop: '1rem'
+            background: `${COLOR.gray90} !important`,
+            padding: '0 !important'
         }
     },
     headRow: {
         style: {
-            borderBottomColor: `${COLOR.gray100}`,
             flex: 'inline-flex',
             overflow: 'visible',
             whiteSpace: 'normal',
             boxShadow: '0 10px 10px rgb(0 0 0 / 0.2)',
-            background: `${COLOR.gray100} !important`,
-            padding: '0 1rem'   
+            background: `${COLOR.gray90} !important`,
+            padding: '0 1rem',
+            borderColor: 'transparent' 
         }
     },
 };

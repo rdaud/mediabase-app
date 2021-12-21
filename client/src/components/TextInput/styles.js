@@ -15,9 +15,19 @@ export const StyledInput = styled.input`
     padding-left: 1rem;
     height: 48px;
     width: 100%;
-    background: ${COLOR.gray90};
-    border: ${ props => props.error ? "1px solid darkgray" : `1px solid ${COLOR.gray80}`};
-    color: ${COLOR.white};
+    background: ${ props => 
+        props.variation && props.variation === 'filled' && props.colorMode === 'light' ? COLOR.gray70 :
+        props.variation && props.variation === 'filled' && props.colorMode === 'dark' ? COLOR.gray80 :
+        props.variation && props.variation === 'outline' ? 'transparent' :
+        'transparent'
+    };    border-width: 1px;
+    border-style: solid;
+    border-color: ${ props => 
+        props.variation && props.variation === 'outline' && props.colorMode === 'light' ? COLOR.gray70 :
+        props.variation && props.variation === 'outline' && props.colorMode === 'dark' ? COLOR.gray80 :
+        props.variation && props.variation === 'filled' ? 'transparent' :
+        'transparent'
+    };    color: ${COLOR.white};
     font-size: 14px;
 
     &:focus {
@@ -26,7 +36,7 @@ export const StyledInput = styled.input`
     }
 
     &:hover {
-        border: 1px solid ${COLOR.gray70};
+        border: 1px solid ${COLOR.gray60};
     }
 `
 

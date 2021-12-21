@@ -45,12 +45,11 @@ export const AddCampaignModal = (props) => {
 
 
     return (
-        <Modal headerTitle="Nova Campanha" modalWidth="600px" handleClickOnCloseButton={handleClickOnCloseButton}>
+        <Modal headerTitle="Nova Campanha" width="600px" handleClickOnCloseButton={handleClickOnCloseButton}>
            { props.loading ? <div>Is loading </div> : 
            <FormWrapper>
-                <FormContainer onSubmit={handleSubmitFormClick}>
-                    
-                        <FormGroup>
+                <FormContainer onSubmit={handleSubmitFormClick}>                
+                    <FormGroup>
                             <TextInput lighter label="Nome da campanha" onChange={val => setNome(val.target.value)} value={nome} placeholder="Nome da campanha" />
                         </FormGroup>
 
@@ -63,7 +62,7 @@ export const AddCampaignModal = (props) => {
                         </FormGroup>
 
                         <FormGroup>
-                            <Select onChange={ val => setStatus(val)} value={status} options={options} prompt="Status" label="Status"/>
+                            <Select variation="filled" colorMode="dark" onChange={ val => setStatus(val)} value={status} options={options} prompt="Status" label="Status"/>
                         </FormGroup>
 
                         <FormGroup
@@ -77,6 +76,8 @@ export const AddCampaignModal = (props) => {
                                 
                             }}>
                             <Datepicker
+                                variation="filled"
+                                colorMode="dark"
                                 label="Início"
                                 prompt="DD-MM-AAAA"
                                 onChange={e => setDataDeVeiculacaoInicio(e.target.value)}
@@ -88,6 +89,8 @@ export const AddCampaignModal = (props) => {
                                 "width": "100%"
                             }}>
                             <Datepicker
+                                variation="filled"
+                                colorMode="dark"
                                 label="Fim"
                                 placeholder="DD-MM-AAAA"
                                 onChange={e => setDataDeVeiculacaoFim(e.target.value)}
@@ -100,7 +103,7 @@ export const AddCampaignModal = (props) => {
                      <div>
                         <Button
                             variation="primary"
-                            corDaOrelha={COLOR.black}
+                            corDaOrelha={COLOR.gray90}
                             style={{
                             marginTop: "1rem"
                         }}>

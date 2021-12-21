@@ -4,20 +4,19 @@ import icon from '../../assets/icons/close.svg'
 import { SystemButton } from "../";
 import { Hero, Header, ModalContainer } from './styles';
 
-// Comment
 
-export const Modal = (props) => {
+export const Modal = ({ children, headerTitle, headerBackground, handleClickOnCloseButton, ...rest }) => {
 
     return ( 
         <Hero>
-            <ModalContainer {...props}>
-                <Header>
-                    <h2>{props.headerTitle}</h2>
-                    <SystemButton onClick={props.handleClickOnCloseButton}>
+            <ModalContainer {...rest}>
+                <Header headerBackground={headerBackground}>
+                    <h2>{ headerTitle }</h2>
+                    <SystemButton onClick={handleClickOnCloseButton}>
                         <img src={icon} alt="Fechar" />
                     </SystemButton>
                 </Header>
-                {props.children}
+                { children }
             </ModalContainer>
         </Hero>
     )

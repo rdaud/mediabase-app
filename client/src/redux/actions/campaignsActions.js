@@ -119,7 +119,7 @@ const createCampaignRequest = () => {
         console.log(data)
           dispatch(createCampaignSuccess(data));
           dispatch(closeAddCampaignModalRequest());
-          history.push(`home/campanha/${data._id}`)
+          history.push(`/campanha/${data._id}`)
           alert('Campanha criada com sucesso');
         })
       .catch((error) => {

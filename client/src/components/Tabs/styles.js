@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Section4 } from '../Typography';
+import { COLOR } from "../../tokens/colors";
 
 
 export const TabBarWrapper = styled.div`
@@ -9,6 +10,7 @@ export const TabBarWrapper = styled.div`
     justify-content: flex-start;
     cursor: pointer;
     padding-left: 2rem;
+    border-bottom: 1px solid ${COLOR.gray80};
 `
 
 export const TabWrapper = styled.div`

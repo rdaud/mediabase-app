@@ -99,7 +99,7 @@ console.log(rows)
   // Render the UI for your table
   return (
       <>
-     { subrowsCounter && <Toolbar counter={subrowsCounter} handleClickOnCancelar={handleClickOnCancelar} /> } 
+     { !!subrowsCounter && <Toolbar counter={subrowsCounter} handleClickOnCancelar={handleClickOnCancelar} /> } 
 
     <div className="tableWrap">
     <div style={{
@@ -115,10 +115,10 @@ console.log(rows)
             />
         </div>
         <div style={{ textAlign: 'left' }}> 
-            <SelectColumnFilter userColumns={columns[0]} />
+            <SelectColumnFilter userColumns={columns[1]} />
         </div>
         <div style={{ textAlign: 'left'}}> 
-            <SelectColumnFilter userColumns={columns[1]} />
+            <SelectColumnFilter userColumns={columns[2]} />
         </div> 
     </div>
     

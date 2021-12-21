@@ -2,7 +2,6 @@ import React from 'react';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Switch, Redirect, BrowserRouter } from "react-router-dom";
 import { SignUpPage, SignInPage, CampaignPage, HomePage, Playground, ProfilePage } from "./pages";
-// import HomePage from "./pages/HomePage";
 import PrivateRoute from "./routes/PrivateRoute";
 import PublicRoute from "./routes/PublicRoute";
 

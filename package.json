@@ -1,5 +1,5 @@
 {
-  "name": "mediabase-app",
+  "name": "mediabase-server",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -8,26 +8,30 @@
     "@testing-library/user-event": "^12.8.3",
     "airtable": "^0.11.1",
     "babel-core": "^6.26.3",
+    "babel-jest": "26.6.0",
+    "babel-loader": "8.1.0",
     "bcryptjs": "^2.4.3",
     "concurrently": "^6.2.2",
     "cors": "^2.8.5",
+    "eslint": "7.11.0",
     "express": "^4.17.1",
     "history": "^5.0.1",
+    "jest": "26.6.0",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.1",
     "mongodb": "^4.1.2",
     "mongoose": "^6.0.7",
     "multer": "^1.4.3",
+    "nodemon": "^2.0.12",
     "react": "^17.0.2",
     "react-app-rewired": "^2.1.8",
     "react-cookie": "^4.1.1",
     "react-dom": "^17.0.2",
     "react-icons": "^4.3.1",
-    "react-scripts": "4.0.3",
+    "react-scripts": "^4.0.3",
     "sass": "^1.41.0",
     "validator": "^13.6.0",
     "web-vitals": "^1.1.2"
-
   },
   "scripts": {
     "start": "concurrently \"npm run server\" \"npm run client\"",
@@ -59,7 +63,7 @@
     "env-cmd": "^10.1.0"
   },
   "engines": {
-    "node": "16.13.1",
-    "nodemon": "^2.0.12"
+    "node": "16.x",
+    "yarn": "1.x"
   }
 }

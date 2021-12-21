@@ -97,8 +97,8 @@ const ProfilePage = ( { match, userInfo, token }) => {
                 </ProfileWrapper>
             <InnerWrapper>   
                 <FormWrapper>
-                    <TextInput lighter type="text" onChange={item => setNome(item.target.value)} label="Nome" value={nome} />
-                    <TextInput type="email" onChange={ item => setEmail(item.target.value)} label="Email" value={email} />
+                    <TextInput variation="outline" colorMode="light" type="text" onChange={item => setNome(item.target.value)} label="Nome" value={nome} />
+                    <TextInput variation="outline" colorMode="light" type="email" onChange={ item => setEmail(item.target.value)} label="Email" value={email} />
                     <Button variation="primary" style={{ marginTop: '2rem' }} corDaOrelha={COLOR.gray80}>Salvar</Button>
                 </FormWrapper>
             </InnerWrapper>

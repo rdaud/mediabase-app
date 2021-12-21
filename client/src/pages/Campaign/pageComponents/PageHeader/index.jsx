@@ -62,7 +62,10 @@ export const PageHeader = ({id}) => {
             </Cliente>
             <Status isShown={isShown} onMouseOver={() => setIsShown(true)} onMouseLeave={() => setIsShown(false)}>
                 
-                <Select options={[' 🔴 Finalizada', '🟢 Em produção']} value={status} />
+                <Select 
+                variation="outline"
+                colorMode="dark"
+                options={[' 🔴 Finalizada', '🟢 Em produção']} value={status} />
               
             </Status>
         </Header>

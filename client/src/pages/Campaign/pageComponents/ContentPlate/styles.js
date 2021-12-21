@@ -15,5 +15,5 @@ export const Body = styled.div`
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-    background: ${COLOR.gray100};
+    background: ${COLOR.gray90};
 `

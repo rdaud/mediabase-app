@@ -16,8 +16,7 @@ export const StyledInput = styled.input`
     padding-left: 1rem;
     height: 48px;
     width: 100%;
-    border: ${ props => props.error ? "1px solid darkgray" : `1px solid ${COLOR.gray80}`};
-    color: ${COLOR.white};
+
     font-size: 14px;
     position: absolute;
     opacity: 0;
@@ -37,22 +36,34 @@ export const SelectedValue = styled.div`
 
 export const Control = styled.div`
     display: inline-flex;
-    background-color: ${COLOR.gray90};
     height: ${ props => props.small ? "2rem" : "3rem" };
     width: 100%;
     min-width: 150px;
     align-items: center;
     padding: 1rem;
-    color: ${COLOR.gray70} !important;
+    color: ${COLOR.gray60} !important;
     position: relative;
     justify-content: space-between;
     outline: none;
-    // border: 1px solid ${ props => props.lighter ? COLOR.gray70 : COLOR.gray100};
+    border-width: 1px;
+    border-style: solid;
+    border-color: ${ props => 
+        props.variation && props.variation === 'outline' && props.colorMode === 'light' ? COLOR.gray70 :
+        props.variation && props.variation === 'outline' && props.colorMode === 'dark' ? COLOR.gray80 :
+        props.variation && props.variation === 'filled' ? 'transparent' :
+        'transparent'
+    };    color: ${COLOR.white};
+    background: ${ props => 
+        props.variation && props.variation === 'filled' && props.colorMode === 'light' ? COLOR.gray70 :
+        props.variation && props.variation === 'filled' && props.colorMode === 'dark' ? COLOR.gray80 :
+        props.variation && props.variation === 'outline' ? 'transparent' :
+        'transparent'
+    };
     font-size: 14px;
     margin: 0;
    
     &:hover {
-        border-color: ${ props => props.lighter ? COLOR.white : COLOR.gray70 };
+        border-color: ${ props => props.colorMode === 'dark' ? COLOR.gray60 : COLOR.gray70 };
         cursor: pointer;
     }
 

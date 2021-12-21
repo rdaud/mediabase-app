@@ -56,7 +56,8 @@ export const AddCriativoModal = () => {
 
                     <FormGroup>
                         <FileInput
-                            lighter
+                            variation="filled"
+                            colorMode="dark"
                             label="Imagem de capa"
                             onChange={val => {
                                 const obj = val.target.files[0]
@@ -71,13 +72,14 @@ export const AddCriativoModal = () => {
                     </FormGroup>
 
                     <FormGroup>
-                        <TextArea lighter label="Descrição" onChange={val => setDescrição(val.target.value)} value={descricao} placeholder="Inserir descrição" />
+                        <TextArea variation="filled"
+                            colorMode="dark" label="Descrição" onChange={val => setDescrição(val.target.value)} value={descricao} placeholder="Inserir descrição" />
                     </FormGroup>
 
                      <div>
                         <Button
                             variation="primary"
-                            corDaOrelha={COLOR.gray80}
+                            corDaOrelha={COLOR.gray90}
                             style={{
                             marginTop: "1rem"
                         }}>

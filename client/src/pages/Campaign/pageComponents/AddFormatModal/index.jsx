@@ -26,20 +26,20 @@ const CustomCell = ({row}) => {
             display: "flex",
             flexDirection: "column",
         }}>
-        <p>
-            {row.NomeDoFormato}
-        </p>
-        <div style={{
-            display: "inline-flex",
-            height: "18px",
-            alignItems: "center"
-        }}>
-        <Tag>
-        {row.Tamanho}
-        </Tag> <small style={{fontSize: "10px"}}> &nbsp; | &nbsp; {
-        row.FormatoDoArquivo !== undefined && row.FormatoDoArquivo.join(', ') 
-        }</small>
-        </div>
+            <p>
+                {row.NomeDoFormato}
+            </p>
+            <div style={{
+                display: "inline-flex",
+                height: "18px",
+                alignItems: "center"
+            }}>
+            <Tag>
+            {row.Tamanho}
+            </Tag> <small style={{fontSize: "10px"}}> &nbsp; | &nbsp; {
+            row.FormatoDoArquivo !== undefined && row.FormatoDoArquivo.join(', ') 
+            }</small>
+            </div>
         </div>
     )
 }
@@ -143,7 +143,7 @@ export const AddFormatModal = () => {
                 width: "100%",
                 position: "absolute",
                 bottom: 0,
-                background: `${COLOR.gray70}`,
+                background: `${COLOR.gray90}`,
                 display: "inline-flex",
                 justifyContent: "space-between",
                 alignItems: "center",
@@ -154,7 +154,7 @@ export const AddFormatModal = () => {
                 <Info2 color={COLOR.white}>{count} formato(s) selecionado(s)</Info2>
                 </div>
                 <div>
-                    <Button variation="primary" iconLeft={plus} corDaOrelha={COLOR.gray70} onClick={handleSubmit}>Adicionar</Button>
+                    <Button variation="primary" iconLeft={plus} corDaOrelha={COLOR.gray90} onClick={handleSubmit}>Adicionar</Button>
                 </div>
     
             </div>
@@ -169,6 +169,8 @@ export const AddFormatModal = () => {
             <ActionsWrapper>  
                 <ButtonWrapper>
                     <Select
+                        variation="outline"
+                        colorMode="dark"
                         prompt="Veiculo"
                         value={veiculo}
                         options={filteredArrayOfVeiculo()}
@@ -178,6 +180,8 @@ export const AddFormatModal = () => {
                 </ButtonWrapper>
                 <ButtonWrapper>
                     <Select 
+                        variation="outline"
+                        colorMode="dark"
                         prompt="Meio"
                         value={meio}
                         options={filteredArrayOfMeio()}
@@ -187,7 +191,8 @@ export const AddFormatModal = () => {
                 </ButtonWrapper>
                 <ButtonWrapper>
                     <Search
-                        lighter
+                        variation="outline"
+                        colorMode="dark"
                         onChange={e => setFilterText(e.target.value)}
                         filterText={filterText}
                     />

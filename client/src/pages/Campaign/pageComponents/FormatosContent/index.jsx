@@ -179,6 +179,8 @@ export const Formatos = (props) => {
         <ActionsWrapper>
                 <ButtonWrapper>
                     <Select
+                        variation="outline"
+                        colorMode="dark"
                         prompt="Meio"
                         value={meio}
                         options={filteredArrayOfMeio()}
@@ -187,7 +189,7 @@ export const Formatos = (props) => {
                     />
                 </ButtonWrapper>
                 <ButtonWrapper>
-                    <Search lighter onChange={e => setFilterText(e.target.value)} filterText={filterText} />
+                    <Search variation="outline" colorMode="dark" onChange={e => setFilterText(e.target.value)} filterText={filterText} />
                 </ButtonWrapper>
                 <ButtonWrapper>           
                     <Button

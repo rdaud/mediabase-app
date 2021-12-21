@@ -7,7 +7,7 @@ export const Wrapper = styled.div`
     min-width: 150px;
     max-width: 300px;
     outline: 1px solid transparent;
-    outline-color: ${ props => props.lighter ? COLOR.gray70 : COLOR.gray100 };
+    outline-color: ${ props => props.colorMode === 'light' ? COLOR.gray60 : COLOR.gray80 };
     padding-left: 1rem;
     display: inline-flex;
     align-itens: center;
@@ -19,7 +19,7 @@ export const Wrapper = styled.div`
     }
 
     &:hover {
-        outline-color: ${ props => props.lighter ? COLOR.white : COLOR.gray70 };
+        outline-color: ${ props => props.lighter ? COLOR.white : COLOR.gray60 };
     }
 
   

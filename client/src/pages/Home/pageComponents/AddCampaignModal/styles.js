@@ -7,7 +7,6 @@ export const FormWrapper = styled.div`
     height: max-content;
     position: relative;
     padding: 0 2rem 2rem 2rem; 
-    background: ${COLOR.gray80};
 `
 
 export const FormContainer = styled.form` 

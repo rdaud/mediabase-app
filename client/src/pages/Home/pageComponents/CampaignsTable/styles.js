@@ -54,13 +54,12 @@ export const customStyles = {
       },
     },
     highlightOnHoverStyle: {
-        backgroundColor: `${COLOR.gray100}`,
-        borderBottomColor: `${COLOR.black}`,
+        border: `1px solid ${COLOR.brandRed90}`,
         outline: 'none'
     },
     rows: {
       style: {
-        backgroundColor: `${COLOR.gray100}`,
+        backgroundColor: `${COLOR.gray80}`,
         cursor: 'pointer',
         '&:not(:last-of-type)': {
         borderBottomColor: `${COLOR.black}`,

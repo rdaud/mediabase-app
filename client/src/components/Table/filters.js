@@ -52,6 +52,8 @@ export const filterTypes =
 
             <Select
             prompt={capitalizedId}
+            variation="outline"
+            colorMode="dark"
             value={filterValue}
             options={options}
             onChange={e => {

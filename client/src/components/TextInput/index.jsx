@@ -3,7 +3,7 @@ import { Wrapper, StyledInput, Label, AssistiveText, Error } from './styles';
 
 
 
-export const TextInput = ({ label, error, assistiveText, placeholder,onChange, type, value}) => {
+export const TextInput = ({ label, error, assistiveText, placeholder,onChange, type, value, ...rest}) => {
 
     const [ onFocus, setOnFocus ] = useState(false);
 
@@ -18,9 +18,9 @@ export const TextInput = ({ label, error, assistiveText, placeholder,onChange, t
     return (
         
         <Wrapper>
-        { label && <Label>{label}</Label>}
-        <StyledInput error={error} value={value} onChange={onChange} onFocus={focusHandler} onBlur={blurHandler} placeholder={placeholder} type={type}/>
-       { assistiveText && <AssistiveText>{assistiveText}</AssistiveText> }
+             { label && <Label>{label}</Label>}
+            <StyledInput {...rest} error={error} value={value} onChange={onChange} onFocus={focusHandler} onBlur={blurHandler} placeholder={placeholder} type={type}/>
+        { assistiveText && <AssistiveText>{assistiveText}</AssistiveText> }
         </Wrapper>
         
     );

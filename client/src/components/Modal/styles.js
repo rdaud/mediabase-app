@@ -18,7 +18,6 @@ export const Header = styled.div`
     position: relative;
     display: flex;
     justify-content: space-between;
-    background: ${COLOR.gray80};
     align-items: center;
     padding: 1rem 2rem 1rem 2rem;
 `
@@ -26,7 +25,7 @@ export const Header = styled.div`
 export const ModalContainer = styled.div`
     width:  ${ props => props.width || "1024px" };
     height:  ${ props => props.height || "600px" };
-    background-color: ${COLOR.black};
+    background-color: ${COLOR.gray90};
     position: relative;
     margin: 0 auto;
     overflow-y: hidden;
