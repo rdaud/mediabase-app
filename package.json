@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@reduxjs/toolkit": "^1.6.2",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
@@ -19,16 +18,16 @@
     "mongodb": "^4.1.2",
     "mongoose": "^6.0.7",
     "multer": "^1.4.3",
-    "nodemon": "^2.0.12",
     "react": "^17.0.2",
+    "react-app-rewired": "^2.1.8",
     "react-cookie": "^4.1.1",
     "react-dom": "^17.0.2",
     "react-icons": "^4.3.1",
     "react-scripts": "4.0.3",
-    "redux-persist": "^6.0.0",
     "sass": "^1.41.0",
     "validator": "^13.6.0",
     "web-vitals": "^1.1.2"
+
   },
   "scripts": {
     "start": "concurrently \"npm run server\" \"npm run client\"",
@@ -57,10 +56,10 @@
     ]
   },
   "devDependencies": {
-    "env-cmd": "^10.1.0",
-    "react-app-rewired": "^2.1.8"
+    "env-cmd": "^10.1.0"
   },
   "engines": {
-    "node": "16.13.1"
+    "node": "16.13.1",
+    "nodemon": "^2.0.12"
   }
 }

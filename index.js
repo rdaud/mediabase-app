@@ -5,7 +5,6 @@ const userRouter = require('./routers/user')
 const campaignRouter = require('./routers/campaign')
 const formatsRouter = require('./routers/formats')
 const criativosRouter = require('./routers/criativo')
-const multer = require('multer')
 
 const app = express()
 
