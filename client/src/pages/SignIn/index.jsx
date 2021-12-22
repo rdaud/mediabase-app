@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { signIn } from "../../redux/actions/usersActions";
 import { Button, FormGroup, TextInput, Link } from "../../components";
-import logo from "../../assets/logo/logo.svg"
+import logo from "../../assets/logo/logo-complete.svg"
 import { useDispatch, useSelector } from "react-redux";
 import { Hero,  Wrapper, Logo, FormContainer } from './styles';
 import {  Info2, Info1 } from "../../components/Typography";
@@ -31,7 +31,7 @@ export const SignInPage = () => {
                     <Logo>
                         <img src={logo} alt="Mediabase" />
                     </Logo>
-                    <Info1 style={{ textAlign: "center" }} color={COLOR.white}>Bem vindo ao Mediabase</Info1>
+                    {/* <Info1 style={{ textAlign: "center" }} color={COLOR.white}>Bem vindo ao Mediabase</Info1> */}
                         <FormContainer onSubmit={handleSignInClick}> 
                             <FormGroup>
                                 <TextInput

@@ -74,7 +74,7 @@ export const Tbody = styled.div`
     .tr {
       padding: .5rem;
       position: relative;
-      border-bottom: 1px solid ${COLOR.gray100};
+      border-bottom: 1px solid ${COLOR.gray90};
 
       &.depth-1 {
         background: black;

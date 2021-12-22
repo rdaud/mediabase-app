@@ -30,7 +30,7 @@ export const Wrapper = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 1rem;
+    gap: 3rem;
 `
 export const FormContainerWrapper = styled.div`
 `
@@ -41,7 +41,6 @@ export const Logo = styled.div`
     img {
         display: inline;
         margin: 0 auto;
-        transform: scale(.8);
     }
   
 `

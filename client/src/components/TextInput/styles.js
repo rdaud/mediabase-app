@@ -49,6 +49,11 @@ export const AssistiveText = styled.p`
     font-size: .750rem;
 `
 
+export const ErrorText = styled.p`
+    color: ${COLOR.brandRed90};
+    font-size: .750rem;
+`
+
 export const Error = styled.p`
     color: darkgray;
     font-size: .750rem;

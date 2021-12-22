@@ -1,26 +1,19 @@
 import React, { useState } from 'react';
-import { Wrapper, StyledInput, Label, AssistiveText, Error } from './styles';
+import { Wrapper, StyledInput, Label, AssistiveText, ErrorText } from './styles';
 
 
 
-export const TextInput = ({ label, error, assistiveText, placeholder,onChange, type, value, ...rest}) => {
+export const TextInput = ({ label, error, assistiveText, placeholder,onChange, onBlur, onFocus, type, value, ...rest}) => {
 
-    const [ onFocus, setOnFocus ] = useState(false);
 
-    const focusHandler = () => {
-        setOnFocus(true)
-    };
-
-    const blurHandler = () => {
-        setOnFocus(false)
-    };
 
     return (
         
         <Wrapper>
              { label && <Label>{label}</Label>}
-            <StyledInput {...rest} error={error} value={value} onChange={onChange} onFocus={focusHandler} onBlur={blurHandler} placeholder={placeholder} type={type}/>
+            <StyledInput {...rest} value={value} onChange={onChange} onFocus={onFocus} onBlur={onBlur} placeholder={placeholder} type={type}/>
         { assistiveText && <AssistiveText>{assistiveText}</AssistiveText> }
+        { error && <ErrorText>{error}</ErrorText> }
         </Wrapper>
         
     );

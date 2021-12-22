@@ -4,7 +4,7 @@ import { COLOR } from '../../tokens/colors';
 
 export const StyledButton = styled.button`
 
-    background-color: ${ props => props.cor || "#EB330F" };
+    background-color: ${ props => props.disabled === true ? 'gray' : props.cor || "#EB330F" };
     padding: .5rem 1.2rem !important;
     position: relative;
     height: 3rem;

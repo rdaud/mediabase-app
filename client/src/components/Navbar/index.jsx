@@ -15,7 +15,7 @@ import axios from 'axios';
 const Navbar = ({ userInfo, token }) => {
 
     const [ hasAvatar, setHasAvatar ] = useState(false)
-    const profilePicUrl = `http://localhost:3001/users/${userInfo._id}/avatar`
+    const profilePicUrl = userInfo !== null && `http://localhost:3001/users/${userInfo._id}/avatar`
     const [ isShown, setIsShown ] = useState(false)
     const dispatch = useDispatch()
     const history = useHistory()
@@ -41,7 +41,9 @@ const Navbar = ({ userInfo, token }) => {
         [],
       );
 
-      memoizedCheckIfHasProfilePic()
+      if (userInfo !== null) {
+        memoizedCheckIfHasProfilePic()
+      }
 
     const handleLogOutClick = () => {
         dispatch(signOut(history,token))
