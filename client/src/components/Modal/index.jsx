@@ -5,13 +5,13 @@ import { SystemButton } from "../";
 import { Hero, Header, ModalContainer } from './styles';
 
 
-export const Modal = ({ children, headerTitle, headerBackground, handleClickOnCloseButton, ...rest }) => {
+export const Modal = ({ children, headerTitle, handleClickOnCloseButton, ...rest }) => {
 
     return ( 
         <Hero>
             <ModalContainer {...rest}>
-                <Header headerBackground={headerBackground}>
-                    <h2>{ headerTitle }</h2>
+                <Header>
+                    <h2>{headerTitle}</h2>
                     <SystemButton onClick={handleClickOnCloseButton}>
                         <img src={icon} alt="Fechar" />
                     </SystemButton>

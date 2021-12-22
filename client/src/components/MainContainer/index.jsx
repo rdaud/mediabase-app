@@ -2,11 +2,11 @@ import React from 'react';
 import { Hero } from './styles';
 
 
-export const MainContainer = (props) => {
+export const MainContainer = ({children, ...rest}) => {
 
     return (
-        <Hero>
-            {props.children}
+        <Hero { ...rest }>
+            { children }
         </Hero>
     )
 }

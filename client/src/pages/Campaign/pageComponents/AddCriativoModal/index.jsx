@@ -51,9 +51,9 @@ export const AddCriativoModal = () => {
            <FormWrapper>
                 <FormContainer onSubmit={handleSubmitFormClick}>            
                     <FormGroup>
-                        <TextInput lighter label="Nome do criativo" onChange={val => setNome(val.target.value)} value={nome} placeholder="Nome do criativo" />
+                        <TextInput  variation="filled"
+                            colorMode="dark" label="Nome do criativo" onChange={val => setNome(val.target.value)} value={nome} placeholder="Nome do criativo" />
                     </FormGroup>
-
                     <FormGroup>
                         <FileInput
                             variation="filled"
@@ -70,7 +70,6 @@ export const AddCriativoModal = () => {
                             onClick={handleClickOnRemover}
                         />
                     </FormGroup>
-
                     <FormGroup>
                         <TextArea variation="filled"
                             colorMode="dark" label="Descrição" onChange={val => setDescrição(val.target.value)} value={descricao} placeholder="Inserir descrição" />

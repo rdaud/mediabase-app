@@ -1,52 +1,13 @@
-import React, { useState, useMemo } from 'react';
-import { Modal, Select, Search, Button, Info2 } from '../../../../components'
-import DataTable from 'react-data-table-component';
+import React, { useState } from 'react';
+import { Modal, Button, Info2 } from '../../../../components'
 import { closeAddFormatModalRequest, updateCampaign } from "../../../../redux/actions/campaignsActions";
 import { useDispatch, useSelector } from 'react-redux';
 import plus from '../../../../assets/icons/plus.svg'
-import { TableWrapper, ActionsWrapper, ButtonWrapper, customStyles } from './styles';
+import {  ActionsWrapper, ButtonWrapper } from './styles';
 import styled from 'styled-components';
 import { COLOR } from '../../../../tokens/colors';
 import { useEffect } from 'react';
-
-
-const space = " | "
-
-const Tag = styled.small`
-    background: #FBD6CF;
-    color: ${COLOR.brandRed100};
-    padding: 0 .2rem;
-    font-size: 10px;
-`
-
-const CustomCell = ({row}) => {
-
-    return (
-        <div style={{
-            display: "flex",
-            flexDirection: "column",
-        }}>
-            <p>
-                {row.NomeDoFormato}
-            </p>
-            <div style={{
-                display: "inline-flex",
-                height: "18px",
-                alignItems: "center"
-            }}>
-            <Tag>
-            {row.Tamanho}
-            </Tag> <small style={{fontSize: "10px"}}> &nbsp; | &nbsp; {
-            row.FormatoDoArquivo !== undefined && row.FormatoDoArquivo.join(', ') 
-            }</small>
-            </div>
-        </div>
-    )
-}
-
-
-
-
+import { AddFormatsTable } from './pageComponents';
 
 
 
@@ -55,59 +16,10 @@ export const AddFormatModal = () => {
 
 
     const [ data, setData ] = useState([])
-    const [ veiculo, setVeiculo ] = useState('')
-    const [ meio, setMeio ] = useState('')
-    const [ filterText, setFilterText ] = useState(null);
     const dispatch = useDispatch()
     const [ hasSelectedRows, setHasSelectedRows ] = useState(false)
     const { formatos } = useSelector( state => state.formatos )
     const [ count, setCount ] = useState(null)
-
-
-    
-    const filteredArrayOfVeiculo = () => {
-        let arr = []
-        if ( formatos !== undefined ) {
-            formatos.forEach( item => arr.push(item.Veículo))
-        }
-        return [ ...new Set(arr) ]
-    }
-
-
-    const filteredArrayOfMeio = () => {
-        let arr = []
-        if ( formatos !== undefined ) {
-            formatos.forEach( item => arr.push(item.Meio))
-        }
-        return [ ...new Set(arr) ]
-    }
-
-
-
-    const columns = React.useMemo(
-        () => [
-            {
-                name: 'Formato',
-                selector: row => row.NomeDoFormato,
-                selector: row => row.Veículo,
-                maxWidth: '600px',
-                wrap: false,
-                cell: row => <CustomCell row={row} />,
-            },
-            {
-                name: 'Veículo',
-                selector: row => row.Veículo,
-                sortable: true,
-            },
-            {
-                name: 'Meio',
-                selector: row => row.Meio,
-                sortable: true,
-        
-            },
-        ],
-        []
-      )
 
     const handleClickOnCloseButton = () => {
         dispatch(closeAddFormatModalRequest())
@@ -128,8 +40,6 @@ export const AddFormatModal = () => {
 
     const handleSubmit = () => {
 
-      
-        
         const obj = {
             formatos: data
         }
@@ -161,56 +71,20 @@ export const AddFormatModal = () => {
         )
     }
 
-    useEffect(() => { console.log(formatos)},[])
 
-    const subHeaderComponentMemo = React.useMemo(() => {
-
-        return (
-            <ActionsWrapper>  
-                <ButtonWrapper>
-                    <Select
-                        variation="outline"
-                        colorMode="dark"
-                        prompt="Veiculo"
-                        value={veiculo}
-                        options={filteredArrayOfVeiculo()}
-                        onChange={val => setVeiculo(val)}
-                        lighter
-                    />
-                </ButtonWrapper>
-                <ButtonWrapper>
-                    <Select 
-                        variation="outline"
-                        colorMode="dark"
-                        prompt="Meio"
-                        value={meio}
-                        options={filteredArrayOfMeio()}
-                        onChange={val => setMeio(val)}
-                        lighter
-                    />
-                </ButtonWrapper>
-                <ButtonWrapper>
-                    <Search
-                        variation="outline"
-                        colorMode="dark"
-                        onChange={e => setFilterText(e.target.value)}
-                        filterText={filterText}
-                    />
-                </ButtonWrapper>
-            </ActionsWrapper>  
-        );
-
-	}, [meio,veiculo]);
+   
 
     const filteredItems = formatos.map((item,index) => {
         return { id: item.id , ...item.fields}
     });
 
+    console.log(filteredItems)
 
     return (
         <Modal headerTitle="Adicionar formatos" handleClickOnCloseButton={handleClickOnCloseButton}>
-           { hasSelectedRows && <SelectedsBar count={count} /> }          
-            <TableWrapper>
+           { hasSelectedRows && <SelectedsBar count={count} /> }   
+            <AddFormatsTable data={filteredItems} />
+            {/* <TableWrapper>
                 <DataTable
                 columns={columns}
                 data={filteredItems}
@@ -224,7 +98,7 @@ export const AddFormatModal = () => {
                 fixedHeader
                 customStyles={customStyles}
                 />
-            </TableWrapper>
+            </TableWrapper> */}
         </Modal>
     )
 }

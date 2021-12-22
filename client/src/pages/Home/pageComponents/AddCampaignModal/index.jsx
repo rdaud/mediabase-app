@@ -45,20 +45,23 @@ export const AddCampaignModal = (props) => {
 
 
     return (
-        <Modal headerTitle="Nova Campanha" width="600px" handleClickOnCloseButton={handleClickOnCloseButton}>
+        <Modal headerTitle="Nova Campanha" width="600px" height="auto" handleClickOnCloseButton={handleClickOnCloseButton}>
            { props.loading ? <div>Is loading </div> : 
            <FormWrapper>
                 <FormContainer onSubmit={handleSubmitFormClick}>                
                     <FormGroup>
-                            <TextInput lighter label="Nome da campanha" onChange={val => setNome(val.target.value)} value={nome} placeholder="Nome da campanha" />
+                            <TextInput  variation="filled"
+                                colorMode="dark" label="Nome da campanha" onChange={val => setNome(val.target.value)} value={nome} placeholder="Nome da campanha" />
                         </FormGroup>
 
                         <FormGroup>
-                            <TextInput label="Cliente" onChange={val => setCliente(val.target.value)} value={cliente} placeholder="Cliente" />
+                            <TextInput  variation="filled"
+                                colorMode="dark" label="Cliente" onChange={val => setCliente(val.target.value)} value={cliente} placeholder="Cliente" />
                         </FormGroup>
 
                         <FormGroup>
-                            <TextInput label="Produto" onChange={val => setProduto(val.target.value)} value={produto} placeholder="Produto" />
+                            <TextInput  variation="filled"
+                                colorMode="dark" label="Produto" onChange={val => setProduto(val.target.value)} value={produto} placeholder="Produto" />
                         </FormGroup>
 
                         <FormGroup>

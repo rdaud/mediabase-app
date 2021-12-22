@@ -12,11 +12,10 @@ export const Icon = styled.span`
   position: relative;
   transform: rotate(0DEG);
   transition: transform .2s;
-  
 `
 
 export const SelectedValue = styled.div`
-    color: ${ props => props.isDefault ? COLOR.gray60 : COLOR.white };
+  color: ${ props => props.isDefault ? COLOR.gray60 : COLOR.white };
 `
 
 export const Control = styled.div`
@@ -75,7 +74,7 @@ export const InlineControl = styled.div`
 
 
 export const Label = styled.label`
-    color: ${COLOR.gray70};
+    color: ${COLOR.gray60};
 `
 
 export const Options = styled.div`

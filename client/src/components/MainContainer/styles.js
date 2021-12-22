@@ -7,7 +7,6 @@ export const Hero = styled.div`
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: 2rem;
     padding: ${ props => props.padding || 0 };
 `
 

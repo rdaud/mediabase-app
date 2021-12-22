@@ -43,7 +43,7 @@ export const StyledTextArea = styled.textarea`
 `
 
 export const Label = styled.label`
-    color: ${COLOR.gray70};
+    color: ${COLOR.gray60};
 `
 export const AssistiveText = styled.p`
     color: ${COLOR.white};

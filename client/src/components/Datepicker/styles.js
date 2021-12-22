@@ -52,7 +52,7 @@ export const Control = styled.input`
 
 
 export const Label = styled.label`
-    color: ${COLOR.gray70};
+    color: ${COLOR.gray60};
 `
 
 export const Options = styled.div`

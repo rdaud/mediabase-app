@@ -29,11 +29,6 @@ app.use(formatsRouter)
 app.use(criativosRouter)
 
 
-// Apply hot reload
-
-if (process.env.NODE_ENV !== 'production' && module.hot) { module.hot.accept('./index', renderApp) }
-
-
 // Express only serves static assets in production
 if (process.env.NODE_ENV === "production") {
     app.use(express.static("client/build"));

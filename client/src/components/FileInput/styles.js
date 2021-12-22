@@ -28,10 +28,13 @@ export const StyledInput = styled.input`
 
     &:hover {
         border: 1px solid ${COLOR.gray70};
+        cursor: pointer;
+
     }
 `
 
 export const SelectedValue = styled.div`
+    color: ${COLOR.gray60};
 `
 
 export const Control = styled.div`
@@ -64,13 +67,12 @@ export const Control = styled.div`
    
     &:hover {
         border-color: ${ props => props.colorMode === 'dark' ? COLOR.gray60 : COLOR.gray70 };
-        cursor: pointer;
     }
 
 `
 
 export const Label = styled.label`
-    color: ${COLOR.gray70};
+    color: ${COLOR.gray60};
 `
 export const AssistiveText = styled.p`
     color: ${COLOR.white};

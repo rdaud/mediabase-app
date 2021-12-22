@@ -1,74 +1,234 @@
-import { COLOR } from "../../../../tokens/colors";
-import styled from 'styled-components';
-import { relativeTimeRounding } from "moment";
+import React from 'react';
+import styled, { keyframes } from "styled-components" 
+import { COLOR } from '../../../../tokens/colors';
+import plus from '../../../../assets/icons/plus.svg'
 
 
-export const Wrapper = styled.div`
-    width: 100%;
-    margin-bottom: 3rem;
-    height: 100%;
-    padding: 0 2rem;
-    position: relative;
-    overflow-y: scroll;
+export const Link = styled.button`
+  color: gray;
+  transition: .2s;
+  border-radius: 2px;
+
+  :hover {
+    background: rgba(255,255,255,.05);
+    color: ${COLOR.white};
+    transition: .2s;
+  }
 `
 
-export const ActionsWrapper = styled.div`
-    position: relative;
-    display: inline-flex;
-    width: 100%;
-    gap: 1rem;
-    justify-content: flex-start;
+export const StatusBar = ({...rest}) => {
 
-    & > div:last-child {
-        align-self: flex-end;
-        flex-grow: 2;
-        text-align: right;
-    }
-`
-
-export const ButtonWrapper = styled.div`
-    padding: 0 !important;
-    margin: 0 !important;
-    line-height: 0;
-`
-
-export const customStyles = {
-    title: {
-      style: {
-        fontColor: 'red',
-        fontWeight: '900',
-      }
-    },
-    headRow: {
-      style: {
-        borderBottomColor: `${COLOR.black}`
-      }
-    },
-    subHeader: {
-      style: {
-        backgroundColor: 'transparent',
-        minHeight: '52px',
-        marginBottom: '1rem',
-        padding: 0,
-        position: 'relative'
-      },
-    },
-    highlightOnHoverStyle: {
-        border: `1px solid ${COLOR.brandRed90}`,
-        outline: 'none'
-    },
-    rows: {
-      style: {
-        backgroundColor: `${COLOR.gray80}`,
-        cursor: 'pointer',
-        '&:not(:last-of-type)': {
-        borderBottomColor: `${COLOR.black}`,
-        },
-      }
-    },
-    table: {
-        style: {
-            background: 'transparent',
-        }
-    }
+  return (
+      <div {...rest} style={{
+          background: `${COLOR.gray80}`,
+          borderRadius: '20px',
+          width: '120px',
+          height: '8px',
+      }}>
+      
+      </div>
+  )
 }
+
+
+export const Table = styled.div`
+  border-spacing: 0;
+  width: 100%;
+  font-size: 14px;
+`
+
+const fade = keyframes`
+  from {
+    opacity: .5;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+`;
+
+
+export const Thead = styled.div`
+  overflow-y: auto;
+  overflow-x: hidden;
+  .tr {
+    background: ${COLOR.gray70};
+  }
+`
+
+export const Tr = styled.div`
+  position: relative;
+  padding: .5rem;
+  border: 1px solid transparent;
+ 
+`
+
+export const Tbody = styled.div`
+
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: calc(100vh - 145px);
+
+    .tr {
+      padding: .5rem;
+      position: relative;
+      border-bottom: 1px solid ${COLOR.gray100};
+
+      &.depth-1 {
+        background: black;
+        border-bottom: 1px solid transparent;
+      }
+
+      &:hover {
+        border: 1px solid ${COLOR.brandRed90};
+        cursor: pointer;
+      }
+    }
+`
+
+export const Th = styled.div`
+  color: ${COLOR.white};
+  text-transform: uppercase;
+  font-size: 12px;
+  margin: 0;
+  
+  &:last-child {
+    text-align: right;
+  }
+`
+
+export const Td = styled.div`
+  margin: 0;
+  color: ${COLOR.white};
+  &:last-child {
+    text-align: right;
+  }
+`
+
+
+export const Styles = styled.div`
+  
+  display: block;
+  overflow: auto;
+  width: 100%;
+  max-width: 100%;
+
+  
+  .align-right {
+    justify-content: flex-end;
+    
+  }
+
+  .tableWrap {
+    display: block;
+    max-width: 100%;
+    overflow-x: scroll;
+    overflow-y: hidden;
+  }
+
+`
+
+
+
+export const CustomTr = styled.tr`
+  && {
+    background: ${ props => props.expanded % 2 ? COLOR.gray100 : COLOR.gray100};
+  }
+`
+
+export const CustomExpandedRow = styled.div`
+  background-color: ${ props => props.depth === 1 ? 'black': COLOR.black};
+  border: ${ props => props.isExpanded ? '1px solid red' : '1px solid transparent'}
+`
+
+
+const AdicionarCriativoLargeWrapper = styled.div`
+  display: inline-flex;
+  gap: 2px;
+  cursor: pointer;
+  align-items: center;
+`
+
+const Menu = styled.div`
+  background: ${COLOR.gray80};
+  width: auto;
+  max-width: 150px;
+`
+
+const Criativo = styled.div`
+  width: 12px;
+  height: 12px;
+  position: relative;
+  background: ${COLOR.gray90};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  img:hover {
+      filter: invert(30%) sepia(98%) saturate(4776%) hue-rotate(358deg) brightness(96%) contrast(93%);
+  }
+
+`
+
+const Adicionar = styled.div`
+  width: 12px;
+  height: 12px;
+  position: relative;
+  background: ${COLOR.gray90};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  img:hover {
+      filter: invert(30%) sepia(98%) saturate(4776%) hue-rotate(358deg) brightness(96%) contrast(93%);
+  }
+`
+
+
+export const AdicionarCriativoLarge = () => {
+
+
+    return (
+        <>
+            <AdicionarCriativoLargeWrapper>
+                <Criativo style={{ width: '100%', padding: '0 8px', height: '24px', background: `${COLOR.gray100}`}}>
+                    <p style={{ fontSize: '12px'}}>
+                    Adicionar criativo
+                    </p>
+                </Criativo>
+                <Adicionar style={{ width: '24px', padding: '0 8px', height: '24px', background: `${COLOR.gray100}`}}>
+                    <img src={plus} width="16" height="16"></img>
+                </Adicionar>
+            </AdicionarCriativoLargeWrapper>
+           
+            <Menu></Menu>
+        </>
+    )
+}
+
+
+export const IndeterminateCheckbox = React.forwardRef(
+  ({ indeterminate, ...rest }, ref) => {
+    const defaultRef = React.useRef()
+    const resolvedRef = ref || defaultRef
+
+    React.useEffect(() => {
+      resolvedRef.current.indeterminate = indeterminate
+    }, [resolvedRef, indeterminate])
+
+    return (
+      <>
+        <input type="checkbox" ref={resolvedRef} {...rest} />
+      </>
+    )
+  }
+)
+
+export const RowSubComponent = () => (
+  <div style={{display: 'inline-flex', overflow: 'hidden', width: '100%', height: '100%' }}>    
+  <AdicionarCriativoLarge />
+  </div>
+)
+
+
+

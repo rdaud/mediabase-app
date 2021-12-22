@@ -1,10 +1,9 @@
-import React, { useState, useMemo } from 'react';
-import { Modal, Button, TextInput, TextArea, FormGroup, FileInput } from '../../../../components'
+import React, { useState } from 'react';
+import { Modal, TextInput, TextArea, FormGroup, FileInput } from '../../../../components'
 import { closeEditCriativoModalRequest } from "../../../../redux/actions/campaignsActions";
 import { createCriativo } from "../../../../redux/actions/criativoActions";
 import { useDispatch, useSelector } from 'react-redux';
 import { FormWrapper, FormContainer, ImagemDeCapa, AlterarImagem } from './styles';
-import { COLOR } from '../../../../tokens/colors';
 import { useEffect } from 'react';
 import axios from 'axios';
 
@@ -62,12 +61,11 @@ export const EditCriativoModal = (criativo) => {
             <ImagemDeCapa>
                 <img width="600" src={`/criativo/imagem/${selected}`}></img>
                 <AlterarImagem>Alterar imagem</AlterarImagem>
-                </ImagemDeCapa>
-           <FormWrapper>
-                <FormContainer onSubmit={handleSubmitFormClick}>
-                    
+            </ImagemDeCapa>
+            <FormWrapper>
+                <FormContainer onSubmit={handleSubmitFormClick}>                 
                     <FormGroup>
-                        <TextInput lighter label="Nome do criativo" onChange={val => setNome(val.target.value)} value={nome} placeholder="Nome do criativo" />
+                        <TextInput variation="filled" colorMode="dark"  label="Nome do criativo" onChange={val => setNome(val.target.value)} value={nome} placeholder="Nome do criativo" />
                     </FormGroup>
 
                     {/* <FormGroup>
@@ -88,9 +86,7 @@ export const EditCriativoModal = (criativo) => {
 
                     <FormGroup>
                         <TextArea variation="filled" colorMode="dark" label="Descrição" onChange={val => setDescricao(val.target.value)} value={descricao} placeholder="Inserir descrição" />
-                    </FormGroup>
-
-                    
+                    </FormGroup>  
                  </FormContainer>
             </FormWrapper>
         </Modal>

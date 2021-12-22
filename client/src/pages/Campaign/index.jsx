@@ -26,11 +26,11 @@ export const CampaignPage = (props) => {
 
     return (
         <>
-            { addFormatModal && <AddFormatModal id={props.match.params.id}/> }
+            { addFormatModal && <AddFormatModal id={ props.match.params.id }/> }
             { addCriativoModal && <AddCriativoModal /> }
-            { editCriativoModal && <EditCriativoModal criativo={selected}/> }
-            <MainContainer>
-                <PageHeader id={props.match.params.id}/>
+            { editCriativoModal && <EditCriativoModal criativo={ selected} /> }
+            <MainContainer style={{ gap: '2rem'}}>
+                <PageHeader id={ props.match.params.id }/>
                 <ContentPlate/>
             </MainContainer>
         </>

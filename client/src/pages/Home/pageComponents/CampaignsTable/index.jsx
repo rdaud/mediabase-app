@@ -1,198 +1,237 @@
-import React, { useState, useEffect} from 'react';
-import DataTable from 'react-data-table-component';
+import React, { useMemo, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { useHistory } from "react-router-dom";
-import { Search, Select } from '../../../../components';
-import { useSelector } from 'react-redux';
-import { Wrapper, ActionsWrapper, ButtonWrapper, customStyles } from './styles';
-import moment from 'moment';
-import styled from 'styled-components';
+import { useTable, useRowSelect, useRowState,useFlexLayout, useExpanded, useFilters, useGlobalFilter, useSortBy } from 'react-table'
+import { Styles, Table, Thead, Tr, Tbody, Th, Td, StatusBar,IndeterminateCheckbox, CustomExpandedRow, RowSubComponent, Link} from './styles'
+import { COLUMNS } from './columns'
+import { DATA } from './data'
+import { filterTypes, DefaultColumnFilter, GlobalFilter, SelectColumnFilter } from './filters'
+import { Toolbar } from './Toolbar'
 
 
+const headerProps = (props, { column }) => getStyles(props, column.align)
+const cellProps = (props, { cell }) => getStyles(props, cell.column.align)
 
-const columns = [
-    {
-        name: 'Nome',
-        selector: row => row.nome,
-        omit: false,
-        sortable: true,
+const getStyles = (props, align = 'left', toggle) => [
+  props,
+  {
+    style: {
+      justifyContent: align === 'right' ? 'flex-end' : 'flex-start',
+      alignItems: 'center',
+      display: 'flex',
+      flexBasis: 'auto',
     },
-    {
-        name: 'Cliente',
-        selector: row => row.cliente,
-        sortable: true,
-    },
-    {
-        name: 'Produto',
-        selector: row => row.produto,
-        sortable: true,
-    },
-    {
-        name: 'Status',
-        selector: row => row.status,
-        sortable: true,
-    },
-    {
-        name: 'Data de veiculação',
-        selector: row => `${moment(row.dataDeVeiculacaoInicio).format('DD/MM/YYYY')} até ${moment(row.dataDeVeiculacaoFim).format('DD/MM/YYYY')}`,
-    },
-];
-
-const TextField = styled.input`
-	height: 32px;
-	width: 200px;
-	border-radius: 3px;
-	border-top-left-radius: 5px;
-	border-bottom-left-radius: 5px;
-	border-top-right-radius: 0;
-	border-bottom-right-radius: 0;
-	border: 1px solid #e5e5e5;
-	padding: 0 32px 0 16px;
-
-	&:hover {
-		cursor: pointer;
-	}
-`;
-
-const ClearButton = styled.button`
-	border-top-left-radius: 0;
-	border-bottom-left-radius: 0;
-	border-top-right-radius: 5px;
-	border-bottom-right-radius: 5px;
-	height: 34px;
-	width: 32px;
-	text-align: center;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-`;
+  },
+]
 
 
+const App = ({ columns: userColumns, data, renderRowSubComponent, stateReducer
+}) => {
 
-export const CampaignsTable = (props) => {
 
+    const [ selectedSubRows, setSelectedSubRows ] = useState('')
     const history = useHistory();
-    const { campaigns } = useSelector(state => state.campaigns)
-    const [  filterText, setFilterText ] = useState('');
-	const [ resetPaginationToggle, setResetPaginationToggle ] = useState(false);
-    const [ cliente, setCliente ] = useState('')
-    const [ produtos, setProduto ] = useState('')
-    const [ status, setStatus ] = useState('')
-    const [ pending, setPending ] = useState(false)
 
 
+    const defaultColumn = React.useMemo(
+        () => ({
+            Filter: DefaultColumnFilter,
 
-    const handleRowClick = ({ _id }) => {
-        const url = `/campanha/${_id}`
-        history.push(url)
-    }
+          // When using the useFlexLayout:
+          minWidth: 30, // minWidth is only used as a limit for resizing
+          width: 150, // width is used for both the flex-basis and flex-grow
+          maxWidth: 200, // maxWidth is only used as a limit for resizing
+        }),
+        []
+      )
 
-    // useEffect(() => {
-    //     setTimeout(() => setPending(false), 2000)
-    // },[])
+      function handleClickOnRow({row}) {
+          console.log(row)
+      }
+  
  
-    const allowed = ['_id','nome','cliente','status','produto','dataDeVeiculacaoInicio', 'dataDeVeiculacaoFim']
 
-    const filteredData = [...campaigns].map((item,index) => { 
-      const filtered = Object.keys(item)
-      .filter(key => allowed.includes(key))
-      .reduce((obj, key) => {
-        obj[key] = item[key];
-        return obj;
-      }, {});
+  const tableInstance = useTable({
+    columns: userColumns,
+    data,
+    defaultColumn, // Be sure to pass the defaultColumn option
+    filterTypes,
+    stateReducer,
+    expandSubRows: true,
+    getSubRows: React.useCallback((row) => row.criativos || []),
+  },
+  useFlexLayout,
+  useFilters, 
+  useGlobalFilter, 
+  useSortBy,
+  useExpanded,
+  useRowSelect,
+  useRowState
+  )
 
-      return filtered
-    })
 
+  const {
+    getTableProps,
+    getTableBodyProps,
+    toggleRowSelected,
+    headerGroups,
+    rows,
+    columns,
+    prepareRow,
+    visibleColumns,
+    selectedFlatRows,
+    preGlobalFilteredRows,
+    setGlobalFilter,
+    getToggleAllRowsSelectedProps,
+    state: { globalFilter, filters }
+  } = tableInstance
 
+  // tableInstance.setState()
+console.log(rows)
+    
+  // Get selected rows data
+  const { selectedRowsData: original } = selectedFlatRows
+  
+  // Count how many subrows are selected
+  const subrowsCounter = selectedFlatRows.filter((item) => item.depth === 1 ).length
 
-    const filteredArrayOfClientes = () => {
-      let arr = []
-      campaigns.forEach( item => arr.push(item.cliente))
-      return [ ...new Set(arr)]
-    }
-
-    const filteredArrayOfProdutos = () => {
-      let arr = []
-      campaigns.forEach( item => arr.push(item.produto))
-      return [ ...new Set(arr)]
-    }
-
-    const filteredArrayOfStatus= () => {
-      let arr = []
-      campaigns.forEach( item => arr.push(item.status))
-      return [ ...new Set(arr)]
-    }
-	
-    const filteredItems = filteredData.filter(
-		item => {
-            return item.cliente && item.cliente.toLowerCase().includes(filterText.toLowerCase())      
+  // Toggle all selected rows state to false when clicking on cancelar button
+  function handleClickOnCancelar() {
+    rows.forEach((item) => {
+        if (item.isSelected) {
+            toggleRowSelected(item.id,false)
         }
-	);
+    })
+  }
 
+  // Render the UI for your table
+  return (
+      <>
+     { !!subrowsCounter && <Toolbar counter={subrowsCounter} handleClickOnCancelar={handleClickOnCancelar} /> } 
 
-   
-   
- 
-    const subHeaderComponentMemo = React.useMemo(() => {
-
-        return (
-
-        <ActionsWrapper>
-                    <Select
-                        variation="outline"
-                        colorMode="dark"
-                        prompt="Cliente"
-                        value={cliente}
-                        options={filteredArrayOfClientes()}
-                        onChange={val => {
-                            setCliente(val)
-                        }}
-                    />
-                <ButtonWrapper>
-                    <Select
-                        variation="outline"
-                        colorMode="dark"
-                        prompt="Produto"
-                        value={produtos}
-                        options={filteredArrayOfProdutos()}
-                        onChange={val => setProduto(val)}
-                    />
-                </ButtonWrapper>
-                <ButtonWrapper>
-                    <Select
-                        variation="outline"
-                        colorMode="dark"
-                        prompt="Status"
-                        value={status}
-                        options={filteredArrayOfStatus()}
-                        onChange={val => setStatus(val)}
-                    />
-                </ButtonWrapper>
-                <ButtonWrapper>
-                    <Search style={{
-                    }} onChange={e => setFilterText(e.target.value)} filterText={filterText} />
-                </ButtonWrapper>
-        </ActionsWrapper>
-            
-        );
-	}, [status,cliente,produtos,filterText, resetPaginationToggle]);
-
-    return (
-        <Wrapper>
-            <DataTable
-                columns={columns}
-                data={filteredItems}
-                theme="dark"
-                fixedHeader
-                subHeader
-                subHeaderComponent={subHeaderComponentMemo}
-                highlightOnHover="true"
-                onRowClicked={handleRowClick}
-                customStyles={customStyles}
-                progressPending={pending}
+    <div className="tableWrap">
+    <div style={{
+        display: 'inline-flex',
+        gap: '1rem',
+        padding: '1rem'
+    }}>
+        <div>          
+            <GlobalFilter
+              preGlobalFilteredRows={preGlobalFilteredRows}
+              globalFilter={globalFilter}
+              setGlobalFilter={setGlobalFilter}
             />
-        </Wrapper>
-    )
+        </div>
+        <div style={{ textAlign: 'left' }}> 
+            <SelectColumnFilter userColumns={columns[1]} />
+        </div>
+        <div style={{ textAlign: 'left'}}> 
+            <SelectColumnFilter userColumns={columns[2]} />
+        </div> 
+    </div>
+    
+    <Table className="table tableWrap" {...getTableProps()} >
+        <Thead>
+        {headerGroups.map(headerGroup => (
+            <Tr className="tr" {...headerGroup.getHeaderGroupProps()}>
+            {headerGroup.headers.map(column => {
+                return (
+                <Th className={ column.id === 'expander' ? "th align-right" : "th"} {...column.getHeaderProps({
+                    ...column.getSortByToggleProps(),
+                        style: {
+                            display: 'inline-flex',
+                            alignItems: 'center',                            
+                        }
+                    
+                    })} >{column.render('Header')}
+                {/* Add a sort direction indicator */}
+                <span style={{ position: 'absolute', marginLeft: '.5rem'}}>
+                    {column.isSorted
+                    ? column.isSortedDesc
+                        ? ' 🔽'
+                        : ' 🔼'
+                    : ''}
+                </span>
+                </Th>
+            )})}
+            </Tr>
+        ))}
+        </Thead>
+
+        <Tbody className="tbody" {...getTableBodyProps()} >
+        
+        {rows.map((row, i) => {
+
+            prepareRow(row)
+            
+            return (
+            // Use a React.Fragment here so the table markup is still valid
+            <React.Fragment >
+                <Tr className={ row.depth === 1 ? "tr depth-1" : "tr" }  {...row.getRowProps()} depth={row.depth} onClick={() => {
+                        const url = `/campanha/${row.original._id}`
+                        history.push(url) 
+                }}
+                >   
+            
+                {row.cells.map(cell => {
+
+                    if (row.depth === 1 && cell.column.id === 'arquivo' && cell.value === '') {
+                        return <Td className="td" {...cell.getCellProps()}><Link onClick={() => console.log('Subir arquivo')}>Adicionar arquivo +</Link></Td>
+                    }
+
+                    if (row.depth === 1 && cell.column.id === 'prazo' && cell.value === '') {
+                        return <Td className="td" {...cell.getCellProps()}><Link onClick={() => ''}>Prazo +</Link></Td>
+                    }
+
+                    if (row.depth === 1 && cell.column.id === 'veiculação' && cell.value === '') {
+                        return <Td className="td" {...cell.getCellProps()}><Link onClick={() => ''}>Veiculação +</Link></Td>
+                    }
+
+                    return (
+                    <Td className={cell.column.id === 'expander' ? "td align-right" : "td"} {...cell.getCellProps({
+                        style: {
+                            display: 'flex',
+                            alignItems: 'center'
+                        }
+                    })}>{cell.render('Cell')}</Td>
+                    )
+                })}
+                </Tr>
+            </React.Fragment>
+            )
+        })}
+        </Tbody>
+      </Table>
+    </div>
+    </>
+  )
+}
+
+
+
+export const CampaignsTable = () => {
+
+ const { campaigns } = useSelector(state => state.campaigns)
+
+ console.log(campaigns)
+
+  const columns = useMemo(() => COLUMNS,[])
+  const data = useMemo(() => DATA,[])
+
+  const renderRowSubComponent = React.useCallback(
+    () =>  <RowSubComponent /> )
+
+
+  return (
+    <Styles>
+      <App
+        columns={columns}
+        data={campaigns}
+        renderRowSubComponent={renderRowSubComponent}
+      />
+    </Styles>
+
+  )
 }
 
 
