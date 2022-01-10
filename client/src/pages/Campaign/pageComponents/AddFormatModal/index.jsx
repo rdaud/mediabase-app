@@ -38,39 +38,7 @@ export const AddFormatModal = () => {
     }
 
 
-    const handleSubmit = () => {
-
-        const obj = {
-            formatos: data
-        }
-        dispatch(updateCampaign(obj))
-    }
-
-    const SelectedsBar = ({count}) => {
-        return (
-            <div style={{
-                height: "72px",
-                width: "100%",
-                position: "absolute",
-                bottom: 0,
-                background: `${COLOR.gray90}`,
-                display: "inline-flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                padding: "0 2rem",
-                zIndex: 999
-            }}>
-                <div>
-                <Info2 color={COLOR.white}>{count} formato(s) selecionado(s)</Info2>
-                </div>
-                <div>
-                    <Button variation="primary" iconLeft={plus} corDaOrelha={COLOR.gray90} onClick={handleSubmit}>Adicionar</Button>
-                </div>
-    
-            </div>
-        )
-    }
-
+   
 
    
 
@@ -78,11 +46,9 @@ export const AddFormatModal = () => {
         return { id: item.id , ...item.fields}
     });
 
-    console.log(filteredItems)
 
     return (
         <Modal headerTitle="Adicionar formatos" handleClickOnCloseButton={handleClickOnCloseButton}>
-           { hasSelectedRows && <SelectedsBar count={count} /> }   
             <AddFormatsTable data={filteredItems} />
             {/* <TableWrapper>
                 <DataTable

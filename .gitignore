@@ -6,8 +6,6 @@
 .pnp.js
 /config
 /variables
-/client
-
 
 # testing
 /coverage

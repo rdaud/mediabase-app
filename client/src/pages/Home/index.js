@@ -20,6 +20,7 @@ export const HomePage = () => {
       dispatch(openAddCampaignModalRequest())
     }
 
+    console.log(token)
 
     useEffect(() => { 
       dispatch(getCampaigns(token))
