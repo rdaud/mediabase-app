@@ -74,12 +74,16 @@ export const createCriativoRequest = () => {
   export const getCriativosRequest = () => {
     return {
       type: 'GET_CRIATIVOS_REQUEST',
+      loading: true
+
     }
   }
 
   export const getCriativosFailure = () => {
     return {
       type: 'GET_CRIATIVOS_FAILURE',
+      loading: false
+
     }
   }
 

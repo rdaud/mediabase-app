@@ -15,36 +15,31 @@ import { COLOR } from '../../../../tokens/colors';
 
 
 
-export const AddCriativoModal = () => {
+export const AddCriativoModal = ({ handleClickOnCloseButton }) => {
 
     const [ nome, setNome ] = useState('')
     const [ descricao, setDescrição ] = useState('')
     const [ imagem, setImagem ] = useState({})
+    const [ open, setOpen ] = useState(true)
+
     const dispatch = useDispatch()
     const history = useHistory()
 
-    console.log(imagem)
+    const handleSubmitFormClick = (event) => {
 
-        const handleClickOnCloseButton = () => {
-            dispatch(closeAddCriativoModalRequest())
-        };
-
-
-        const handleSubmitFormClick = (event) => {
-
-            event.preventDefault();
-            if (nome === '' || descricao === '' || imagem === '') {
-                return alert('Preencha todos campos')
-            }
-            dispatch(createCriativo({ nome, imagem, descricao }));
-            setNome('')
-            setDescrição('')
-            setImagem('')  
-        };
-
-        const handleClickOnRemover = () => {
-            setImagem('')  
+        event.preventDefault();
+        if (nome === '' || descricao === '' || imagem === '') {
+            return alert('Preencha todos campos')
         }
+        dispatch(createCriativo({ nome, imagem, descricao }));
+        setNome('')
+        setDescrição('')
+        setImagem('')
+    };
+
+    const handleClickOnRemover = () => {
+        setImagem('')  
+    }
 
     return (
         <Modal headerTitle="Novo Criativo" height="auto" width="600px" handleClickOnCloseButton={handleClickOnCloseButton}>

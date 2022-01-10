@@ -1,26 +1,33 @@
 import React, { useEffect, useState } from 'react';
-import { Navbar, MainContainer } from '../../components';
+import {  MainContainer } from '../../components';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFormatos } from '../../redux/actions/formatsActions';
-import { openAddCampaignModalRequest, getCampaigns } from '../../redux/actions/campaignsActions';
+import {  getCampaigns } from '../../redux/actions/campaignsActions';
 import { AddCampaignModal, CampaignsTable, PageHeader } from './pageComponents';
-import { Hero, EmptyStateContainer, EmptyStateWrapper } from './styles';
+import { EmptyStateContainer, EmptyStateWrapper } from './styles';
 
 
 
 export const HomePage = () => {
 
     const { addCampaignModal,  loading, campaigns } = useSelector(state => state.campaigns)
+
+    // Manage modal open state
+    const [ open, setOpen ] = useState(false)
+    
     const { token } = useSelector(state => state.authentication)
     const [ isPageLoaded , setIsPageLoaded ] = useState(false)
     const dispatch = useDispatch()
 
 
     const handleClick = () => {
-      dispatch(openAddCampaignModalRequest())
+      setOpen(true)
     }
 
-    console.log(token)
+    const handleClickOnCloseButton = () => {
+      setOpen(false)
+    }
+
 
     useEffect(() => { 
       dispatch(getCampaigns(token))
@@ -32,20 +39,17 @@ export const HomePage = () => {
         dispatch(getFormatos())
         setIsPageLoaded(true)
       }
-    },[isPageLoaded])
-
-   
-
+    },[ isPageLoaded ])
 
     return (
       <>
-        { addCampaignModal && <AddCampaignModal loading={loading}/> }
+        { open && <AddCampaignModal loading={loading} handleClickOnCloseButton={handleClickOnCloseButton} /> }
         <MainContainer>
-            <PageHeader />     
+            <PageHeader setOpen={ handleClick } />     
             { campaigns !== undefined && campaigns.length > 0 ? <CampaignsTable /> :
             <EmptyStateWrapper>
               <EmptyStateContainer>
-                    <p>Você ainda não possui campanha adicionada. Clique em <span onClick={handleClick}>Adicionar campanha</span> para iniciar.</p>
+                    <p>Você ainda não possui campanha adicionada. Clique em <span onClick={ handleClick }>Adicionar campanha</span> para iniciar.</p>
               </EmptyStateContainer>
             </EmptyStateWrapper> }          
         </MainContainer>

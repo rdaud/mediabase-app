@@ -1,6 +1,5 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { openAddFormatModalRequest } from '../../../../redux/actions/campaignsActions';
 import { Wrapper,
     ActionsWrapper,
     ExpandableRowsComponent,
@@ -13,6 +12,7 @@ import { Wrapper,
 import DataTable from 'react-data-table-component';
 import plus from '../../../../assets/icons/plus.svg';
 import { Button, Search, Select } from '../../../../components';
+import { AddFormatModal } from '..';
 import { COLOR } from '../../../../tokens/colors';
 
 
@@ -51,35 +51,41 @@ const StatusBar = () => {
 
     return (
         <div style={{
-            background: `${COLOR.gray90}`,
-            borderRadius: '20px',
-            width: '120px',
-            height: '8px'
-        }}>
-        
+                background: `${COLOR.gray90}`,
+                borderRadius: '20px',
+                width: '120px',
+                height: '8px'
+            }}>  
         </div>
     )
 }
 
-const NoDataComponent = ({handleClick}) => {
+const NoDataComponent = ({ handleClickOnAddFormato }) => {
     return (
         <Wrapper>
              <EmptyStateContainer>
-                <p>Essa campanha ainda não possuí nenhum formato. Clique em <span onClick={handleClick}>Adicionar formatos</span> para iniciar.</p>
+                <p>Essa campanha ainda não possuí nenhum formato. Clique em <span onClick={handleClickOnAddFormato}>Adicionar formatos</span> para iniciar.</p>
              </EmptyStateContainer>
         </Wrapper>
     )
 }
 
-export const Formatos = (props) => {
+export const Formatos = () => {
 
     const dispatch = useDispatch();
-    const { formatos } = useSelector( state => state.campaigns.currentPageCampaign )
+    const { formatos, _id } = useSelector( state => state.campaigns.currentPageCampaign )
+
     const [  filterText, setFilterText ] = useState('');
     const [ meio, setMeio ] = useState('')
+    const [ open, setOpen ] = useState(false)
 
-    const handleClick = () => {
-        dispatch(openAddFormatModalRequest())
+
+    const handleClickOnAddFormato = () => {
+        setOpen(true)
+    }
+
+    const handleClickOnCloseButton = () => {
+        setOpen(false)
     }
     
     const filteredArrayOfMeio = () => {
@@ -171,11 +177,11 @@ export const Formatos = (props) => {
 
       const allowed = ['Veículo','Meio','NomeDoFormato','Tamanho','FormatoDoArquivo']
 
-
       const subHeaderComponentMemo = React.useMemo(() => {
 
         return (
-     
+        <>
+        { open && <AddFormatModal id={ _id } handleClickOnCloseButton={ handleClickOnCloseButton } /> }
         <ActionsWrapper>
                 <ButtonWrapper>
                     <Select
@@ -197,17 +203,18 @@ export const Formatos = (props) => {
                         cor={COLOR.brandRed90}
                         corDaOrelha={COLOR.gray100}
                         iconLeft={plus}
-                        onClick={handleClick}>
+                        onClick={handleClickOnAddFormato}>
                     Adicionar formato
                     </Button>
                 </ButtonWrapper>
         </ActionsWrapper>
+        </>
         );
 	}, [meio, filterText]);
 
     return (
         <>
-        
+        { open && <AddFormatModal handleClickOnCloseButton={handleClickOnCloseButton}/>}
         <DataTable
             columns={columns}
             data={formatos}
@@ -222,7 +229,7 @@ export const Formatos = (props) => {
             expandableRowsComponent={ () => <ExpandableRowsComponent /> }
             selectableRows
             customStyles={customStyles}
-            noDataComponent={ <NoDataComponent handleClick={handleClick}/> }
+            noDataComponent={ <NoDataComponent handleClickOnAddFormato={handleClickOnAddFormato}/> }
         />
  
         </>

@@ -8,8 +8,9 @@ import { useEffect } from 'react';
 import axios from 'axios';
 
 
-export const EditCriativoModal = (criativo) => {
+export const EditCriativoModal = ({ criativo, handleClickOnCloseButton }) => {
 
+    
     const [ nome, setNome ] = useState(criativo.nome)
     const [ descricao, setDescricao ] = useState(criativo.descricao)
     const [ imagem, setImagem ] = useState(criativo.imagem)
@@ -17,13 +18,6 @@ export const EditCriativoModal = (criativo) => {
     const { token } = useSelector(state => state.authentication)
 
     const dispatch = useDispatch()
-
-
-    const handleClickOnCloseButton = () => {
-        dispatch(closeEditCriativoModalRequest())
-    };
-
-    console.log(selected)
 
     const handleSubmitFormClick = (event) => {
 
@@ -39,7 +33,7 @@ export const EditCriativoModal = (criativo) => {
 
 
     useEffect(() => {  
-        const url = `/criativo/${selected}`
+        const url = `/criativo/${criativo}`
         console.log(url)
         axios.get(url,{
             headers: {
@@ -59,7 +53,7 @@ export const EditCriativoModal = (criativo) => {
     return (
         <Modal headerTitle="Detalhe do criativo" height="auto" width="600px" handleClickOnCloseButton={handleClickOnCloseButton}>
             <ImagemDeCapa>
-                <img width="600" src={`/criativo/imagem/${selected}`}></img>
+                <img width="600" src={`/criativo/imagem/${criativo}`}></img>
                 <AlterarImagem>Alterar imagem</AlterarImagem>
             </ImagemDeCapa>
             <FormWrapper>

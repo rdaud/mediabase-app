@@ -1,8 +1,8 @@
-import React,{useEffect, useRef, useState} from 'react';
+import React,{ useEffect, useState } from 'react';
 import { FormatWrapper, Wrapper, EmptyStateContainer, Criativo, CriativoButton, InnerWrapper, OutterWrapper } from './styles';
-import { useDispatch, connect } from 'react-redux';
-import { openAddCriativoModalRequest, openEditCriativoModalRequest } from '../../../../redux/actions/campaignsActions';
+import { useDispatch, useSelector,connect } from 'react-redux';
 import { getCriativos } from '../../../../redux/actions/criativoActions';
+import { AddCriativoModal, EditCriativoModal } from '..';
 
 const NoDataComponent = ({onClick}) => {
     return (
@@ -16,41 +16,55 @@ const NoDataComponent = ({onClick}) => {
 
 
 
-const Criativos = ({ criativos }) => {
+const Criativos = ({ criativos, loading }) => {
 
     const dispatch = useDispatch()
-    
-
     const [ selectedCriativo, setSelectedCriativo ] = useState('')
+    const { editCriativoModal, selected } = useSelector( state => state.criativos )
 
-    function handleClickOnAddCriativo() {
-        dispatch(openAddCriativoModalRequest())
+
+
+    // Manage modal open state
+    const [ openAddCriativo, setOpenAddCriativo ] = useState(false)
+    const [ openEditCriativo, setEditCriativo ] = useState(false)
+
+
+    const handleClickOnAddCriativo = () => {
+        setOpenAddCriativo(true)
     }
 
-    function handleClickOnCriativo(id) {
+    const handleClickOnCloseButton = () => {
+        setOpenAddCriativo(false)
+        setEditCriativo(false)
+    }
+
+    const handleClickOnCriativo = (id) => {
         setSelectedCriativo(id)
-        dispatch(openEditCriativoModalRequest(id))
+        setEditCriativo(true)
     }
 
     useEffect(() => {
         dispatch(getCriativos())
     },[])
-
-    console.log(selectedCriativo)
-
+    
+   
+console.log(selectedCriativo)
     return (
+        
         <OutterWrapper>
+            { openAddCriativo && <AddCriativoModal handleClickOnCloseButton={ handleClickOnCloseButton } /> }
+            { openEditCriativo && <EditCriativoModal criativo={ selectedCriativo } handleClickOnCloseButton={ handleClickOnCloseButton } /> }
             <FormatWrapper>
                 { criativos.length > 0 ? 
-                <InnerWrapper>
-                    { criativos.map((item,index) => {
-                        return (                      
-                            <Criativo key={index} onClick={() => handleClickOnCriativo(item._id)} nome={item.nome} imagem={`/criativo/imagem/${item._id}`} descricao={item.descricao}/>                       
-                        )
-                    })}
-                    <CriativoButton onClick={handleClickOnAddCriativo}/>
-                </InnerWrapper>
-                :  <NoDataComponent onClick={handleClickOnAddCriativo}/>
+                    <InnerWrapper>
+                        { criativos.map((item,index) => {
+                            return (                      
+                                <Criativo key={index} onClick={() => handleClickOnCriativo(item._id)} nome={item.nome} imagem={`/criativo/imagem/${item._id}`} descricao={item.descricao}/>                       
+                            )
+                        })}
+                        <CriativoButton onClick={handleClickOnAddCriativo}/>
+                    </InnerWrapper>
+                    :  <NoDataComponent onClick={handleClickOnAddCriativo}/>
                 }
             </FormatWrapper>
         </OutterWrapper>
@@ -58,8 +72,8 @@ const Criativos = ({ criativos }) => {
 }
 
 function mapStateToProps(state) {
-    const { criativos } = state.criativos
-    return { criativos }
+    const { criativos, loading } = state.criativos
+    return { criativos, loading }
   }
 
 const connectedStore = connect(mapStateToProps)(Criativos)

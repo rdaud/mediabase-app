@@ -1,14 +1,18 @@
 import '../../App.scss';
-import React from 'react';
+import React, { useEffect, createElement, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import icon from '../../assets/icons/close.svg'
 import { SystemButton } from "../";
 import { Hero, Header, ModalContainer } from './styles';
 
 
-export const Modal = ({ children, headerTitle, handleClickOnCloseButton, ...rest }) => {
+const modalRoot = document.getElementById('modal');
 
-    return ( 
-        <Hero>
+
+export const Modal = ({ children, setOpen, headerTitle, handleClickOnCloseButton, ...rest }) => {
+
+    return createPortal(
+        <Hero >
             <ModalContainer {...rest}>
                 <Header>
                     <h2>{headerTitle}</h2>
@@ -19,7 +23,9 @@ export const Modal = ({ children, headerTitle, handleClickOnCloseButton, ...rest
                 { children }
             </ModalContainer>
         </Hero>
+        ,document.getElementById('modal')
     )
+     
 }
 
 

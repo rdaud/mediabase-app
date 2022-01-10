@@ -1,18 +1,12 @@
 import React, { useState } from 'react';
-import { Modal, Button, Info2 } from '../../../../components'
-import { closeAddFormatModalRequest, updateCampaign } from "../../../../redux/actions/campaignsActions";
+import { Modal } from '../../../../components'
 import { useDispatch, useSelector } from 'react-redux';
-import plus from '../../../../assets/icons/plus.svg'
-import {  ActionsWrapper, ButtonWrapper } from './styles';
-import styled from 'styled-components';
-import { COLOR } from '../../../../tokens/colors';
-import { useEffect } from 'react';
 import { AddFormatsTable } from './pageComponents';
 
 
 
 
-export const AddFormatModal = () => {
+export const AddFormatModal = ({ handleClickOnCloseButton }) => {
 
 
     const [ data, setData ] = useState([])
@@ -21,9 +15,7 @@ export const AddFormatModal = () => {
     const { formatos } = useSelector( state => state.formatos )
     const [ count, setCount ] = useState(null)
 
-    const handleClickOnCloseButton = () => {
-        dispatch(closeAddFormatModalRequest())
-    };
+ 
 
     const handleSelectedRows = ({ selectedRows }) => {
         if (selectedRows.length > 0) {
@@ -38,17 +30,13 @@ export const AddFormatModal = () => {
     }
 
 
-   
-
-   
-
     const filteredItems = formatos.map((item,index) => {
         return { id: item.id , ...item.fields}
     });
 
 
     return (
-        <Modal headerTitle="Adicionar formatos" handleClickOnCloseButton={handleClickOnCloseButton}>
+        <Modal headerTitle="Adicionar formatos" handleClickOnCloseButton={ handleClickOnCloseButton }>
             <AddFormatsTable data={filteredItems} />
             {/* <TableWrapper>
                 <DataTable

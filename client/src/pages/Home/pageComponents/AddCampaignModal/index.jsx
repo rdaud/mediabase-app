@@ -9,7 +9,7 @@ import { COLOR } from '../../../../tokens/colors';
 
 
 
-export const AddCampaignModal = (props) => {
+export const AddCampaignModal = ({ loading, handleClickOnCloseButton }) => {
 
     const dispatch = useDispatch()
     const history = useHistory()
@@ -34,10 +34,7 @@ export const AddCampaignModal = (props) => {
         setDataDeVeiculacaoFim('')
     };
 
-    const handleClickOnCloseButton = () => {
-        dispatch(closeAddCampaignModalRequest())
-    };
-
+  
     const options = [
         'Em produção', 
         'Finalizada'
@@ -46,7 +43,7 @@ export const AddCampaignModal = (props) => {
 
     return (
         <Modal headerTitle="Nova Campanha" width="600px" height="auto" handleClickOnCloseButton={handleClickOnCloseButton}>
-           { props.loading ? <div>Is loading </div> : 
+           { loading ? <div>Is loading </div> : 
            <FormWrapper>
                 <FormContainer onSubmit={handleSubmitFormClick}>                
                     <FormGroup>
