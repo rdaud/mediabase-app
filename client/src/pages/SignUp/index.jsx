@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import {  useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
 import { signUp } from "../../redux/actions/usersActions";
 import { Button, FormGroup, TextInput, Link } from "../../components";
 import logo from "../../assets/logo/logo-complete.svg"
-import { useDispatch, useSelector } from "react-redux";
 import { Hero,  Wrapper, Logo, FormContainer } from './styles';
 import {  Info2, Info1 } from "../../components/Typography";
 import { COLOR } from "../../tokens/colors";

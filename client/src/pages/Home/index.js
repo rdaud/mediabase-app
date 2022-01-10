@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import {  MainContainer } from '../../components';
-import { useDispatch, useSelector } from 'react-redux';
-import { getFormatos } from '../../redux/actions/formatsActions';
-import {  getCampaigns } from '../../redux/actions/campaignsActions';
-import { AddCampaignModal, CampaignsTable, PageHeader } from './pageComponents';
-import { EmptyStateContainer, EmptyStateWrapper } from './styles';
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+
+import {  MainContainer } from '../../components'
+import { getFormatos } from '../../redux/actions/formatsActions'
+import {  getCampaigns } from '../../redux/actions/campaignsActions'
+import { AddCampaignModal, CampaignsTable, PageHeader } from './pageComponents'
+import { EmptyStateContainer, EmptyStateWrapper } from './styles'
 
 
 

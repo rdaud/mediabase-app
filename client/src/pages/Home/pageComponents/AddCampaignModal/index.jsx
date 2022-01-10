@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { Button, Modal, FormGroup, TextInput, Select, Datepicker } from "../../../../components";
-import { createCampaign } from "../../../../redux/actions/campaignsActions";
-import { closeAddCampaignModalRequest } from '../../../../redux/actions/campaignsActions';
-import { FormWrapper, FormContainer } from './styles';
-import { COLOR } from '../../../../tokens/colors';
+import React, { useState } from 'react'
+import { useHistory } from "react-router-dom"
+import { useDispatch } from "react-redux"
+
+import { Button, Modal, FormGroup, TextInput, Select, Datepicker } from "../../../../components"
+import { createCampaign } from "../../../../redux/actions/campaignsActions"
+import { FormWrapper, FormContainer } from './styles'
+import { COLOR } from '../../../../tokens/colors'
 
 
 

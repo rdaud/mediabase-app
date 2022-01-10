@@ -1,19 +1,22 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Wrapper,
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import styled from 'styled-components'
+import DataTable from 'react-data-table-component'
+
+
+import
+{   Wrapper,
     ActionsWrapper,
     ExpandableRowsComponent,
     EmptyStateContainer,
     AdicionarCriativo,
     ButtonWrapper,
     customStyles
- } from './styles';
- import styled from 'styled-components';
-import DataTable from 'react-data-table-component';
-import plus from '../../../../assets/icons/plus.svg';
-import { Button, Search, Select } from '../../../../components';
-import { AddFormatModal } from '..';
-import { COLOR } from '../../../../tokens/colors';
+ } from './styles'
+import plus from '../../../../assets/icons/plus.svg'
+import { Button, Search, Select } from '../../../../components'
+import { AddFormatModal } from '..'
+import { COLOR } from '../../../../tokens/colors'
 
 
 

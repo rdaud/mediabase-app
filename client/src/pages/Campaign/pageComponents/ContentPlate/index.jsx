@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import { Wrapper, Body } from './styles';
-import {  TabBar, Tab } from '../../../../components';
-import { Formatos, Criativos } from '../';
+import React, { useState } from 'react'
+
+import { Wrapper, Body } from './styles'
+import {  TabBar, Tab } from '../../../../components'
+import { Formatos, Criativos } from '../'
 
 export const ContentPlate = () => {
 

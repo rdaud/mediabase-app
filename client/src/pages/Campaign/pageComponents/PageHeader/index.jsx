@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { useHistory } from "react-router-dom";
-import { MdWest as BackArrow } from "react-icons/md";
-import chevron from '../../../../assets/icons/chevron-down.svg';
-import icon from '../../../../assets/icons/info.svg';
-import { StatusButton, Dropdown, DropdownItem, Select } from "../../../../components";
-import { useDispatch, useSelector } from "react-redux";
-import { Header, Nome, Produto, Cliente, Status, InfoIcon, BackButton } from './styles';
-import { Heading1 } from '../../../../components/Typography';
-import { StyledStatusButton } from '../../../../components/Button/styles';
+import React, { useEffect, useState } from 'react'
+import { useHistory } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
+
+import { MdWest as BackArrow } from "react-icons/md"
+import icon from '../../../../assets/icons/info.svg'
+import {  Select } from "../../../../components"
+import { Header, Nome, Produto, Cliente, Status, InfoIcon, BackButton } from './styles'
+import { Heading1 } from '../../../../components/Typography'
 
 
 

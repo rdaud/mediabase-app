@@ -1,12 +1,11 @@
 import React, { useCallback, useState } from 'react';
-import { FormWrapper, Profile, ProfileWrapper, InnerWrapper } from './styles';
-import { useSelector, useDispatch, connect } from 'react-redux';
-import { MainContainer, TextInput, Button, Checkbox } from '../../components';
-import { PageHeader } from './pageComponents';
-import { getAvatar } from '../../redux/actions/usersActions';
-import { CameraOutlined } from '@ant-design/icons'
-import { COLOR } from '../../tokens/colors';
+import {  useDispatch, connect } from 'react-redux';
 import axios from 'axios';
+
+import { FormWrapper, Profile, ProfileWrapper, InnerWrapper } from './styles';
+import { MainContainer, TextInput, Button } from '../../components';
+import { PageHeader } from './pageComponents';
+import { COLOR } from '../../tokens/colors';
 
 
 

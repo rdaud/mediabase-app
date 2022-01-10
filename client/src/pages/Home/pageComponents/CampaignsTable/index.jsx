@@ -1,16 +1,34 @@
 import React, { useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { useHistory } from "react-router-dom";
-import { useTable, useRowSelect, useRowState,useFlexLayout, useExpanded, useFilters, useGlobalFilter, useSortBy } from 'react-table'
-import { Styles, Table, Thead, Tr, Tbody, Th, Td, StatusBar,IndeterminateCheckbox, CustomExpandedRow, RowSubComponent, Link} from './styles'
+import { useHistory } from "react-router-dom"
+
+import {
+  useTable,
+  useRowSelect,
+  useRowState,
+  useFlexLayout,
+  useExpanded,
+  useFilters,
+  useGlobalFilter,
+  useSortBy
+} from 'react-table'
+import
+{
+  Styles,
+  Table,
+  Thead,
+  Tr,
+  Tbody,
+  Th,
+  Td,
+  RowSubComponent,
+  Link
+} from './styles'
 import { COLUMNS } from './columns'
 import { DATA } from './data'
 import { filterTypes, DefaultColumnFilter, GlobalFilter, SelectColumnFilter } from './filters'
 import { Toolbar } from './Toolbar'
 
-
-const headerProps = (props, { column }) => getStyles(props, column.align)
-const cellProps = (props, { cell }) => getStyles(props, cell.column.align)
 
 const getStyles = (props, align = 'left', toggle) => [
   props,

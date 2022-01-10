@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
-import { Modal, TextInput, TextArea, FormGroup, FileInput } from '../../../../components'
-import { closeEditCriativoModalRequest } from "../../../../redux/actions/campaignsActions";
-import { createCriativo } from "../../../../redux/actions/criativoActions";
-import { useDispatch, useSelector } from 'react-redux';
-import { FormWrapper, FormContainer, ImagemDeCapa, AlterarImagem } from './styles';
-import { useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import axios from 'axios'
+
+import { Modal, TextInput, TextArea, FormGroup } from '../../../../components'
+import { FormWrapper, FormContainer, ImagemDeCapa, AlterarImagem } from './styles'
 
 
 export const EditCriativoModal = ({ criativo, handleClickOnCloseButton }) => {

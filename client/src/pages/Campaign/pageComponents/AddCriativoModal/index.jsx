@@ -1,18 +1,10 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+
 import { Modal, Button, TextInput, TextArea, FormGroup, FileInput } from '../../../../components'
-import { closeAddCriativoModalRequest } from "../../../../redux/actions/campaignsActions";
-import { createCriativo } from "../../../../redux/actions/criativoActions";
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from "react-router-dom";
-import { FormWrapper, FormContainer } from './styles';
-import { COLOR } from '../../../../tokens/colors';
-
-
-
-
-
-
-
+import { createCriativo } from "../../../../redux/actions/criativoActions"
+import { FormWrapper, FormContainer } from './styles'
+import { COLOR } from '../../../../tokens/colors'
 
 
 export const AddCriativoModal = ({ handleClickOnCloseButton }) => {
@@ -20,10 +12,8 @@ export const AddCriativoModal = ({ handleClickOnCloseButton }) => {
     const [ nome, setNome ] = useState('')
     const [ descricao, setDescrição ] = useState('')
     const [ imagem, setImagem ] = useState({})
-    const [ open, setOpen ] = useState(true)
 
     const dispatch = useDispatch()
-    const history = useHistory()
 
     const handleSubmitFormClick = (event) => {
 

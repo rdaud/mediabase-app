@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+
 import { Modal } from '../../../../components'
-import { useDispatch, useSelector } from 'react-redux';
-import { AddFormatsTable } from './pageComponents';
+import { AddFormatsTable } from './pageComponents'
 
 
 
@@ -38,21 +39,6 @@ export const AddFormatModal = ({ handleClickOnCloseButton }) => {
     return (
         <Modal headerTitle="Adicionar formatos" handleClickOnCloseButton={ handleClickOnCloseButton }>
             <AddFormatsTable data={filteredItems} />
-            {/* <TableWrapper>
-                <DataTable
-                columns={columns}
-                data={filteredItems}
-                theme="dark"
-                highlightOnHover="true"
-                selectableRowsHighlight="true"
-                subHeader
-                subHeaderComponent={subHeaderComponentMemo}
-                selectableRows
-                onSelectedRowsChange={handleSelectedRows}
-                fixedHeader
-                customStyles={customStyles}
-                />
-            </TableWrapper> */}
         </Modal>
     )
 }

@@ -8,10 +8,6 @@ const criativosRouter = require('./routers/criativo')
 
 const app = express()
 
-
-
-
-
 let port = process.env.PORT || 3001;
 
 
@@ -41,7 +37,6 @@ app.get('/', function (req, res) {
 /**
  * Listen to port 3001
  */
-
 
 app.listen(port, () => console.log(`Server is running on port ${port}`))
 

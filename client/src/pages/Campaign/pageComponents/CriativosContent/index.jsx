@@ -1,8 +1,17 @@
-import React,{ useEffect, useState } from 'react';
-import { FormatWrapper, Wrapper, EmptyStateContainer, Criativo, CriativoButton, InnerWrapper, OutterWrapper } from './styles';
-import { useDispatch, useSelector,connect } from 'react-redux';
-import { getCriativos } from '../../../../redux/actions/criativoActions';
-import { AddCriativoModal, EditCriativoModal } from '..';
+import React,{ useEffect, useState } from 'react'
+import { useDispatch, useSelector,connect } from 'react-redux'
+
+import 
+{   FormatWrapper,
+    Wrapper,
+    EmptyStateContainer,
+    Criativo,
+    CriativoButton,
+    InnerWrapper,
+    OutterWrapper
+} from './styles';
+import { getCriativos } from '../../../../redux/actions/criativoActions'
+import { AddCriativoModal, EditCriativoModal } from '..'
 
 const NoDataComponent = ({onClick}) => {
     return (
@@ -49,8 +58,7 @@ const Criativos = ({ criativos, loading }) => {
     
    
 console.log(selectedCriativo)
-    return (
-        
+    return (   
         <OutterWrapper>
             { openAddCriativo && <AddCriativoModal handleClickOnCloseButton={ handleClickOnCloseButton } /> }
             { openEditCriativo && <EditCriativoModal criativo={ selectedCriativo } handleClickOnCloseButton={ handleClickOnCloseButton } /> }
