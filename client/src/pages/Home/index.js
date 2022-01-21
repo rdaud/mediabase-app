@@ -20,7 +20,6 @@ export const HomePage = () => {
     const [ isPageLoaded , setIsPageLoaded ] = useState(false)
     const dispatch = useDispatch()
 
-
     const handleClick = () => {
       setOpen(true)
     }

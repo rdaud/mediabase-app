@@ -35,10 +35,15 @@ export const AddCampaignModal = ({ loading, handleClickOnCloseButton }) => {
     };
 
   
+  
     const options = [
         'Em produção', 
         'Finalizada'
       ]
+
+      console.log('Rendered')
+
+ 
 
 
     return (
@@ -46,10 +51,8 @@ export const AddCampaignModal = ({ loading, handleClickOnCloseButton }) => {
            { loading ? <div>Is loading </div> : 
            <FormWrapper>
                 <FormContainer onSubmit={handleSubmitFormClick}>                
-                    <FormGroup>
-                            <TextInput  variation="filled"
+                            <TextInput variation="filled"
                                 colorMode="dark" label="Nome da campanha" onChange={val => setNome(val.target.value)} value={nome} placeholder="Nome da campanha" />
-                        </FormGroup>
 
                         <FormGroup>
                             <TextInput  variation="filled"
@@ -71,7 +74,7 @@ export const AddCampaignModal = ({ loading, handleClickOnCloseButton }) => {
                                 "gap": "1rem",
                             }}>
                                     <div style={{
-                                "flex-grow": 1,
+                                "flexGrow": 1,
                                 "width": "100%"
                                 
                             }}>
@@ -85,7 +88,7 @@ export const AddCampaignModal = ({ loading, handleClickOnCloseButton }) => {
                             />
                             </div>
                             <div style={{
-                                "flex-grow": 1,
+                                "flexGrow": 1,
                                 "width": "100%"
                             }}>
                             <Datepicker

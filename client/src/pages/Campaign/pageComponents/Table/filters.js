@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAsyncDebounce } from 'react-table';
-import { Select, Search } from '..';
+import { Search, Select } from '../../../../components';
 
 
 

@@ -1,9 +1,8 @@
 import React from "react"
 import { StatusBar, IndeterminateCheckbox } from "./styles"
-import { ReactComponent as ChevronDown} from '../../assets/icons/chevron-down.svg'
-import { ReactComponent as ChevronUp} from '../../assets/icons/chevron-up.svg'
-import { StatusSelect } from ".."
-
+import { ReactComponent as ChevronDown} from '../../../../assets/icons/chevron-down.svg'
+import { ReactComponent as ChevronUp} from '../../../../assets/icons/chevron-up.svg'
+import { StatusSelect } from "../../../../components"
 
 export const COLUMNS = [
 
@@ -49,7 +48,7 @@ export const COLUMNS = [
 
             {
                 Header: 'Formato',
-                accessor: 'formato',
+                accessor: 'nomedoformato',
                 disableFilters:true,
                 
             },
@@ -62,7 +61,7 @@ export const COLUMNS = [
           },
           {
             Header: 'Arquivo / Specs',
-            accessor: 'arquivo',
+            accessor: 'formatodoarquivo',
             disableFilters:true,
             width: 200,
             minWidth: 150,

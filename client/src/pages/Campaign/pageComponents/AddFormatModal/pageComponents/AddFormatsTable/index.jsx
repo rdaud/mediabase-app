@@ -61,19 +61,31 @@ const App = ({
 
  
 
-  const handleSubmit = () => {
-
+  const handleSubmit = () =>
+  {
     // Clean the data before dispatching
     const cleanedData = []
-    selectedFlatRows.forEach( item => {
-      cleanedData.push(item.original)
+    selectedFlatRows.forEach( item =>
+    {
+    // Create a new object with lowercased key values
+    const convertToLowercase = obj =>
+      Object.keys(obj).reduce((acc, key) => {
+      acc[key.toLowerCase()] = obj[key];
+      return acc;
+    }, {});
+    const lowercaseObject = convertToLowercase(item.original)
+    lowercaseObject.criativos = [{}]
+    lowercaseObject.formatodoarquivo = 'Formatos do arquivo'
+    lowercaseObject.prazo = 'Adicionar prazo'
+    lowercaseObject.veiculação = 'Adicionar veiculação'
+    cleanedData.push(lowercaseObject)
     })
-    
+
     // Now we're good to go ;)
     dispatch(updateCampaign({
       formatos: cleanedData
     }))
-}
+  }
     
 
 console.log(rows)
@@ -102,6 +114,8 @@ console.log(rows)
         </div>
     )
 },[selectedFlatRows])
+
+console.log(selectedFlatRows)
 
 
   // Render the UI for your table

@@ -1,14 +1,25 @@
 import React, { useMemo, useState } from 'react'
 import { useTable, useRowSelect, useRowState,useFlexLayout, useExpanded, useFilters, useGlobalFilter, useSortBy } from 'react-table'
-import { Styles, Table, Thead, Tr, Tbody, Th, Td, StatusBar,IndeterminateCheckbox, CustomExpandedRow, RowSubComponent, Link} from './styles'
+import { Styles, Table, Thead, Tr, Tbody, Th, Td, Wrapper, EmptyStateContainer, RowSubComponent, Link} from './styles'
 import { COLUMNS } from './columns'
 import { DATA } from './data'
 import { filterTypes, DefaultColumnFilter, GlobalFilter, SelectColumnFilter } from './filters'
 import { Toolbar } from './Toolbar'
+import { Toast, Button } from '../../../../components'
+import { COLOR } from '../../../../tokens/colors'
+import plus from '../../../../assets/icons/plus.svg'
+import { AddFormatModal } from '..'
 
 
-const headerProps = (props, { column }) => getStyles(props, column.align)
-const cellProps = (props, { cell }) => getStyles(props, cell.column.align)
+const NoDataComponent = ({ handleClickOnAddFormato }) => {
+  return (
+      <Wrapper>
+           <EmptyStateContainer>
+              <p>Essa campanha ainda não possuí nenhum formato. Clique em <span onClick={handleClickOnAddFormato}>Adicionar formatos</span> para iniciar.</p>
+           </EmptyStateContainer>
+      </Wrapper>
+  )
+}
 
 const getStyles = (props, align = 'left', toggle) => [
   props,
@@ -78,8 +89,9 @@ const App = ({ columns: userColumns, data, renderRowSubComponent, stateReducer
     state: { globalFilter, filters }
   } = tableInstance
 
-  // tableInstance.setState()
-console.log(rows)
+  console.log(rows)
+
+  const [ open, setOpen ] = useState(false)
     
   // Get selected rows data
   const { selectedRowsData: original } = selectedFlatRows
@@ -96,33 +108,53 @@ console.log(rows)
     })
   }
 
+
+  const handleClickOnCloseButton = () => {
+    setOpen(false)
+  }
+
+  const handleClickOnAddFormato = () => {
+      setOpen(true)
+  }
+
   // Render the UI for your table
   return (
       <>
      { !!subrowsCounter && <Toolbar counter={subrowsCounter} handleClickOnCancelar={handleClickOnCancelar} /> } 
-
+     { open && <AddFormatModal handleClickOnCloseButton={handleClickOnCloseButton}/> }
     <div className="tableWrap">
-    <div style={{
-        display: 'inline-flex',
-        gap: '1rem',
-        padding: '1rem'
-    }}>
-        <div>          
-            <GlobalFilter
-              preGlobalFilteredRows={preGlobalFilteredRows}
-              globalFilter={globalFilter}
-              setGlobalFilter={setGlobalFilter}
-            />
-        </div>
-        <div style={{ textAlign: 'left' }}> 
-            <SelectColumnFilter userColumns={columns[1]} />
-        </div>
-        <div style={{ textAlign: 'left'}}> 
-            <SelectColumnFilter userColumns={columns[2]} />
-        </div> 
-    </div>
-    
+      <div style={{
+          display: 'inline-flex',
+          gap: '1rem',
+          padding: '1rem'
+      }}>
+          <div>          
+              <GlobalFilter
+                preGlobalFilteredRows={preGlobalFilteredRows}
+                globalFilter={globalFilter}
+                setGlobalFilter={setGlobalFilter}
+              />
+          </div>
+          <div style={{ textAlign: 'left' }}> 
+              <SelectColumnFilter userColumns={columns[1]} />
+          </div>
+          <div style={{ textAlign: 'left'}}> 
+              <SelectColumnFilter userColumns={columns[2]} />
+          </div>
+          <div style={{ textAlign: 'right'}}> 
+            <Button
+              variation="primary"
+              cor={COLOR.brandRed90}
+              corDaOrelha={COLOR.gray100}
+              iconLeft={plus}
+              onClick={handleClickOnAddFormato}>
+              Adicionar formato
+            </Button>
+          </div>
+      </div>
+
     <Table className="table tableWrap" {...getTableProps()} >
+      
         <Thead>
         {headerGroups.map(headerGroup => (
             <Tr className="tr" {...headerGroup.getHeaderGroupProps()}>
@@ -151,10 +183,10 @@ console.log(rows)
         </Thead>
 
         <Tbody className="tbody" {...getTableBodyProps()} >
-        
+            { data.length === 0 && <NoDataComponent handleClickOnAddFormato={ () => setOpen(true) }/>}
+
         {rows.map((row, i) => {
 
-    
             prepareRow(row)
             
             return (
@@ -166,7 +198,7 @@ console.log(rows)
                 {row.cells.map(cell => {
 
 
-                    if (row.depth === 1 && cell.column.id === 'arquivo' && cell.value === '') {
+                    if (row.depth === 1 && cell.column.id === 'formatodoarquivo' && cell.value === '') {
                         return <Td className="td" {...cell.getCellProps()}><Link onClick={() => console.log('Subir arquivo')}>Adicionar arquivo +</Link></Td>
                     }
 
@@ -195,16 +227,8 @@ console.log(rows)
                 */}
                 {row.isExpanded && !row.depth ? (
                 <Tr {...row.getRowProps()} className="tr depth-1">
-                    <Td className="td"
-                   >
-                    {/*
-                        Inside it, call our renderRowSubComponent function. In reality,
-                        you could pass whatever you want as props to
-                        a component like this, including the entire
-                        table instance. But for this example, we'll just
-                        pass the row
-                        */}
-                    {renderRowSubComponent()}
+                    <Td className="td">
+                      { renderRowSubComponent() }
                     </Td>
                 </Tr>
                 ) : null}
@@ -220,24 +244,32 @@ console.log(rows)
 
 
 
-export const CampaignsTable = () => {
+export const CampaignsTable = ({ data }) => {
 
   const columns = useMemo(() => COLUMNS,[])
-  const data = useMemo(() => DATA,[])
+  // const data = useMemo(() => DATA,[])
+
+  const [ dataUpdate , setDataUpdate ] = useState({
+    isUpdating: false,
+    status: 'failure'
+  })
 
   const renderRowSubComponent = React.useCallback(
-    () =>  <RowSubComponent /> )
+    () =>  <RowSubComponent />
+  )
 
 
   return (
     <Styles>
-      <App
-        columns={columns}
-        data={data}
-        renderRowSubComponent={renderRowSubComponent}
-      />
+      { dataUpdate.isUpdating && <Toast status={dataUpdate.status} />}
+      { data === undefined ? 'Carregando dados' :
+        <App
+          columns={ columns }
+          data={ data }
+          renderRowSubComponent={ renderRowSubComponent }
+        />
+      }
     </Styles>
-
   )
 }
 

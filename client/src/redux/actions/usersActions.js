@@ -106,6 +106,8 @@ export const signIn = (userLoginData = {}, history) => {
       history.push("/home");
     }).catch( error => {
       dispatch(signInFailure(error))
+      alert('Email ou senha incorretos!');
+
     })
 
     } 

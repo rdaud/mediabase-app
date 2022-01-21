@@ -5,13 +5,7 @@ import { COLOR } from "../../../../tokens/colors";
 
 
 
-export const Wrapper = styled.div`
-    height: 100%;
-    width: 100%;
-    position: relative;
-    top: 50%;
-    padding: 2rem;
-`
+
 
 export const ActionsWrapper = styled.div`
     position: relative;
@@ -36,23 +30,6 @@ export const FormatosList = styled.ul`
     padding-left: 0 !important;
 `
 
-export const EmptyStateContainer = styled.div`
-
-    width: 100%;
-    height: 100%;
-    margin: 2rem;
-    border: 1px dashed ${COLOR.gray90};
-    position: relative;
-    color: ${COLOR.white};
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    span {
-        color: ${COLOR.brandRed90};
-        cursor: pointer;
-    }
-`
 
 export const FormatWrapper = styled.li`
     display: inline-flex;

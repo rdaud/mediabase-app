@@ -1,14 +1,14 @@
 import React, {useState} from 'react';
 import styled from "styled-components";
-import { COLOR } from "../../../tokens/colors";
-import { ReactComponent as Trash } from "../../../assets/icons/trash.svg"
-import { ReactComponent as Criativo } from "../../../assets/icons/criativo.svg"
-import { ReactComponent as Hourglass } from "../../../assets/icons/hourglass.svg"
-import { ReactComponent as Calendar } from "../../../assets/icons/calendar.svg"
-import { ReactComponent as Status } from "../../../assets/icons/check.svg"
-import { ReactComponent as Download } from "../../../assets/icons/download.svg"
-import { ReactComponent as Document } from "../../../assets/icons/document.svg"
-import { ReactComponent as Close } from "../../../assets/icons/close.svg"
+import { COLOR } from '../../../../../tokens/colors';
+import { ReactComponent as Trash } from "../../../../../assets/icons/trash.svg"
+import { ReactComponent as Criativo } from "../../../../../assets/icons/criativo.svg"
+import { ReactComponent as Hourglass } from "../../../../../assets/icons/hourglass.svg"
+import { ReactComponent as Calendar } from "../../../../../assets/icons/calendar.svg"
+import { ReactComponent as Status } from "../../../../../assets/icons/check.svg"
+import { ReactComponent as Download } from "../../../../../assets/icons/download.svg"
+import { ReactComponent as Document } from "../../../../../assets/icons/document.svg"
+import { ReactComponent as Close } from "../../../../../assets/icons/close.svg"
 
 
 

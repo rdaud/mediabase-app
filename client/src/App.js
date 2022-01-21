@@ -8,6 +8,8 @@ import PublicRoute from "./routes/PublicRoute";
 
 
 export default function App() {
+
+
   return (
       <BrowserRouter>
         <Switch>

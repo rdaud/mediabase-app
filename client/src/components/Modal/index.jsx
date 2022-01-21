@@ -6,11 +6,9 @@ import { SystemButton } from "../";
 import { Hero, Header, ModalContainer } from './styles';
 
 
-const modalRoot = document.getElementById('modal');
-
-
 export const Modal = ({ children, setOpen, headerTitle, handleClickOnCloseButton, ...rest }) => {
-
+  
+ 
     return createPortal(
         <Hero >
             <ModalContainer {...rest}>
@@ -23,7 +21,7 @@ export const Modal = ({ children, setOpen, headerTitle, handleClickOnCloseButton
                 { children }
             </ModalContainer>
         </Hero>
-        ,document.getElementById('modal')
+        , document.querySelector('.modal-portal')
     )
      
 }

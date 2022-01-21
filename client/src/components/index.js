@@ -5,7 +5,6 @@ export * from './Tabs'
 export * from './TextInput'
 export * from './FileInput'
 export * from './TextArea'
-export * from './Table'
 export * from './Link'
 export * from './Loader'
 export * from './Dropdown'
@@ -18,6 +17,8 @@ export * from './Select'
 export * from './StatusSelect'
 export * from './Checkbox'
 export * from './Typography'
+export * from './Toast'
+
 
 
 

@@ -28,7 +28,6 @@ export const CampaignPage = (props) => {
 
     return (
         <>
-            { addFormatModal && <AddFormatModal id={ props.match.params.id }/> }
             <MainContainer style={{ gap: '2rem'}}>
                 <PageHeader id={ props.match.params.id }/>
                 <ContentPlate/>

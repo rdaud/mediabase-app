@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { keyframes } from "styled-components" 
-import { COLOR } from "../../tokens/colors"
-import plus from '../../assets/icons/plus.svg'
+import { COLOR } from "../../../../tokens/colors"
+import plus from '../../../../assets/icons/plus.svg'
 
 
 export const Link = styled.button`
@@ -53,15 +53,18 @@ const fade = keyframes`
 export const Thead = styled.div`
   overflow-y: auto;
   overflow-x: hidden;
+  box-shadow:  12px 2px 10px rgba(0, 0, 0, .8);
+
   .tr {
-    background: ${COLOR.gray70};
-  }
+    background: ${COLOR.gray90};
+
+
 `
 
 export const Tr = styled.div`
   position: relative;
   padding: .5rem;
-  border: 1px solid transparent;
+  border: 1px solid transparent;  
 `
 
 export const Tbody = styled.div`
@@ -111,6 +114,7 @@ export const Styles = styled.div`
   display: block;
   overflow: auto;
   width: 100%;
+  height: 100%;
   max-width: 100%;
 
   
@@ -224,9 +228,34 @@ export const IndeterminateCheckbox = React.forwardRef(
 
 export const RowSubComponent = () => (
   <div style={{display: 'inline-flex', overflow: 'hidden', width: '100%', height: '100%' }}>    
-  <AdicionarCriativoLarge />
+    <AdicionarCriativoLarge />
   </div>
 )
 
 
 
+
+export const EmptyStateContainer = styled.div`
+
+    width: 100%;
+    height: 100%;
+    margin: 2rem;
+    border: 1px dashed ${COLOR.gray90};
+    position: relative;
+    color: ${COLOR.white};
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    span {
+        color: ${COLOR.brandRed90};
+        cursor: pointer;
+    }
+`
+
+export const Wrapper = styled.div`
+    height: 100%;
+    width: 100%;
+    position: relative;
+    padding: 2rem;
+`
