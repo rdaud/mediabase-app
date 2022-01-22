@@ -1,0 +1,42 @@
+{
+  "files": {
+    "main.css": "/static/css/main.fd072e33.chunk.css",
+    "main.js": "/static/js/main.5d7c7a6a.chunk.js",
+    "main.js.map": "/static/js/main.5d7c7a6a.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.c6c2ecf3.js",
+    "runtime-main.js.map": "/static/js/runtime-main.c6c2ecf3.js.map",
+    "static/css/2.73e94240.chunk.css": "/static/css/2.73e94240.chunk.css",
+    "static/js/2.cd6091a4.chunk.js": "/static/js/2.cd6091a4.chunk.js",
+    "static/js/2.cd6091a4.chunk.js.map": "/static/js/2.cd6091a4.chunk.js.map",
+    "static/js/3.888795fa.chunk.js": "/static/js/3.888795fa.chunk.js",
+    "static/js/3.888795fa.chunk.js.map": "/static/js/3.888795fa.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.73e94240.chunk.css.map": "/static/css/2.73e94240.chunk.css.map",
+    "static/css/main.fd072e33.chunk.css.map": "/static/css/main.fd072e33.chunk.css.map",
+    "static/js/2.cd6091a4.chunk.js.LICENSE.txt": "/static/js/2.cd6091a4.chunk.js.LICENSE.txt",
+    "static/media/calendar.740cd719.svg": "/static/media/calendar.740cd719.svg",
+    "static/media/check.3a382fdb.svg": "/static/media/check.3a382fdb.svg",
+    "static/media/chevron-down-icon.3aa85cc1.svg": "/static/media/chevron-down-icon.3aa85cc1.svg",
+    "static/media/chevron-down.2f14f975.svg": "/static/media/chevron-down.2f14f975.svg",
+    "static/media/chevron-up.63d76edb.svg": "/static/media/chevron-up.63d76edb.svg",
+    "static/media/close.048563fd.svg": "/static/media/close.048563fd.svg",
+    "static/media/criativo.6c4527f4.svg": "/static/media/criativo.6c4527f4.svg",
+    "static/media/document.5694609c.svg": "/static/media/document.5694609c.svg",
+    "static/media/download.adadb282.svg": "/static/media/download.adadb282.svg",
+    "static/media/hourglass.8ec62826.svg": "/static/media/hourglass.8ec62826.svg",
+    "static/media/info-icon.2ee583bd.svg": "/static/media/info-icon.2ee583bd.svg",
+    "static/media/info.f6d7786e.svg": "/static/media/info.f6d7786e.svg",
+    "static/media/logo-complete.a26fb754.svg": "/static/media/logo-complete.a26fb754.svg",
+    "static/media/logo-vertical.5bd481df.svg": "/static/media/logo-vertical.5bd481df.svg",
+    "static/media/plus.6c26f2d9.svg": "/static/media/plus.6c26f2d9.svg",
+    "static/media/search.06f588fa.svg": "/static/media/search.06f588fa.svg",
+    "static/media/trash.2e43385d.svg": "/static/media/trash.2e43385d.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.c6c2ecf3.js",
+    "static/css/2.73e94240.chunk.css",
+    "static/js/2.cd6091a4.chunk.js",
+    "static/css/main.fd072e33.chunk.css",
+    "static/js/main.5d7c7a6a.chunk.js"
+  ]
+}
