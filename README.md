@@ -4,7 +4,7 @@ Mediabase is a full stack web application fully developed by me while I worked a
 
 # Stack
 
-React / Redux / MongoDB / JWT
+JWT Auth / MongoDB / Node.js / React / Redux
 
 # Contributions
 
