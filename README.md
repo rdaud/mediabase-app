@@ -1,6 +1,6 @@
 # About Mediabase App
 
-Mediabase is a full stack web application fully developed by me while I worked at R/GA. It's an internal tool meant to streamline the work process between Creative and Media departments.
+Mediabase is a full stack web application created by the Experience Design team and fully developed by me when I worked at R/GA São Paulo. It's an internal tool meant to streamline the work process between Creative and Media departments.
 
 # Stack
 
